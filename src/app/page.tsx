@@ -1,5 +1,5 @@
 "use client";
-import Table from '@/components/Table/Table';
+import TableSongs from '@/components/TableSongs/TableSongs';
 import React from 'react';
 
 import { songsData } from '../../pages/api/songs';
@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <main>
-      <Table header={tableHeaderData} songsData={songsData} />
+      <TableSongs header={tableHeaderData} songsData={songsData} />
     </main>
   )
 }

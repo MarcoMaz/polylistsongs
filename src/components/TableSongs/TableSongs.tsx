@@ -1,11 +1,11 @@
 import { SongProp } from "../../../pages/api/songs";
 
-interface TableProps {
+interface TableSongsProps {
   header: string[];
   songsData: SongProp[];
 }
 
-const Table: React.FunctionComponent<TableProps> = ({ header, songsData }) => {
+const TableSongs: React.FunctionComponent<TableSongsProps> = ({ header, songsData }) => {
   return (
     <table>
       <thead>
@@ -16,16 +16,13 @@ const Table: React.FunctionComponent<TableProps> = ({ header, songsData }) => {
         </tr>
       </thead>
       <tbody>
-        {songsData.map(({timeSignature, polyrhythm, ...props}) => {
+        {songsData.map(({...props}) => {
           return (
             <tr key={props.id}>
               <td>{props.id}</td>
               <td>{props.title}</td>
               <td>{props.album}</td>
               <td>{props.artist}</td>
-              <td>{props.drummer}</td>
-              <td>{`${timeSignature.numerator}/${timeSignature.denominator}`}</td>
-              <td>{`${polyrhythm.numerator}:${polyrhythm.denominator}`}</td>
             </tr>
           );
         })}
@@ -34,4 +31,4 @@ const Table: React.FunctionComponent<TableProps> = ({ header, songsData }) => {
   );
 };
 
-export default Table;
+export default TableSongs;
