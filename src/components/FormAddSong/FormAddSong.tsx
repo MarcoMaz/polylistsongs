@@ -1,6 +1,7 @@
 import { SetStateAction, useState } from "react";
 import Button from "../Button/Button";
 import { SongProp } from "../../../pages/api/songs";
+import InputText from "../InputText/InputText";
 
 interface FormAddSongProps {
   tableFields: string[];
@@ -9,7 +10,7 @@ interface FormAddSongProps {
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
-interface InputsProps {
+export interface InputsProps {
   [key: string]: string;
 }
 
@@ -47,17 +48,12 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     <form onSubmit={handleFormSubmit}>
       {tableFields.map((field, index) => {
         return (
-          <div key={index}>
-            <label htmlFor={field}>{`Enter your ${field}:`}</label>
-            <input
-              type="text"
-              name={field}
-              id={field}
-              required
-              value={inputFields[field]}
-              onChange={handleInputChange}
-            />
-          </div>
+          <InputText
+            key={index}
+            field={field}
+            handleChange={handleInputChange}
+            inputFields={inputFields}
+          />
         );
       })}
       <Button type="submit" label="send" />
