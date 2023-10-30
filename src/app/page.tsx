@@ -5,7 +5,7 @@ import { SongProp, songsData } from "../../pages/api/songs";
 
 import Button from "@/components/Button/Button";
 import FormAddSong from "@/components/FormAddSong/FormAddSong";
-import Modal from "@/components/Modal/Modal";
+import Dialog from "@/components/Dialog/Dialog";
 import TableSongs from "@/components/TableSongs/TableSongs";
 
 export default function Home() {
@@ -26,14 +26,14 @@ export default function Home() {
     <main>
       <TableSongs tableFields={tableFields} songs={songs} />
       <Button type="button" label="+" onClick={addSongButtonClick} />
-      <Modal isOpen={isDialogOpen} onClose={closeDialog}>
+      <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
         <FormAddSong
           tableFields={tableFields}
           songs={songs}
           setSongs={setSongs}
           setIsDialogOpen={setIsDialogOpen}
         />
-      </Modal>
+      </Dialog>
     </main>
   );
 }

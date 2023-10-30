@@ -2,13 +2,13 @@ import { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import Button from "../Button/Button";
 
-interface ModalProps {
+interface DialogProps {
   children: React.ReactNode;
   isOpen: boolean;
   onClose?: () => void;
 }
 
-const Modal: React.FunctionComponent<ModalProps> = ({
+const Dialog: React.FunctionComponent<DialogProps> = ({
   children,
   isOpen,
   onClose,
@@ -33,4 +33,4 @@ const Modal: React.FunctionComponent<ModalProps> = ({
   );
 };
 
-export default Modal;
+export default Dialog;
