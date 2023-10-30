@@ -1,29 +1,48 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import Button from "../Button/Button";
+import { SongProp } from "../../../pages/api/songs";
 
 interface FormAddSongProps {
-  inputFields: string[];
+  tableFields: string[];
+  songs: SongProp[];
+  setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
+}
+
+interface InputsProps {
+  [key: string]: string;
 }
 
 const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
-  inputFields,
+  tableFields,
+  songs,
+  setSongs,
 }) => {
-  const inputFieldsWithoutID = [...inputFields].splice(1);
-  const [formData, setFormData] = useState<Record<string, string>>({});
+  const [inputFields, setInputFields] = useState<InputsProps>({
+    title: "",
+    album: "",
+    artist: "",
+  });
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputFields({ ...inputFields, [name]: value });
   };
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    setFormData({});
-    console.log(formData)
+    const formData = new FormData(event.target as HTMLFormElement);
+    const newSong = Object.fromEntries(formData.entries());
+    const newSongWithID = {
+      id: songs.length + 1,
+      ...newSong,
+    };
+    setSongs([...songs, newSongWithID as SongProp]);
+    setInputFields({ title: "", album: "", artist: "" });
   };
 
   return (
     <form onSubmit={handleFormSubmit}>
-      {inputFieldsWithoutID.map((field, index) => {
+      {tableFields.map((field, index) => {
         return (
           <div key={index}>
             <label htmlFor={field}>{`Enter your ${field}:`}</label>
@@ -32,6 +51,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
               name={field}
               id={field}
               required
+              value={inputFields[field]}
               onChange={handleInputChange}
             />
           </div>

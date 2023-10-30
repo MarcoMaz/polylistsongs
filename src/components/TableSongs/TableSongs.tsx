@@ -1,22 +1,23 @@
 import { SongProp } from "../../../pages/api/songs";
 
 interface TableSongsProps {
-  header: string[];
-  songsData: SongProp[];
+  tableFields: string[];
+  songs: SongProp[];
 }
 
-const TableSongs: React.FunctionComponent<TableSongsProps> = ({ header, songsData }) => {
+const TableSongs: React.FunctionComponent<TableSongsProps> = ({ tableFields, songs }) => {
   return (
     <table>
       <thead>
         <tr>
-          {header.map((str, index) => {
+          <th></th> {/* @TODO: Remove when ID is removed too. */}
+          {tableFields.map((str, index) => {
             return <th key={index}>{str}</th>;
           })}
         </tr>
       </thead>
       <tbody>
-        {songsData.map(({...props}) => {
+        {songs.map(({...props}) => {
           return (
             <tr key={props.id}>
               <td>{props.id}</td>
