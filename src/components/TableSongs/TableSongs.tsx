@@ -1,11 +1,22 @@
+import { SetStateAction } from "react";
 import { SongProp } from "../../../pages/api/songs";
+import Button from "../Button/Button";
 
 interface TableSongsProps {
   tableFields: string[];
   songs: SongProp[];
+  setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
 }
 
-const TableSongs: React.FunctionComponent<TableSongsProps> = ({ tableFields, songs }) => {
+const TableSongs: React.FunctionComponent<TableSongsProps> = ({
+  tableFields,
+  songs,
+  setSongs,
+}) => {
+  const handleButtonClick = (el: number) => {
+    setSongs(songs.filter((a) => a.id !== el));
+  };
+
   return (
     <table>
       <thead>
@@ -17,13 +28,20 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({ tableFields, son
         </tr>
       </thead>
       <tbody>
-        {songs.map(({...props}) => {
+        {songs.map(({ ...props }) => {
           return (
             <tr key={props.id}>
               <td>{props.id}</td>
               <td>{props.title}</td>
               <td>{props.album}</td>
               <td>{props.artist}</td>
+              <td>
+                <Button
+                  type="button"
+                  label="remove"
+                  onClick={() => handleButtonClick(props.id)}
+                />
+              </td>
             </tr>
           );
         })}

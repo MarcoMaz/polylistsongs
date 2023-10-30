@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <main>
-      <TableSongs tableFields={tableFields} songs={songs} />
+      <TableSongs tableFields={tableFields} songs={songs} setSongs={setSongs}/>
       <Button type="button" label="+" onClick={addSongButtonClick} />
       <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
         <FormAddSong

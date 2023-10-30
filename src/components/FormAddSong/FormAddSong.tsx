@@ -26,6 +26,10 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     artist: "",
   });
 
+  const generateRandomId = () => {
+    return Math.floor(Math.random() * 1000);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputFields({ ...inputFields, [name]: value });
@@ -36,7 +40,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     const formData = new FormData(event.target as HTMLFormElement);
     const newSong = Object.fromEntries(formData.entries());
     const newSongWithID = {
-      id: songs.length + 1,
+      id: generateRandomId(),
       ...newSong,
     };
     setSongs([...songs, newSongWithID as SongProp]);
