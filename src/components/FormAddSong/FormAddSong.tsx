@@ -6,6 +6,7 @@ interface FormAddSongProps {
   tableFields: string[];
   songs: SongProp[];
   setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
+  setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
 interface InputsProps {
@@ -16,6 +17,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
   tableFields,
   songs,
   setSongs,
+  setIsDialogOpen,
 }) => {
   const [inputFields, setInputFields] = useState<InputsProps>({
     title: "",
@@ -38,6 +40,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     };
     setSongs([...songs, newSongWithID as SongProp]);
     setInputFields({ title: "", album: "", artist: "" });
+    setIsDialogOpen(false);
   };
 
   return (
