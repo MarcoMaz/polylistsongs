@@ -13,7 +13,7 @@ const InputText: React.FunctionComponent<InputTextProps> = ({
 }) => {
   return (
     <div>
-      <label htmlFor={field}>{`Enter your ${field}:`}</label>
+      <label htmlFor={field}>{field}</label>
       <input
         type="text"
         name={field}

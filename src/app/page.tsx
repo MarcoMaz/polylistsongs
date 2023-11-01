@@ -7,10 +7,13 @@ import Button from "@/components/Button/Button";
 import FormAddSong from "@/components/FormAddSong/FormAddSong";
 import Dialog from "@/components/Dialog/Dialog";
 import TableSongs from "@/components/TableSongs/TableSongs";
+import FormEditSong from "@/components/FormEditSong/FormEditSong";
 
 export default function Home() {
   const [songs, setSongs] = useState<SongProp[]>(songsData);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [selectedSong, setSelectedSong] = useState<SongProp | null>(null);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const tableFields: string[] = ["title", "album", "artist"];
 
@@ -24,15 +27,33 @@ export default function Home() {
 
   return (
     <main>
-      <TableSongs tableFields={tableFields} songs={songs} setSongs={setSongs}/>
+      <TableSongs
+        tableFields={tableFields}
+        songs={songs}
+        setSongs={setSongs}
+        setSelectedSong={setSelectedSong}
+        setIsDialogOpen={setIsDialogOpen}
+        setIsEditing={setIsEditing}
+      />
       <Button type="button" label="+" onClick={addSongButtonClick} />
       <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
-        <FormAddSong
-          tableFields={tableFields}
-          songs={songs}
-          setSongs={setSongs}
-          setIsDialogOpen={setIsDialogOpen}
-        />
+        {isEditing ? (
+          <FormEditSong
+            tableFields={tableFields}
+            selectedSong={selectedSong}
+            songs={songs}
+            setSongs={setSongs}
+            setIsDialogOpen={setIsDialogOpen}
+            setIsEditing={setIsEditing}
+          />
+        ) : (
+          <FormAddSong
+            tableFields={tableFields}
+            songs={songs}
+            setSongs={setSongs}
+            setIsDialogOpen={setIsDialogOpen}
+          />
+        )}
       </Dialog>
     </main>
   );
