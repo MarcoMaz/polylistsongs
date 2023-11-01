@@ -5,6 +5,7 @@ export interface SongProp {
   title: string;
   album: string;
   artist: string;
+  drummer: string;
 }
 
 
@@ -14,18 +15,21 @@ export const songsData: SongProp[] = [
     title: "New Millenium",
     album: "Falling into Infinity",
     artist: "Dream Theater",
+    drummer: "Mike Portnoy"
   },
   {
     id: 2,
     title: "Pyramid on Mars",
     album: "On the Virg",
     artist: "Virgil Donati",
+    drummer: "Virgil Donati"
   },
   {
     id: 3,
     title: "Outside now",
     album: "Joe's Garage",
     artist: "Frank Zappa",
+    drummer: "Vinnie Colaiuta",
   },
 ];
 

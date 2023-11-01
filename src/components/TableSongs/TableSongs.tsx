@@ -47,6 +47,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               <td>{props.title}</td>
               <td>{props.album}</td>
               <td>{props.artist}</td>
+              <td>{props.drummer}</td>
               <td>
                 <Button
                   type="button"

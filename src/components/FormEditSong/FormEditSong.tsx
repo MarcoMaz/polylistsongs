@@ -28,12 +28,13 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     title: "",
     album: "",
     artist: "",
+    drummer: ""
   });
 
   useEffect(() => {
     if (selectedSong) {
-      const { title, album, artist } = selectedSong;
-      setInputFields({ title: title, album: album, artist: artist });
+      const { title, album, artist, drummer } = selectedSong;
+      setInputFields({ title: title, album: album, artist: artist, drummer: drummer });
     }
   }, [selectedSong]);
 
