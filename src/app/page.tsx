@@ -23,6 +23,7 @@ export default function Home() {
 
   const closeDialog = () => {
     setIsDialogOpen(false);
+    setSelectedSong(null);
   };
 
   return (
