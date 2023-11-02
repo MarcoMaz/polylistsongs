@@ -24,6 +24,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     title: "",
     album: "",
     artist: "",
+    drummer: "",
   });
 
   const generateRandomId = () => {
@@ -44,7 +45,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
       ...newSong,
     };
     setSongs([...songs, newSongWithID as SongProp]);
-    setInputFields({ title: "", album: "", artist: "" });
+    setInputFields({ title: "", album: "", artist: "", drummer: "" });
     setIsDialogOpen(false);
   };
 
