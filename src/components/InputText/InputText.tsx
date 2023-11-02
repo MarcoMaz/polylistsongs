@@ -1,15 +1,16 @@
+import { ChangeEvent } from "react";
 import { InputsProps } from "../FormAddSong/FormAddSong";
 
 interface InputTextProps {
   field: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   inputFields: InputsProps;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputText: React.FunctionComponent<InputTextProps> = ({
   field,
-  handleChange,
   inputFields,
+  handleChange,
 }) => {
   return (
     <div>

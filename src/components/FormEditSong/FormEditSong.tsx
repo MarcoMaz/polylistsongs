@@ -2,6 +2,7 @@ import { SetStateAction, useEffect, useState } from "react";
 import Button from "../Button/Button";
 import InputText from "../InputText/InputText";
 import { SongProp } from "../../../pages/api/songs";
+import Dropdown from "../Dropdown/Dropdown";
 
 interface FormAddSongProps {
   selectedSong: SongProp | null;
@@ -83,25 +84,14 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
       {tableFields.map((field, index) => {
         if (field === "polyType") {
           return (
-            <div key={index}>
-              <label htmlFor="polytype">Choose the polyrhythmic type:</label>
-              <br />
-              <select
-                name="polytypes"
-                id="polytype"
-                onChange={handleSelect}
-                value={inputFields.polyType}
-              >
-                {polyTypes.map((polyType, idx) => {
-                  return (
-                    <option key={idx} value={polyType}>
-                      {polyType}
-                    </option>
-                  );
-                })}
-              </select>
-              <br />
-            </div>
+            <Dropdown
+              key={index}
+              label="Choose the polyrhythmic type:"
+              field={field}
+              onChange={handleSelect}
+              inputFields={inputFields}
+              polyTypes={polyTypes}
+            />
           );
         } else {
           return (
