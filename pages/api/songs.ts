@@ -6,6 +6,7 @@ export interface SongProp {
   album: string;
   artist: string;
   drummer: string;
+  polyType: 'groove' | 'section' | 'fill'
 }
 
 
@@ -15,14 +16,16 @@ export const songsData: SongProp[] = [
     title: "New Millenium",
     album: "Falling into Infinity",
     artist: "Dream Theater",
-    drummer: "Mike Portnoy"
+    drummer: "Mike Portnoy",
+    polyType: "groove"
   },
   {
     id: 2,
     title: "Pyramid on Mars",
     album: "On the Virg",
     artist: "Virgil Donati",
-    drummer: "Virgil Donati"
+    drummer: "Virgil Donati",
+    polyType: "section"
   },
   {
     id: 3,
@@ -30,6 +33,7 @@ export const songsData: SongProp[] = [
     album: "Joe's Garage",
     artist: "Frank Zappa",
     drummer: "Vinnie Colaiuta",
+    polyType: "fill"
   },
 ];
 

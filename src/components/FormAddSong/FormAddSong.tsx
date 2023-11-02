@@ -6,6 +6,7 @@ import InputText from "../InputText/InputText";
 interface FormAddSongProps {
   tableFields: string[];
   songs: SongProp[];
+  polyTypes: string[];
   setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
 }
@@ -17,6 +18,7 @@ export interface InputsProps {
 const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
   tableFields,
   songs,
+  polyTypes,
   setSongs,
   setIsDialogOpen,
 }) => {
@@ -27,6 +29,8 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     drummer: "",
   });
 
+  console.log(inputFields)
+
   const generateRandomId = () => {
     return Math.floor(Math.random() * 1000);
   };
@@ -36,6 +40,14 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     setInputFields({ ...inputFields, [name]: value });
   };
 
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    setInputFields((prevInputFields) => ({
+      ...prevInputFields,
+      polyType: value,
+    }));
+  };
+
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
@@ -43,6 +55,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     const newSongWithID = {
       id: generateRandomId(),
       ...newSong,
+      polyType: inputFields.polyType,
     };
     setSongs([...songs, newSongWithID as SongProp]);
     setInputFields({ title: "", album: "", artist: "", drummer: "" });
@@ -52,14 +65,38 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
   return (
     <form onSubmit={handleFormSubmit}>
       {tableFields.map((field, index) => {
-        return (
-          <InputText
-            key={index}
-            field={field}
-            handleChange={handleInputChange}
-            inputFields={inputFields}
-          />
-        );
+        if (field === "polyType") {
+          return (
+            <div key={index}>
+              <label htmlFor="polytype">Choose the polyrhythmic type:</label>
+              <br />
+              <select
+                name="polytypes"
+                id="polytype"
+                onChange={handleSelect}
+                value={inputFields.polyType}
+              >
+                {polyTypes.map((polyType, idx) => {
+                  return (
+                    <option key={idx} value={polyType}>
+                      {polyType}
+                    </option>
+                  );
+                })}
+              </select>
+              <br />
+            </div>
+          );
+        } else {
+          return (
+            <InputText
+              key={index}
+              field={field}
+              handleChange={handleInputChange}
+              inputFields={inputFields}
+            />
+          );
+        }
       })}
       <Button type="submit" label="send" />
     </form>

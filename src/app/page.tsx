@@ -15,7 +15,8 @@ export default function Home() {
   const [selectedSong, setSelectedSong] = useState<SongProp | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const tableFields: string[] = ["title", "album", "artist", "drummer"];
+  const tableFields: string[] = ["title", "album", "artist", "drummer", "polyType"];
+  const polyTypes: string[] = ["groove", "section", "fill"];
 
   const addSongButtonClick = () => {
     setIsDialogOpen(true);
@@ -43,6 +44,7 @@ export default function Home() {
             tableFields={tableFields}
             selectedSong={selectedSong}
             songs={songs}
+            polyTypes={polyTypes}
             setSongs={setSongs}
             setIsDialogOpen={setIsDialogOpen}
             setIsEditing={setIsEditing}
@@ -51,6 +53,7 @@ export default function Home() {
           <FormAddSong
             tableFields={tableFields}
             songs={songs}
+            polyTypes={polyTypes}
             setSongs={setSongs}
             setIsDialogOpen={setIsDialogOpen}
           />
