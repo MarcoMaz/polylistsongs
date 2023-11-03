@@ -50,6 +50,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               <td>{props.drummer}</td>
               <td>{props.polyType}</td>
               <td>{props.year}</td>
+              <td>{props.timestamp}</td>
               <td>
                 <Button
                   type="button"

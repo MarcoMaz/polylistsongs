@@ -34,12 +34,14 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     artist: "",
     drummer: "",
     polyType: "",
-    year: 0,
+    year: 2023,
+    timestamp: "00:00",
   });
 
   useEffect(() => {
     if (selectedSong) {
-      const { title, album, artist, drummer, polyType, year } = selectedSong;
+      const { title, album, artist, drummer, polyType, year, timestamp } =
+        selectedSong;
       setInputFields({
         title: title,
         album: album,
@@ -47,13 +49,31 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
         drummer: drummer,
         polyType: polyType,
         year: year,
+        timestamp: timestamp,
       });
     }
   }, [selectedSong]);
 
+  const isValidTimestamp = (timestamp: string): boolean => {
+    const timestampRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+    return timestampRegex.test(timestamp);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInputFields({ ...inputFields, [name]: value });
+    if (name === "timestamp") {
+      const formattedValue = value.replace(/[^\d]/g, "");
+      const trimmedValue = formattedValue.slice(0, 4);
+
+      const minutes = trimmedValue.substring(0, 2);
+      const seconds = trimmedValue.substring(2, 4);
+
+      const formattedTimestamp = `${minutes}:${seconds}`;
+
+      setInputFields({ ...inputFields, [name]: formattedTimestamp });
+    } else {
+      setInputFields({ ...inputFields, [name]: value });
+    }
   };
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -6,10 +6,10 @@ export interface SongProp {
   album: string;
   artist: string;
   drummer: string;
-  polyType: 'groove' | 'section' | 'fill';
+  polyType: "groove" | "section" | "fill";
   year: number;
+  timestamp: string;
 }
-
 
 export const songsData: SongProp[] = [
   {
@@ -19,7 +19,8 @@ export const songsData: SongProp[] = [
     artist: "Dream Theater",
     drummer: "Mike Portnoy",
     polyType: "groove",
-    year: 1992
+    year: 1992,
+    timestamp: "05:03"
   },
   {
     id: 2,
@@ -28,7 +29,8 @@ export const songsData: SongProp[] = [
     artist: "Virgil Donati",
     drummer: "Virgil Donati",
     polyType: "section",
-    year: 1999
+    year: 1999,
+    timestamp: "01:00"
   },
   {
     id: 3,
@@ -37,7 +39,8 @@ export const songsData: SongProp[] = [
     artist: "Frank Zappa",
     drummer: "Vinnie Colaiuta",
     polyType: "fill",
-    year: 1979
+    year: 1979,
+    timestamp: "02:11"
   },
 ];
 

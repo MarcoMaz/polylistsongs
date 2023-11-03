@@ -31,6 +31,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     drummer: "",
     polyType: "groove",
     year: 2023,
+    timestamp: "00:00",
   });
 
   const generateRandomId = () => {
@@ -39,7 +40,19 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInputFields({ ...inputFields, [name]: value });
+    if (name === "timestamp") {
+      const formattedValue = value.replace(/[^\d]/g, "");
+      const trimmedValue = formattedValue.slice(0, 4);
+
+      const minutes = trimmedValue.substring(0, 2);
+      const seconds = trimmedValue.substring(2, 4);
+
+      const formattedTimestamp = `${minutes}:${seconds}`;
+
+      setInputFields({ ...inputFields, [name]: formattedTimestamp });
+    } else {
+      setInputFields({ ...inputFields, [name]: value });
+    }
   };
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -67,6 +80,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
       drummer: "",
       polyType: "groove",
       year: 2023,
+      timestamp: "00:00",
     });
     setIsDialogOpen(false);
   };
