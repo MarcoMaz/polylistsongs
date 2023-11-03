@@ -12,7 +12,7 @@ interface FormAddSongProps {
 }
 
 export interface InputsProps {
-  [key: string]: string;
+  [key: string]: string | number;
 }
 
 const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
@@ -27,9 +27,8 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     album: "",
     artist: "",
     drummer: "",
+    year: 2023,
   });
-
-  console.log(inputFields)
 
   const generateRandomId = () => {
     return Math.floor(Math.random() * 1000);
@@ -58,7 +57,13 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
       polyType: inputFields.polyType,
     };
     setSongs([...songs, newSongWithID as SongProp]);
-    setInputFields({ title: "", album: "", artist: "", drummer: "" });
+    setInputFields({
+      title: "",
+      album: "",
+      artist: "",
+      drummer: "",
+      year: 2023,
+    });
     setIsDialogOpen(false);
   };
 
@@ -85,6 +90,21 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
                 })}
               </select>
               <br />
+            </div>
+          );
+        } else if (field === "year") {
+          return (
+            <div key={index}>
+              <label htmlFor="year">year</label>
+              <input
+                type="number"
+                id="year"
+                name="year"
+                min="1950"
+                max="2030"
+                onChange={handleInputChange}
+                value={inputFields[field]}
+              />
             </div>
           );
         } else {

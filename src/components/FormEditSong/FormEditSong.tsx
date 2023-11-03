@@ -15,7 +15,7 @@ interface FormAddSongProps {
 }
 
 export interface InputsProps {
-  [key: string]: string;
+  [key: string]: string | number;
 }
 
 const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
@@ -33,17 +33,19 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     artist: "",
     drummer: "",
     polyType: "",
+    year: 0,
   });
 
   useEffect(() => {
     if (selectedSong) {
-      const { title, album, artist, drummer, polyType } = selectedSong;
+      const { title, album, artist, drummer, polyType, year } = selectedSong;
       setInputFields({
         title: title,
         album: album,
         artist: artist,
         drummer: drummer,
         polyType: polyType,
+        year: year,
       });
     }
   }, [selectedSong]);
@@ -65,8 +67,14 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     event.preventDefault();
     if (selectedSong) {
       const formData = new FormData(event.target as HTMLFormElement);
-      const updatedSong = Object.fromEntries(formData.entries());
-      updatedSong.polyType = inputFields.polyType;
+      const updatedSong: Record<string, string> = {};
+      const formDataEntries: [string, FormDataEntryValue][] = [
+        ...formData.entries(),
+      ];
+      for (let pair of formDataEntries) {
+        updatedSong[pair[0]] = String(pair[1]);
+      }
+      updatedSong.polyType = String(inputFields.polyType);
       const updatedSongs = songs.map((song) => {
         if (song.id === selectedSong.id) {
           return { ...song, ...updatedSong };
@@ -92,6 +100,21 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
               inputFields={inputFields}
               polyTypes={polyTypes}
             />
+          );
+        } else if (field === "year") {
+          return (
+            <div key={index}>
+              <label htmlFor="year">year</label>
+              <input
+                type="number"
+                id="year"
+                name="year"
+                min="1950"
+                max="2030"
+                onChange={handleInputChange}
+                value={inputFields[field]}
+              />
+            </div>
           );
         } else {
           return (
