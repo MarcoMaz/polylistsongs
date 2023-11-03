@@ -29,6 +29,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     album: "",
     artist: "",
     drummer: "",
+    polyType: "groove",
     year: 2023,
   });
 
@@ -64,6 +65,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
       album: "",
       artist: "",
       drummer: "",
+      polyType: "groove",
       year: 2023,
     });
     setIsDialogOpen(false);
