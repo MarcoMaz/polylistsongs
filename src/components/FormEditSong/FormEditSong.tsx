@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import InputText from "../InputText/InputText";
 import { SongProp } from "../../../pages/api/songs";
 import Dropdown from "../Dropdown/Dropdown";
+import InputNumber from "../InputNumber/InputNumber";
 
 interface FormAddSongProps {
   selectedSong: SongProp | null;
@@ -89,44 +90,35 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
 
   return (
     <form onSubmit={handleFormSubmit}>
-      {tableFields.map((field, index) => {
-        if (field === "polyType") {
-          return (
-            <Dropdown
-              key={index}
-              label="Choose the polyrhythmic type:"
-              field={field}
-              onChange={handleSelect}
-              inputFields={inputFields}
-              polyTypes={polyTypes}
-            />
-          );
-        } else if (field === "year") {
-          return (
-            <div key={index}>
-              <label htmlFor="year">year</label>
-              <input
-                type="number"
-                id="year"
-                name="year"
-                min="1950"
-                max="2030"
-                onChange={handleInputChange}
-                value={inputFields[field]}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <InputText
-              key={index}
-              field={field}
-              handleChange={handleInputChange}
-              inputFields={inputFields}
-            />
-          );
-        }
-      })}
+      {tableFields.map((field, index) =>
+        field === "polyType" ? (
+          <Dropdown
+            key={index}
+            label="Choose the polyrhythmic type:"
+            field={field}
+            onChange={handleSelect}
+            inputFields={inputFields}
+            polyTypes={polyTypes}
+          />
+        ) : field === "year" ? (
+          <InputNumber
+            key={index}
+            field={field}
+            inputFields={inputFields}
+            label="year"
+            min={1950}
+            max={2023}
+            handleChange={handleInputChange}
+          />
+        ) : (
+          <InputText
+            key={index}
+            field={field}
+            handleChange={handleInputChange}
+            inputFields={inputFields}
+          />
+        )
+      )}
       <Button type="submit" label="save" />
     </form>
   );

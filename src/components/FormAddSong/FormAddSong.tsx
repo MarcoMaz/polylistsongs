@@ -2,6 +2,8 @@ import { SetStateAction, useState } from "react";
 import Button from "../Button/Button";
 import { SongProp } from "../../../pages/api/songs";
 import InputText from "../InputText/InputText";
+import InputNumber from "../InputNumber/InputNumber";
+import Dropdown from "../Dropdown/Dropdown";
 
 interface FormAddSongProps {
   tableFields: string[];
@@ -69,55 +71,35 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
 
   return (
     <form onSubmit={handleFormSubmit}>
-      {tableFields.map((field, index) => {
-        if (field === "polyType") {
-          return (
-            <div key={index}>
-              <label htmlFor="polytype">Choose the polyrhythmic type:</label>
-              <br />
-              <select
-                name="polytypes"
-                id="polytype"
-                onChange={handleSelect}
-                value={inputFields.polyType}
-              >
-                {polyTypes.map((polyType, idx) => {
-                  return (
-                    <option key={idx} value={polyType}>
-                      {polyType}
-                    </option>
-                  );
-                })}
-              </select>
-              <br />
-            </div>
-          );
-        } else if (field === "year") {
-          return (
-            <div key={index}>
-              <label htmlFor="year">year</label>
-              <input
-                type="number"
-                id="year"
-                name="year"
-                min="1950"
-                max="2030"
-                onChange={handleInputChange}
-                value={inputFields[field]}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <InputText
-              key={index}
-              field={field}
-              handleChange={handleInputChange}
-              inputFields={inputFields}
-            />
-          );
-        }
-      })}
+      {tableFields.map((field, index) =>
+        field === "polyType" ? (
+          <Dropdown
+            key={index}
+            label="Choose the polyrhythmic type:"
+            field={field}
+            inputFields={inputFields}
+            polyTypes={polyTypes}
+            onChange={handleSelect}
+          />
+        ) : field === "year" ? (
+          <InputNumber
+            key={field}
+            field={field}
+            inputFields={inputFields}
+            label="year"
+            min={1950}
+            max={2023}
+            handleChange={handleInputChange}
+          />
+        ) : (
+          <InputText
+            key={index}
+            field={field}
+            handleChange={handleInputChange}
+            inputFields={inputFields}
+          />
+        )
+      )}
       <Button type="submit" label="send" />
     </form>
   );
