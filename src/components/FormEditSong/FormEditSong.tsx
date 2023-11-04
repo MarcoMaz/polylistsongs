@@ -1,7 +1,11 @@
 import { SetStateAction, useEffect, useState } from "react";
 import Button from "../Button/Button";
 import InputText from "../InputText/InputText";
-import { PolyrhythmProp, SongProp } from "../../../pages/api/songs";
+import {
+  PolyrhythmProp,
+  SongProp,
+  TimeSignatureProp,
+} from "../../../pages/api/songs";
 import Dropdown from "../Dropdown/Dropdown";
 import InputNumber from "../InputNumber/InputNumber";
 
@@ -16,7 +20,7 @@ interface FormEditSongProps {
 }
 
 export interface InputsProps {
-  [key: string]: string | number | PolyrhythmProp;
+  [key: string]: string | number | PolyrhythmProp | TimeSignatureProp;
 }
 
 const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
@@ -40,12 +44,25 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
       against: 3,
       base: 2,
     },
+    timeSignature: {
+      numerator: 4,
+      denominator: 4,
+    },
   });
 
   useEffect(() => {
     if (selectedSong) {
-      const { title, album, artist, drummer, polyType, year, timestamp, polyrhythm } =
-        selectedSong;
+      const {
+        title,
+        album,
+        artist,
+        drummer,
+        polyType,
+        year,
+        timestamp,
+        polyrhythm,
+        timeSignature
+      } = selectedSong;
       setInputFields({
         title: title,
         album: album,
@@ -54,7 +71,8 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         polyType: polyType,
         year: year,
         timestamp: timestamp,
-        polyrhythm: polyrhythm
+        polyrhythm: polyrhythm,
+        timeSignature: timeSignature
       });
     }
   }, [selectedSong]);
@@ -112,24 +130,72 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
     }
   };
 
+  const handleTimeSignatureNumeratorChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = e.target;
+    if (
+      typeof inputFields.timeSignature !== "string" &&
+      typeof inputFields.timeSignature !== "number"
+    ) {
+      const updatedTimeSignature =
+        inputFields.timeSignature as TimeSignatureProp;
+      setInputFields((prevInputFields) => ({
+        ...prevInputFields,
+        timeSignature: { ...updatedTimeSignature, numerator: parseInt(value) },
+      }));
+    }
+  };
+
+  const handleTimeSignatureDenominatorChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value } = e.target;
+    if (
+      typeof inputFields.timeSignature !== "string" &&
+      typeof inputFields.timeSignature !== "number"
+    ) {
+      const updatedTimeSignature =
+        inputFields.timeSignature as TimeSignatureProp;
+      setInputFields((prevInputFields) => ({
+        ...prevInputFields,
+        timeSignature: {
+          ...updatedTimeSignature,
+          denominator: parseInt(value),
+        },
+      }));
+    }
+  };
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (selectedSong) {
       const formData = new FormData(event.target as HTMLFormElement);
-      const updatedSong: Record<string, string | PolyrhythmProp> = {};
+      const updatedSong: Record<
+        string,
+        string | PolyrhythmProp | TimeSignatureProp
+      > = {};
       const updatedPolyrhythm: Partial<PolyrhythmProp> = {};
-      const formDataEntries: [string, FormDataEntryValue][] = [...formData.entries()];
+      const updatedTimeSignature: Partial<TimeSignatureProp> = {};
+      const formDataEntries: [string, FormDataEntryValue][] = [
+        ...formData.entries(),
+      ];
       for (let pair of formDataEntries) {
-        if (pair[0] === 'against' || pair[0] === 'base') {
+        if (pair[0] === "against" || pair[0] === "base") {
           updatedPolyrhythm[pair[0]] = parseInt(pair[1] as string);
+        } else if (pair[0] === "numerator" || pair[0] === "denominator") {
+          updatedTimeSignature[pair[0]] = parseInt(pair[1] as string);
         } else {
           updatedSong[pair[0]] = String(pair[1]);
         }
       }
       updatedSong.polyrhythm = {
-        ...inputFields.polyrhythm as PolyrhythmProp,
+        ...(inputFields.polyrhythm as PolyrhythmProp),
         ...updatedPolyrhythm,
+      };
+      updatedSong.timeSignature = {
+        ...(inputFields.timeSignature as TimeSignatureProp),
+        ...updatedTimeSignature,
       };
       updatedSong.polyType = String(inputFields.polyType);
       const updatedSongs = songs.map((song) => {
@@ -143,7 +209,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
       setIsEditing(false);
     }
   };
-    
+
   return (
     <form onSubmit={handleFormSubmit}>
       {tableFields.map((field, index) =>
@@ -168,8 +234,8 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
           />
         ) : field === "polyrhythm" ? (
           <div key={index}>
+            <strong>polyrhythm</strong>
             <div>
-              <label htmlFor="against">Against</label>
               <input
                 type="number"
                 id="against"
@@ -180,8 +246,8 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
                 onChange={handleAgainstChange}
               />
             </div>
+            <span>against</span>
             <div>
-              <label htmlFor="base">Base</label>
               <input
                 type="number"
                 id="base"
@@ -190,6 +256,37 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
                 max="30"
                 value={(inputFields.polyrhythm as PolyrhythmProp).base}
                 onChange={handleBaseChange}
+              />
+            </div>
+          </div>
+        ) : field === "timeSignature" ? (
+          <div key={index}>
+            <strong>Time Signature</strong>
+            <div>
+              <input
+                type="number"
+                id="timeSignatureNumerator"
+                name="timeSignatureNumerator"
+                min="1"
+                max="32"
+                value={
+                  (inputFields.timeSignature as TimeSignatureProp).numerator
+                }
+                onChange={handleTimeSignatureNumeratorChange}
+              />
+            </div>
+            <span>-</span>
+            <div>
+              <input
+                type="number"
+                id="timeSignatureDenominator"
+                name="timeSignatureDenominator"
+                min="2"
+                max="32"
+                value={
+                  (inputFields.timeSignature as TimeSignatureProp).denominator
+                }
+                onChange={handleTimeSignatureDenominatorChange}
               />
             </div>
           </div>

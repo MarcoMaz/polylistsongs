@@ -52,6 +52,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               <td>{props.year}</td>
               <td>{props.timestamp}</td>
               <td>{`${props.polyrhythm.against}:${props.polyrhythm.base}`}</td>
+              <td>{`${props.timeSignature.numerator}/${props.timeSignature.denominator}`}</td>
               <td>
                 <Button
                   type="button"

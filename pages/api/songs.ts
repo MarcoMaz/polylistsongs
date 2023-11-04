@@ -5,6 +5,11 @@ export interface PolyrhythmProp {
   base: number;
 }
 
+export interface TimeSignatureProp {
+  numerator: number;
+  denominator: number;
+}
+
 export interface SongProp {
   id: number;
   title: string;
@@ -15,6 +20,7 @@ export interface SongProp {
   year: number;
   timestamp: string;
   polyrhythm: PolyrhythmProp;
+  timeSignature: TimeSignatureProp;
 }
 
 export const songsData: SongProp[] = [
@@ -31,6 +37,10 @@ export const songsData: SongProp[] = [
       against: 4,
       base: 3,
     },
+    timeSignature: {
+      numerator: 3,
+      denominator: 4,
+    },
   },
   {
     id: 2,
@@ -42,8 +52,12 @@ export const songsData: SongProp[] = [
     year: 1999,
     timestamp: "01:00",
     polyrhythm: {
-      against: 4,
+      against: 7,
       base: 3,
+    },
+    timeSignature: {
+      numerator: 3,
+      denominator: 8,
     },
   },
   {
@@ -58,6 +72,10 @@ export const songsData: SongProp[] = [
     polyrhythm: {
       against: 4,
       base: 3,
+    },
+    timeSignature: {
+      numerator: 3,
+      denominator: 4,
     },
   },
 ];
