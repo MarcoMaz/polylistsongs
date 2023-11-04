@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import { InputsProps } from "../FormAddSong/FormAddSong";
+import { PolyrhythmProp } from "../../../pages/api/songs";
 
 interface InputNumberProps {
   field: string;
@@ -18,6 +19,14 @@ const InputNumber: React.FunctionComponent<InputNumberProps> = ({
   min,
   handleChange,
 }) => {
+  let value;
+  if (typeof inputFields[field] === "object" && field === "polyrhythm") {
+    const polyrhythm = inputFields[field] as PolyrhythmProp;
+    value = `${polyrhythm.against}:${polyrhythm.base}`;
+  } else {
+    value = inputFields[field];
+  }
+
   return (
     <div>
       <label htmlFor={field}>{label}</label>
@@ -28,7 +37,7 @@ const InputNumber: React.FunctionComponent<InputNumberProps> = ({
         min={min}
         max={max}
         onChange={handleChange}
-        value={inputFields[field]}
+        value={value as string}
       />
     </div>
   );

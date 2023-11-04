@@ -51,6 +51,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               <td>{props.polyType}</td>
               <td>{props.year}</td>
               <td>{props.timestamp}</td>
+              <td>{`${props.polyrhythm.against}:${props.polyrhythm.base}`}</td>
               <td>
                 <Button
                   type="button"

@@ -1,5 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
+export interface PolyrhythmProp {
+  against: number;
+  base: number;
+}
+
 export interface SongProp {
   id: number;
   title: string;
@@ -9,6 +14,7 @@ export interface SongProp {
   polyType: "groove" | "section" | "fill";
   year: number;
   timestamp: string;
+  polyrhythm: PolyrhythmProp;
 }
 
 export const songsData: SongProp[] = [
@@ -20,7 +26,11 @@ export const songsData: SongProp[] = [
     drummer: "Mike Portnoy",
     polyType: "groove",
     year: 1992,
-    timestamp: "05:03"
+    timestamp: "05:03",
+    polyrhythm: {
+      against: 4,
+      base: 3,
+    },
   },
   {
     id: 2,
@@ -30,7 +40,11 @@ export const songsData: SongProp[] = [
     drummer: "Virgil Donati",
     polyType: "section",
     year: 1999,
-    timestamp: "01:00"
+    timestamp: "01:00",
+    polyrhythm: {
+      against: 4,
+      base: 3,
+    },
   },
   {
     id: 3,
@@ -40,7 +54,11 @@ export const songsData: SongProp[] = [
     drummer: "Vinnie Colaiuta",
     polyType: "fill",
     year: 1979,
-    timestamp: "02:11"
+    timestamp: "02:11",
+    polyrhythm: {
+      against: 4,
+      base: 3,
+    },
   },
 ];
 

@@ -1,11 +1,11 @@
 import { SetStateAction, useEffect, useState } from "react";
 import Button from "../Button/Button";
 import InputText from "../InputText/InputText";
-import { SongProp } from "../../../pages/api/songs";
+import { PolyrhythmProp, SongProp } from "../../../pages/api/songs";
 import Dropdown from "../Dropdown/Dropdown";
 import InputNumber from "../InputNumber/InputNumber";
 
-interface FormAddSongProps {
+interface FormEditSongProps {
   selectedSong: SongProp | null;
   tableFields: string[];
   songs: SongProp[];
@@ -16,10 +16,10 @@ interface FormAddSongProps {
 }
 
 export interface InputsProps {
-  [key: string]: string | number;
+  [key: string]: string | number | PolyrhythmProp;
 }
 
-const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
+const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
   selectedSong,
   tableFields,
   songs,
@@ -36,11 +36,15 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     polyType: "",
     year: 2023,
     timestamp: "00:00",
+    polyrhythm: {
+      against: 3,
+      base: 2,
+    },
   });
 
   useEffect(() => {
     if (selectedSong) {
-      const { title, album, artist, drummer, polyType, year, timestamp } =
+      const { title, album, artist, drummer, polyType, year, timestamp, polyrhythm } =
         selectedSong;
       setInputFields({
         title: title,
@@ -50,14 +54,10 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
         polyType: polyType,
         year: year,
         timestamp: timestamp,
+        polyrhythm: polyrhythm
       });
     }
   }, [selectedSong]);
-
-  const isValidTimestamp = (timestamp: string): boolean => {
-    const timestampRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
-    return timestampRegex.test(timestamp);
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -84,17 +84,53 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     }));
   };
 
+  const handleAgainstChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (
+      typeof inputFields.polyrhythm !== "string" &&
+      typeof inputFields.polyrhythm !== "number"
+    ) {
+      const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
+      setInputFields((prevInputFields) => ({
+        ...prevInputFields,
+        polyrhythm: { ...updatedPolyrhythm, against: parseInt(value) },
+      }));
+    }
+  };
+
+  const handleBaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (
+      typeof inputFields.polyrhythm !== "string" &&
+      typeof inputFields.polyrhythm !== "number"
+    ) {
+      const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
+      setInputFields((prevInputFields) => ({
+        ...prevInputFields,
+        polyrhythm: { ...updatedPolyrhythm, base: parseInt(value) },
+      }));
+    }
+  };
+
+
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     if (selectedSong) {
       const formData = new FormData(event.target as HTMLFormElement);
-      const updatedSong: Record<string, string> = {};
-      const formDataEntries: [string, FormDataEntryValue][] = [
-        ...formData.entries(),
-      ];
+      const updatedSong: Record<string, string | PolyrhythmProp> = {};
+      const updatedPolyrhythm: Partial<PolyrhythmProp> = {};
+      const formDataEntries: [string, FormDataEntryValue][] = [...formData.entries()];
       for (let pair of formDataEntries) {
-        updatedSong[pair[0]] = String(pair[1]);
+        if (pair[0] === 'against' || pair[0] === 'base') {
+          updatedPolyrhythm[pair[0]] = parseInt(pair[1] as string);
+        } else {
+          updatedSong[pair[0]] = String(pair[1]);
+        }
       }
+      updatedSong.polyrhythm = {
+        ...inputFields.polyrhythm as PolyrhythmProp,
+        ...updatedPolyrhythm,
+      };
       updatedSong.polyType = String(inputFields.polyType);
       const updatedSongs = songs.map((song) => {
         if (song.id === selectedSong.id) {
@@ -107,7 +143,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
       setIsEditing(false);
     }
   };
-
+    
   return (
     <form onSubmit={handleFormSubmit}>
       {tableFields.map((field, index) =>
@@ -130,6 +166,33 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
             max={2023}
             handleChange={handleInputChange}
           />
+        ) : field === "polyrhythm" ? (
+          <div key={index}>
+            <div>
+              <label htmlFor="against">Against</label>
+              <input
+                type="number"
+                id="against"
+                name="against"
+                min="2"
+                max="30"
+                value={(inputFields.polyrhythm as PolyrhythmProp).against}
+                onChange={handleAgainstChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="base">Base</label>
+              <input
+                type="number"
+                id="base"
+                name="base"
+                min="2"
+                max="30"
+                value={(inputFields.polyrhythm as PolyrhythmProp).base}
+                onChange={handleBaseChange}
+              />
+            </div>
+          </div>
         ) : (
           <InputText
             key={index}
@@ -144,4 +207,4 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
   );
 };
 
-export default FormAddSong;
+export default FormEditSong;

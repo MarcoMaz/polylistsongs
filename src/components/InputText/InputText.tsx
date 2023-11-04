@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import { InputsProps } from "../FormAddSong/FormAddSong";
+import { PolyrhythmProp } from "../../../pages/api/songs";
 
 interface InputTextProps {
   field: string;
@@ -12,6 +13,14 @@ const InputText: React.FunctionComponent<InputTextProps> = ({
   inputFields,
   handleChange,
 }) => {
+  let value;
+  if (typeof inputFields[field] === "object" && field === "polyrhythm") {
+    const polyrhythm = inputFields[field] as PolyrhythmProp;
+    value = `${polyrhythm.against}:${polyrhythm.base}`;
+  } else {
+    value = inputFields[field];
+  }
+
   return (
     <div>
       <label htmlFor={field}>{field}</label>
@@ -20,7 +29,7 @@ const InputText: React.FunctionComponent<InputTextProps> = ({
         name={field}
         id={field}
         required
-        value={inputFields[field]}
+        value={value as string}
         onChange={handleChange}
       />
     </div>

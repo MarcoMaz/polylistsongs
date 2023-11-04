@@ -15,7 +15,7 @@ export default function Home() {
   const [selectedSong, setSelectedSong] = useState<SongProp | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
-  const tableFields: string[] = ["title", "album", "artist", "drummer", "polyType", "year", "timestamp"];
+  const tableFields: string[] = ["title", "album", "artist", "drummer", "polyType", "year", "timestamp", "polyrhythm"];
   const polyTypes: string[] = ["groove", "section", "fill"];
 
   const addSongButtonClick = () => {
