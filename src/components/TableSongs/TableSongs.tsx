@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { SetStateAction } from "react";
 import { SongProp } from "../../../pages/api/songs";
 import Button from "../Button/Button";
@@ -54,6 +55,9 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               <td>{`${props.polyrhythm.against}:${props.polyrhythm.base}`}</td>
               <td>{`${props.timeSignature.numerator}/${props.timeSignature.denominator}`}</td>
               <td>{props.source}</td>
+              <td>
+                <img src={props.scoreUrl} alt="image" width={30} height={30} />
+              </td>
               <td>
                 <Button
                   type="button"

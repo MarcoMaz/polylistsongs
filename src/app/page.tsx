@@ -26,6 +26,7 @@ export default function Home() {
     "polyrhythm",
     "timeSignature",
     "source",
+    "scoreUrl"
   ];
   const polyTypes: string[] = ["groove", "section", "fill"];
   const sourceTypes: string[] = [

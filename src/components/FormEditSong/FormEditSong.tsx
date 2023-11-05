@@ -264,7 +264,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
             max={2023}
             handleChange={handleInputChange}
           />
-        ) : field === "polyrhythm" ? (
+        ) : field === "scoreUrl" ? null : field === "polyrhythm" ? (
           <div key={index}>
             <strong>polyrhythm</strong>
             <div>

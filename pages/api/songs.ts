@@ -30,6 +30,7 @@ export interface SongProp {
     | "My Archive"
     | "Minneman Book"
     | "Virgil Donati Book";
+  scoreUrl: string;
 }
 
 export const songsData: SongProp[] = [
@@ -51,6 +52,7 @@ export const songsData: SongProp[] = [
       denominator: 4,
     },
     source: "Mike Portnoy Book",
+    scoreUrl: "https://via.placeholder.com/300",
   },
   {
     id: 2,
@@ -70,6 +72,7 @@ export const songsData: SongProp[] = [
       denominator: 8,
     },
     source: "Virgil Donati Book",
+    scoreUrl: "https://via.placeholder.com/300",
   },
   {
     id: 3,
@@ -89,6 +92,7 @@ export const songsData: SongProp[] = [
       denominator: 4,
     },
     source: "Frank Zappa Book",
+    scoreUrl: "https://via.placeholder.com/300",
   },
 ];
 

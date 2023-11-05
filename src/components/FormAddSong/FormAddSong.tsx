@@ -222,7 +222,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
             </select>
             <br />
           </div>
-        ) : field === "polyrhythm" ? (
+        ) : field === "scoreUrl" ? null : field === "polyrhythm" ? (
           <div key={index}>
             <strong>Polyrhythm</strong>
             <br />
