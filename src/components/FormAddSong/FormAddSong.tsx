@@ -12,6 +12,25 @@ import {
 
 import TextConstants from "@/constants/textConstants";
 
+const initialValues = {
+  title: "",
+  album: "",
+  artist: "",
+  drummer: "",
+  polyType: "groove",
+  year: 2023,
+  timestamp: "00:00",
+  polyrhythm: {
+    against: 3,
+    base: 2,
+  },
+  timeSignature: {
+    numerator: 4,
+    denominator: 4,
+  },
+  source: "My Archive",
+};
+
 interface FormAddSongProps {
   tableFields: string[];
   songs: SongProp[];
@@ -29,24 +48,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
   setSongs,
   setIsDialogOpen,
 }) => {
-  const [inputFields, setInputFields] = useState<InputsProps>({
-    title: "",
-    album: "",
-    artist: "",
-    drummer: "",
-    polyType: "groove",
-    year: 2023,
-    timestamp: "00:00",
-    polyrhythm: {
-      against: 3,
-      base: 2,
-    },
-    timeSignature: {
-      numerator: 4,
-      denominator: 4,
-    },
-    source: "My Archive",
-  });
+  const [inputFields, setInputFields] = useState<InputsProps>(initialValues);
 
   const {
     polyrhythmTypeLabel,
@@ -171,24 +173,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     };
 
     setSongs([...songs, newSongWithID as SongProp]);
-    setInputFields({
-      title: "",
-      album: "",
-      artist: "",
-      drummer: "",
-      polyType: "groove",
-      year: 2023,
-      timestamp: "00:00",
-      polyrhythm: {
-        against: 3,
-        base: 2,
-      },
-      timeSignature: {
-        numerator: 4,
-        denominator: 4,
-      },
-      source: "My Archive",
-    });
+    setInputFields(initialValues);
     setIsDialogOpen(false);
   };
 

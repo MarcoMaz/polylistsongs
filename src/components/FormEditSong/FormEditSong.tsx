@@ -12,6 +12,25 @@ import {
 
 import TextConstants from "@/constants/textConstants";
 
+const initialValues = {
+  title: "",
+  album: "",
+  artist: "",
+  drummer: "",
+  polyType: "",
+  year: 2023,
+  timestamp: "00:00",
+  polyrhythm: {
+    against: 3,
+    base: 2,
+  },
+  timeSignature: {
+    numerator: 4,
+    denominator: 4,
+  },
+  source: "",
+};
+
 interface FormEditSongProps {
   selectedSong: SongProp | null;
   tableFields: string[];
@@ -33,24 +52,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
   setIsDialogOpen,
   setSelectedSong,
 }) => {
-  const [inputFields, setInputFields] = useState<InputsProps>({
-    title: "",
-    album: "",
-    artist: "",
-    drummer: "",
-    polyType: "",
-    year: 2023,
-    timestamp: "00:00",
-    polyrhythm: {
-      against: 3,
-      base: 2,
-    },
-    timeSignature: {
-      numerator: 4,
-      denominator: 4,
-    },
-    source: "",
-  });
+  const [inputFields, setInputFields] = useState<InputsProps>(initialValues);
 
   const {
     polyrhythmTypeLabel,
@@ -58,7 +60,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
     sourceLabel,
     polyrhythmLabels,
     timeSignatureLabel,
-  } = TextConstants.formEditSong; 
+  } = TextConstants.formEditSong;
 
   useEffect(() => {
     if (selectedSong) {
