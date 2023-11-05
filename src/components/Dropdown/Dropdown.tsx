@@ -1,6 +1,6 @@
 import { ChangeEvent, SetStateAction } from "react";
 import { InputsProps } from "../FormAddSong/FormAddSong";
-import { PolyrhythmProp } from "../../../pages/api/songs";
+import { PolyrhythmProp } from "@/models/model";
 
 interface DropdownProps {
   label: string;

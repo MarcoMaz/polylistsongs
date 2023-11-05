@@ -1,13 +1,9 @@
 import { SetStateAction, useState } from "react";
-import {
-  PolyrhythmProp,
-  SongProp,
-  TimeSignatureProp,
-} from "../../../pages/api/songs";
 import Button from "../Button/Button";
 import InputText from "../InputText/InputText";
 import InputNumber from "../InputNumber/InputNumber";
 import Dropdown from "../Dropdown/Dropdown";
+import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
 interface FormAddSongProps {
   tableFields: string[];

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { SongProp, songsData } from "../../pages/api/songs";
+import { songsData } from "../../pages/api/songs";
 
 import Button from "@/components/Button/Button";
 import FormAddSong from "@/components/FormAddSong/FormAddSong";
@@ -9,12 +9,13 @@ import Dialog from "@/components/Dialog/Dialog";
 import TableSongs from "@/components/TableSongs/TableSongs";
 import FormEditSong from "@/components/FormEditSong/FormEditSong";
 
+import { SongProp } from "@/models/model";
+
 export default function Home() {
   const [songs, setSongs] = useState<SongProp[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [selectedSong, setSelectedSong] = useState<SongProp | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-
   const [isDataLoading, setIsDataLoading] = useState<boolean>(true);
   const [isFetchSuccessful, setIsFetchSuccessful] = useState<boolean>(true);
 
