@@ -10,6 +10,8 @@ import {
   TimeSignatureProp,
 } from "@/models/model";
 
+import TextConstants from "@/constants/textConstants";
+
 interface FormEditSongProps {
   selectedSong: SongProp | null;
   tableFields: string[];
@@ -49,6 +51,14 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
     },
     source: "",
   });
+
+  const {
+    polyrhythmTypeLabel,
+    yearLabel,
+    sourceLabel,
+    polyrhythmLabels,
+    timeSignatureLabel,
+  } = TextConstants.formEditSong; 
 
   useEffect(() => {
     if (selectedSong) {
@@ -227,7 +237,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         field === "polyType" ? (
           <Dropdown
             key={index}
-            label="Polyrhythmic type:"
+            label={polyrhythmTypeLabel}
             field={field}
             onChange={handleSelect}
             inputFields={inputFields}
@@ -236,7 +246,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         ) : field === "source" ? (
           <Dropdown
             key={index}
-            label="Source:"
+            label={sourceLabel}
             field={field}
             inputFields={inputFields}
             types={sourceTypes}
@@ -247,14 +257,14 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
             key={index}
             field={field}
             inputFields={inputFields}
-            label="year"
+            label={yearLabel}
             min={1950}
             max={2023}
             handleChange={handleInputChange}
           />
         ) : field === "scoreUrl" ? null : field === "polyrhythm" ? (
           <div key={index}>
-            <strong>polyrhythm</strong>
+            <strong>{polyrhythmLabels.heading}</strong>
             <div>
               <input
                 type="number"
@@ -266,7 +276,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
                 onChange={handleAgainstChange}
               />
             </div>
-            <span>against</span>
+            <span>{polyrhythmLabels.against}</span>
             <div>
               <input
                 type="number"
@@ -281,7 +291,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
           </div>
         ) : field === "timeSignature" ? (
           <div key={index}>
-            <strong>Time Signature</strong>
+            <strong>{timeSignatureLabel}</strong>
             <div>
               <input
                 type="number"
@@ -316,6 +326,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
             field={field}
             handleChange={handleInputChange}
             inputFields={inputFields}
+            label={field}
           />
         )
       )}

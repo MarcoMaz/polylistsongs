@@ -1,12 +1,12 @@
 interface ButtonProps {
-  type: "button" | "submit";
   label: string;
+  type: "button" | "submit";
   onClick?: () => void;
 }
 
 const Button: React.FunctionComponent<ButtonProps> = ({
-  type,
   label,
+  type,
   onClick,
 }) => {
   return (

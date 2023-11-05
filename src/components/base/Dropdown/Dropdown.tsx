@@ -2,17 +2,17 @@ import { ChangeEvent } from "react";
 import { InputsProps, PolyrhythmProp } from "@/models/model";
 
 interface DropdownProps {
-  label: string;
   field: string;
   inputFields: InputsProps;
+  label?: string;
   types: string[];
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const Dropdown: React.FunctionComponent<DropdownProps> = ({
-  label,
   field,
   inputFields,
+  label,
   types,
   onChange,
 }) => {
@@ -28,7 +28,7 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({
 
   return (
     <div>
-      <label htmlFor={field}>{label}</label>
+      {label && <label htmlFor={field}>{label}</label>}
       <br />
       <select
         name={field}

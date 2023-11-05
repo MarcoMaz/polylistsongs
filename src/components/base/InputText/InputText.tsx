@@ -2,12 +2,14 @@ import { ChangeEvent } from "react";
 import { InputsProps, PolyrhythmProp } from "@/models/model";
 
 interface InputTextProps {
+  label?: string;
   field: string;
   inputFields: InputsProps;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputText: React.FunctionComponent<InputTextProps> = ({
+  label,
   field,
   inputFields,
   handleChange,
@@ -22,7 +24,7 @@ const InputText: React.FunctionComponent<InputTextProps> = ({
 
   return (
     <div>
-      <label htmlFor={field}>{field}</label>
+      <label htmlFor={field}>{label}</label>
       <input
         type="text"
         name={field}

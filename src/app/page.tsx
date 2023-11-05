@@ -11,6 +11,8 @@ import TableSongs from "@/components/TableSongs/TableSongs";
 
 import { SongProp } from "@/models/model";
 
+import TextConstants from "@/constants/textConstants";
+
 export default function Home() {
   const [songs, setSongs] = useState<SongProp[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -33,6 +35,8 @@ export default function Home() {
     }
     fetchDataAndSetState();
   }, []);
+
+  const { loadingData, noSongs } = TextConstants.app;
 
   const tableFields: string[] = [
     "title",
@@ -70,7 +74,7 @@ export default function Home() {
 
   return (
     <main>
-      {isDataLoading && <strong>Data loading...</strong>}
+      {isDataLoading && <strong>{loadingData}</strong>}
       {songs.length ? (
         <>
           <TableSongs
@@ -106,8 +110,7 @@ export default function Home() {
           </Dialog>
         </>
       ) : (
-        !isDataLoading &&
-        isFetchSuccessful && <div className="no-data">NO USERS</div>
+        !isDataLoading && isFetchSuccessful && <div>{noSongs}</div>
       )}
     </main>
   );

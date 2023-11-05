@@ -3,8 +3,8 @@ import { InputsProps, PolyrhythmProp } from "@/models/model";
 
 interface InputNumberProps {
   field: string;
+  label?: string;
   inputFields: InputsProps;
-  label: string;
   max: number;
   min: number;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -12,8 +12,8 @@ interface InputNumberProps {
 
 const InputNumber: React.FunctionComponent<InputNumberProps> = ({
   field,
-  inputFields,
   label,
+  inputFields,
   max,
   min,
   handleChange,
@@ -28,7 +28,7 @@ const InputNumber: React.FunctionComponent<InputNumberProps> = ({
 
   return (
     <div>
-      <label htmlFor={field}>{label}</label>
+      {label && <label htmlFor={field}>{label}</label>}
       <input
         type="number"
         id={field}
