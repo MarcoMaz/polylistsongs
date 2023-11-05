@@ -3,7 +3,12 @@ import Button from "../base/Button/Button";
 import Dropdown from "../base/Dropdown/Dropdown";
 import InputNumber from "../base/InputNumber/InputNumber";
 import InputText from "../base/InputText/InputText";
-import { InputsProps, PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
+import {
+  InputsProps,
+  PolyrhythmProp,
+  SongProp,
+  TimeSignatureProp,
+} from "@/models/model";
 
 interface FormAddSongProps {
   tableFields: string[];
@@ -186,7 +191,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
             label="Choose the polyrhythmic type:"
             field={field}
             inputFields={inputFields}
-            polyTypes={polyTypes}
+            types={polyTypes}
             onChange={handleSelect}
           />
         ) : field === "year" ? (
@@ -200,20 +205,14 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
             handleChange={handleInputChange}
           />
         ) : field === "source" ? (
-          <div key={index}>
-            <label htmlFor={field}>Choose the source:</label>
-            <br />
-            <select name={field} id={field} onChange={handleSource}>
-              {sourceTypes.map((sourceType, idx) => {
-                return (
-                  <option key={idx} value={sourceType}>
-                    {sourceType}
-                  </option>
-                );
-              })}
-            </select>
-            <br />
-          </div>
+          <Dropdown
+            key={index}
+            label="Source:"
+            field={field}
+            inputFields={inputFields}
+            types={sourceTypes}
+            onChange={handleSource}
+          />
         ) : field === "scoreUrl" ? null : field === "polyrhythm" ? (
           <div key={index}>
             <strong>Polyrhythm</strong>

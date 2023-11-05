@@ -3,7 +3,12 @@ import Button from "../base/Button/Button";
 import Dropdown from "../base/Dropdown/Dropdown";
 import InputNumber from "../base/InputNumber/InputNumber";
 import InputText from "../base/InputText/InputText";
-import { InputsProps, PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
+import {
+  InputsProps,
+  PolyrhythmProp,
+  SongProp,
+  TimeSignatureProp,
+} from "@/models/model";
 
 interface FormEditSongProps {
   selectedSong: SongProp | null;
@@ -24,8 +29,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
   sourceTypes,
   setSongs,
   setIsDialogOpen,
-  setSelectedSong
-  
+  setSelectedSong,
 }) => {
   const [inputFields, setInputFields] = useState<InputsProps>({
     title: "",
@@ -223,30 +227,21 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         field === "polyType" ? (
           <Dropdown
             key={index}
-            label="Choose the polyrhythmic type:"
+            label="Polyrhythmic type:"
             field={field}
             onChange={handleSelect}
             inputFields={inputFields}
-            polyTypes={polyTypes}
+            types={polyTypes}
           />
         ) : field === "source" ? (
-          <div key={index}>
-            <select
-              name={field}
-              id={field}
-              onChange={handleSource}
-              value={inputFields.source as string}
-            >
-              {sourceTypes.map((sourceType, idx) => {
-                return (
-                  <option key={idx} value={sourceType}>
-                    {sourceType}
-                  </option>
-                );
-              })}
-            </select>
-            <br />
-          </div>
+          <Dropdown
+            key={index}
+            label="Source:"
+            field={field}
+            inputFields={inputFields}
+            types={sourceTypes}
+            onChange={handleSource}
+          />
         ) : field === "year" ? (
           <InputNumber
             key={index}
