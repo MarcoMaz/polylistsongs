@@ -14,6 +14,7 @@ interface FormEditSongProps {
   tableFields: string[];
   songs: SongProp[];
   polyTypes: string[];
+  sourceTypes: string[];
   setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<SetStateAction<boolean>>;
@@ -28,6 +29,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
   tableFields,
   songs,
   polyTypes,
+  sourceTypes,
   setSongs,
   setIsDialogOpen,
   setIsEditing,
@@ -48,6 +50,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
       numerator: 4,
       denominator: 4,
     },
+    source: "",
   });
 
   useEffect(() => {
@@ -61,7 +64,8 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         year,
         timestamp,
         polyrhythm,
-        timeSignature
+        timeSignature,
+        source,
       } = selectedSong;
       setInputFields({
         title: title,
@@ -72,7 +76,8 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         year: year,
         timestamp: timestamp,
         polyrhythm: polyrhythm,
-        timeSignature: timeSignature
+        timeSignature: timeSignature,
+        source: source,
       });
     }
   }, [selectedSong]);
@@ -99,6 +104,14 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
     setInputFields((prevInputFields) => ({
       ...prevInputFields,
       polyType: value,
+    }));
+  };
+
+  const handleSource = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    setInputFields((prevInputFields) => ({
+      ...prevInputFields,
+      source: value,
     }));
   };
 
@@ -198,6 +211,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         ...updatedTimeSignature,
       };
       updatedSong.polyType = String(inputFields.polyType);
+      updatedSong.source = String(inputFields.source);
       const updatedSongs = songs.map((song) => {
         if (song.id === selectedSong.id) {
           return { ...song, ...updatedSong };
@@ -222,6 +236,24 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
             inputFields={inputFields}
             polyTypes={polyTypes}
           />
+        ) : field === "source" ? (
+          <div key={index}>
+            <select
+              name={field}
+              id={field}
+              onChange={handleSource}
+              value={inputFields.source as string}
+            >
+              {sourceTypes.map((sourceType, idx) => {
+                return (
+                  <option key={idx} value={sourceType}>
+                    {sourceType}
+                  </option>
+                );
+              })}
+            </select>
+            <br />
+          </div>
         ) : field === "year" ? (
           <InputNumber
             key={index}

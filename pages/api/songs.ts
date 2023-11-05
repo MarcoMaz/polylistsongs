@@ -21,6 +21,15 @@ export interface SongProp {
   timestamp: string;
   polyrhythm: PolyrhythmProp;
   timeSignature: TimeSignatureProp;
+  source:
+    | "Mike Portnoy Book"
+    | "Frank Zappa Book"
+    | "Modern Drummer Collection"
+    | "Virgil Donati Book"
+    | "Vinnie Colaiuta Book"
+    | "My Archive"
+    | "Minneman Book"
+    | "Virgil Donati Book";
 }
 
 export const songsData: SongProp[] = [
@@ -41,6 +50,7 @@ export const songsData: SongProp[] = [
       numerator: 3,
       denominator: 4,
     },
+    source: "Mike Portnoy Book",
   },
   {
     id: 2,
@@ -59,6 +69,7 @@ export const songsData: SongProp[] = [
       numerator: 3,
       denominator: 8,
     },
+    source: "Virgil Donati Book",
   },
   {
     id: 3,
@@ -77,6 +88,7 @@ export const songsData: SongProp[] = [
       numerator: 3,
       denominator: 4,
     },
+    source: "Frank Zappa Book",
   },
 ];
 

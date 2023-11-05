@@ -25,8 +25,19 @@ export default function Home() {
     "timestamp",
     "polyrhythm",
     "timeSignature",
+    "source",
   ];
   const polyTypes: string[] = ["groove", "section", "fill"];
+  const sourceTypes: string[] = [
+    "Mike Portnoy Book",
+    "Frank Zappa Book",
+    "Modern Drummer Collection",
+    "Virgil Donati Book",
+    "Vinnie Colaiuta Book",
+    "My Archive",
+    "Minneman Book",
+    "Virgil Donati Book",
+  ];
 
   const addSongButtonClick = () => {
     setIsDialogOpen(true);
@@ -55,6 +66,7 @@ export default function Home() {
             selectedSong={selectedSong}
             songs={songs}
             polyTypes={polyTypes}
+            sourceTypes={sourceTypes}
             setSongs={setSongs}
             setIsDialogOpen={setIsDialogOpen}
             setIsEditing={setIsEditing}
@@ -64,6 +76,7 @@ export default function Home() {
             tableFields={tableFields}
             songs={songs}
             polyTypes={polyTypes}
+            sourceTypes={sourceTypes}
             setSongs={setSongs}
             setIsDialogOpen={setIsDialogOpen}
           />

@@ -22,7 +22,7 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({
     const polyrhythm = inputFields[field] as PolyrhythmProp;
     value = `${polyrhythm.against}:${polyrhythm.base}`;
   } else {
-    value = inputFields.polyTyoe;
+    value = inputFields.polyType;
   }
 
   return (
