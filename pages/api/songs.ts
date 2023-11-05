@@ -30,7 +30,7 @@ export interface SongProp {
     | "My Archive"
     | "Minneman Book"
     | "Virgil Donati Book";
-  scoreUrl: string;
+  scoreUrl?: string;
 }
 
 export const songsData: SongProp[] = [
@@ -72,7 +72,6 @@ export const songsData: SongProp[] = [
       denominator: 8,
     },
     source: "Virgil Donati Book",
-    scoreUrl: "https://via.placeholder.com/300",
   },
   {
     id: 3,
