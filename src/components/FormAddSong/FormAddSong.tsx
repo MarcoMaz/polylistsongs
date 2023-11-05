@@ -1,8 +1,8 @@
 import { SetStateAction, useState } from "react";
-import Button from "../Button/Button";
-import Dropdown from "../Dropdown/Dropdown";
-import InputNumber from "../InputNumber/InputNumber";
-import InputText from "../InputText/InputText";
+import Button from "../base/Button/Button";
+import Dropdown from "../base/Dropdown/Dropdown";
+import InputNumber from "../base/InputNumber/InputNumber";
+import InputText from "../base/InputText/InputText";
 import { InputsProps, PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
 interface FormAddSongProps {

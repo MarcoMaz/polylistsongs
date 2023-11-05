@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { SetStateAction } from "react";
-import Button from "../Button/Button";
+import Button from "../base/Button/Button";
 import { SongProp } from "@/models/model";
 
 interface TableSongsProps {
