@@ -7,9 +7,8 @@ interface TableSongsProps {
   tableFields: string[];
   songs: SongProp[];
   setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
-  setSelectedSong: React.Dispatch<SetStateAction<SongProp | null>>;
+  setSelectedSong: React.Dispatch<SetStateAction<SongProp | "">>;
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
-  setIsEditing: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const TableSongs: React.FunctionComponent<TableSongsProps> = ({
@@ -18,7 +17,6 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
   setSongs,
   setSelectedSong,
   setIsDialogOpen,
-  setIsEditing,
 }) => {
   const handleButtonClick = (el: number) => {
     setSongs(songs.filter((a) => a.id !== el));
@@ -26,7 +24,6 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
 
   const handleEditClick = (props: SongProp) => {
     setSelectedSong(props);
-    setIsEditing(true);
     setIsDialogOpen(true);
   };
 

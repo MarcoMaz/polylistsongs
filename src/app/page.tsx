@@ -14,8 +14,7 @@ import { SongProp } from "@/models/model";
 export default function Home() {
   const [songs, setSongs] = useState<SongProp[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const [selectedSong, setSelectedSong] = useState<SongProp | null>(null);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [selectedSong, setSelectedSong] = useState<SongProp | "">("");
   const [isDataLoading, setIsDataLoading] = useState<boolean>(true);
   const [isFetchSuccessful, setIsFetchSuccessful] = useState<boolean>(true);
 
@@ -66,8 +65,10 @@ export default function Home() {
 
   const closeDialog = () => {
     setIsDialogOpen(false);
-    setSelectedSong(null);
+    setSelectedSong("");
   };
+
+  console.log("selectedSOng", selectedSong)
 
   return (
     <main>
@@ -80,11 +81,10 @@ export default function Home() {
             setSongs={setSongs}
             setSelectedSong={setSelectedSong}
             setIsDialogOpen={setIsDialogOpen}
-            setIsEditing={setIsEditing}
           />
           <Button type="button" label="+" onClick={addSongButtonClick} />
           <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
-            {isEditing ? (
+            {selectedSong ? (
               <FormEditSong
                 tableFields={tableFields}
                 selectedSong={selectedSong}
@@ -93,7 +93,7 @@ export default function Home() {
                 sourceTypes={sourceTypes}
                 setSongs={setSongs}
                 setIsDialogOpen={setIsDialogOpen}
-                setIsEditing={setIsEditing}
+                setSelectedSong={setSelectedSong}
               />
             ) : (
               <FormAddSong

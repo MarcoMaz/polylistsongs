@@ -13,7 +13,7 @@ interface FormEditSongProps {
   sourceTypes: string[];
   setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
-  setIsEditing: React.Dispatch<SetStateAction<boolean>>;
+  setSelectedSong: React.Dispatch<SetStateAction<SongProp | "">>;
 }
 
 const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
@@ -24,7 +24,8 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
   sourceTypes,
   setSongs,
   setIsDialogOpen,
-  setIsEditing,
+  setSelectedSong
+  
 }) => {
   const [inputFields, setInputFields] = useState<InputsProps>({
     title: "",
@@ -212,7 +213,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
       });
       setSongs(updatedSongs);
       setIsDialogOpen(false);
-      setIsEditing(false);
+      setSelectedSong("");
     }
   };
 
