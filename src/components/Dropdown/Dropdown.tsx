@@ -1,5 +1,6 @@
 import { ChangeEvent, SetStateAction } from "react";
 import { InputsProps } from "../FormAddSong/FormAddSong";
+import { PolyrhythmProp } from "../../../pages/api/songs";
 
 interface DropdownProps {
   label: string;
@@ -16,6 +17,14 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({
   polyTypes,
   onChange,
 }) => {
+  let value;
+  if (typeof inputFields[field] === "object" && field === "polyrhythm") {
+    const polyrhythm = inputFields[field] as PolyrhythmProp;
+    value = `${polyrhythm.against}:${polyrhythm.base}`;
+  } else {
+    value = inputFields.polyTyoe;
+  }
+
   return (
     <div>
       <label htmlFor={field}>{label}</label>
@@ -24,7 +33,7 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({
         name={field}
         id={field}
         onChange={onChange}
-        value={inputFields.polyType}
+        value={value as string}
       >
         {polyTypes.map((polyType, idx) => {
           return (
