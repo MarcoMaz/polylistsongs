@@ -1,8 +1,8 @@
 import { SetStateAction, useEffect, useState } from "react";
 import Button from "../Button/Button";
-import InputText from "../InputText/InputText";
 import Dropdown from "../Dropdown/Dropdown";
 import InputNumber from "../InputNumber/InputNumber";
+import InputText from "../InputText/InputText";
 import { InputsProps, PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
 interface FormEditSongProps {

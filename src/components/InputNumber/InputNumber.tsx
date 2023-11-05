@@ -1,6 +1,5 @@
 import { ChangeEvent } from "react";
-import { InputsProps } from "../FormAddSong/FormAddSong";
-import { PolyrhythmProp } from "@/models/model";
+import { InputsProps, PolyrhythmProp } from "@/models/model";
 
 interface InputNumberProps {
   field: string;
