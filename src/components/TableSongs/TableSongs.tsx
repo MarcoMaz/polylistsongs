@@ -31,7 +31,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
     <table>
       <thead>
         <tr>
-          <th></th> {/* @TODO: Remove when ID is removed too. */}
+          <th></th>
           {tableFields.map((str, index) => {
             return <th key={index}>{str}</th>;
           })}
@@ -53,14 +53,14 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               <td>{`${props.timeSignature.numerator}/${props.timeSignature.denominator}`}</td>
               <td>{props.source}</td>
               <td>
-                {props.scoreUrl && (
+                {props.scoreUrl ? (
                   <img
                     src={props.scoreUrl}
                     alt="image"
                     width={30}
                     height={30}
                   />
-                )}
+                ) : null}
               </td>
               <td>
                 <Button

@@ -68,8 +68,6 @@ export default function Home() {
     setSelectedSong("");
   };
 
-  console.log("selectedSOng", selectedSong)
-
   return (
     <main>
       {isDataLoading && <strong>Data loading...</strong>}
