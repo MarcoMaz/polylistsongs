@@ -30,3 +30,7 @@ export interface SongProp {
     | "Virgil Donati Book";
   scoreUrl?: string;
 }
+
+export interface InputsProps {
+  [key: string]: string | number | PolyrhythmProp | TimeSignatureProp;
+}

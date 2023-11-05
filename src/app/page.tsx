@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import { songsData } from "../../pages/api/songs";
 
 import Button from "@/components/Button/Button";
-import FormAddSong from "@/components/FormAddSong/FormAddSong";
 import Dialog from "@/components/Dialog/Dialog";
-import TableSongs from "@/components/TableSongs/TableSongs";
+import FormAddSong from "@/components/FormAddSong/FormAddSong";
 import FormEditSong from "@/components/FormEditSong/FormEditSong";
+import TableSongs from "@/components/TableSongs/TableSongs";
 
 import { SongProp } from "@/models/model";
 

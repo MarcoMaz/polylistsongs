@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 import InputText from "../InputText/InputText";
 import Dropdown from "../Dropdown/Dropdown";
 import InputNumber from "../InputNumber/InputNumber";
-import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
+import { InputsProps, PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
 interface FormEditSongProps {
   selectedSong: SongProp | null;
@@ -14,10 +14,6 @@ interface FormEditSongProps {
   setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<SetStateAction<boolean>>;
-}
-
-export interface InputsProps {
-  [key: string]: string | number | PolyrhythmProp | TimeSignatureProp;
 }
 
 const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
