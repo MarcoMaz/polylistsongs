@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { SongProp, songsData } from "../../pages/api/songs";
 
@@ -10,10 +10,29 @@ import TableSongs from "@/components/TableSongs/TableSongs";
 import FormEditSong from "@/components/FormEditSong/FormEditSong";
 
 export default function Home() {
-  const [songs, setSongs] = useState<SongProp[]>(songsData);
+  const [songs, setSongs] = useState<SongProp[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [selectedSong, setSelectedSong] = useState<SongProp | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(true);
+  const [isFetchSuccessful, setIsFetchSuccessful] = useState<boolean>(true);
+
+  useEffect(() => {
+    async function fetchDataAndSetState() {
+      try {
+        setIsDataLoading(true);
+        setSongs(songsData);
+        setIsFetchSuccessful(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setIsFetchSuccessful(false);
+      } finally {
+        setIsDataLoading(false);
+      }
+    }
+    fetchDataAndSetState();
+  }, []);
 
   const tableFields: string[] = [
     "title",
@@ -26,7 +45,7 @@ export default function Home() {
     "polyrhythm",
     "timeSignature",
     "source",
-    "scoreUrl"
+    "scoreUrl",
   ];
   const polyTypes: string[] = ["groove", "section", "fill"];
   const sourceTypes: string[] = [
@@ -51,38 +70,46 @@ export default function Home() {
 
   return (
     <main>
-      <TableSongs
-        tableFields={tableFields}
-        songs={songs}
-        setSongs={setSongs}
-        setSelectedSong={setSelectedSong}
-        setIsDialogOpen={setIsDialogOpen}
-        setIsEditing={setIsEditing}
-      />
-      <Button type="button" label="+" onClick={addSongButtonClick} />
-      <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
-        {isEditing ? (
-          <FormEditSong
+      {isDataLoading && <strong>Data loading...</strong>}
+      {songs.length ? (
+        <>
+          <TableSongs
             tableFields={tableFields}
-            selectedSong={selectedSong}
             songs={songs}
-            polyTypes={polyTypes}
-            sourceTypes={sourceTypes}
             setSongs={setSongs}
+            setSelectedSong={setSelectedSong}
             setIsDialogOpen={setIsDialogOpen}
             setIsEditing={setIsEditing}
           />
-        ) : (
-          <FormAddSong
-            tableFields={tableFields}
-            songs={songs}
-            polyTypes={polyTypes}
-            sourceTypes={sourceTypes}
-            setSongs={setSongs}
-            setIsDialogOpen={setIsDialogOpen}
-          />
-        )}
-      </Dialog>
+          <Button type="button" label="+" onClick={addSongButtonClick} />
+          <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
+            {isEditing ? (
+              <FormEditSong
+                tableFields={tableFields}
+                selectedSong={selectedSong}
+                songs={songs}
+                polyTypes={polyTypes}
+                sourceTypes={sourceTypes}
+                setSongs={setSongs}
+                setIsDialogOpen={setIsDialogOpen}
+                setIsEditing={setIsEditing}
+              />
+            ) : (
+              <FormAddSong
+                tableFields={tableFields}
+                songs={songs}
+                polyTypes={polyTypes}
+                sourceTypes={sourceTypes}
+                setSongs={setSongs}
+                setIsDialogOpen={setIsDialogOpen}
+              />
+            )}
+          </Dialog>
+        </>
+      ) : (
+        !isDataLoading &&
+        isFetchSuccessful && <div className="no-data">NO USERS</div>
+      )}
     </main>
   );
 }
