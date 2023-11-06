@@ -1,18 +1,14 @@
-import React, { SetStateAction, useState } from "react";
+import React, { SetStateAction } from "react";
 import Button from "../base/Button/Button";
 import Dropdown from "../base/Dropdown/Dropdown";
 import InputNumber from "../base/InputNumber/InputNumber";
 import InputText from "../base/InputText/InputText";
-import {
-  InputsProps,
-  PolyrhythmProp,
-  SongProp,
-  TimeSignatureProp,
-} from "@/models/model";
+import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
 import TextConstants from "@/constants/textConstants";
 import PolyrhythmsInput from "../PolyrhythmsInput/PolyrhythmsInput";
 import TimeSignaturesInput from "../TimeSignaturesInput/TimeSignaturesInput";
+import useSongForm from "@/hooks/useSongForm";
 
 const initialValues = {
   title: "",
@@ -50,7 +46,14 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
   setSongs,
   setIsDialogOpen,
 }) => {
-  const [inputFields, setInputFields] = useState<InputsProps>(initialValues);
+  const {
+    inputFields,
+    setInputFields,
+    handleInputChange,
+    handleSelectChange,
+    handlePolyrhythmChange,
+    handleTimeSignatureChange,
+  } = useSongForm(initialValues);
 
   const {
     polyrhythmTypeLabel,
@@ -63,64 +66,6 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
   const generateRandomId = () => {
     return Math.floor(Math.random() * 1000);
   };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    if (name === "timestamp") {
-      const formattedValue = value.replace(/[^\d]/g, "");
-      const trimmedValue = formattedValue.slice(0, 4);
-
-      const minutes = trimmedValue.substring(0, 2);
-      const seconds = trimmedValue.substring(2, 4);
-
-      const formattedTimestamp = `${minutes}:${seconds}`;
-
-      setInputFields({ ...inputFields, [name]: formattedTimestamp });
-    } else {
-      setInputFields({ ...inputFields, [name]: value });
-    }
-  };
-
-  const handleSelectChange =
-    (key: keyof InputsProps) => (e: React.ChangeEvent<HTMLSelectElement>) => {
-      const { value } = e.target;
-      setInputFields((prevInputFields) => ({
-        ...prevInputFields,
-        [key]: value,
-      }));
-    };
-
-  const handlePolyrhythmChange =
-    (key: "against" | "base") => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-      if (
-        typeof inputFields.polyrhythm !== "string" &&
-        typeof inputFields.polyrhythm !== "number"
-      ) {
-        const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
-        setInputFields((prevInputFields) => ({
-          ...prevInputFields,
-          polyrhythm: { ...updatedPolyrhythm, [key]: parseInt(value) },
-        }));
-      }
-    };
-
-  const handleTimeSignatureChange =
-    (key: "numerator" | "denominator") =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-      if (
-        typeof inputFields.timeSignature !== "string" &&
-        typeof inputFields.timeSignature !== "number"
-      ) {
-        const updatedTimeSignature =
-          inputFields.timeSignature as TimeSignatureProp;
-        setInputFields((prevInputFields) => ({
-          ...prevInputFields,
-          timeSignature: { ...updatedTimeSignature, [key]: parseInt(value) },
-        }));
-      }
-    };
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
