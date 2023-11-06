@@ -11,6 +11,7 @@ import {
 } from "@/models/model";
 
 import TextConstants from "@/constants/textConstants";
+import PolyrhythmsInput from "../PolyrhythmsInput/PolyrhythmsInput";
 
 const initialValues = {
   title: "",
@@ -238,33 +239,17 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
             );
           case "polyrhythm":
             return (
-              <div key={index}>
-                <strong>{polyrhythmLabels.heading}</strong>
-                <br />
-                <div>
-                  <input
-                    type="number"
-                    id="against"
-                    name="against"
-                    min="2"
-                    max="30"
-                    value={(inputFields.polyrhythm as PolyrhythmProp).against}
-                    onChange={handlePolyrhythmChange("against")}
-                  />
-                </div>
-                <span>{polyrhythmLabels.against}</span>
-                <div>
-                  <input
-                    type="number"
-                    id="base"
-                    name="base"
-                    min="2"
-                    max="30"
-                    value={(inputFields.polyrhythm as PolyrhythmProp).base}
-                    onChange={handlePolyrhythmChange("base")}
-                  />
-                </div>
-              </div>
+              <PolyrhythmsInput
+                key={index}
+                headingLabel={polyrhythmLabels.heading}
+                againstLabel={polyrhythmLabels.against}
+                againstValue={
+                  (inputFields.polyrhythm as PolyrhythmProp).against
+                }
+                baseValue={(inputFields.polyrhythm as PolyrhythmProp).base}
+                againstChange={handlePolyrhythmChange("against")}
+                baseChange={handlePolyrhythmChange("base")}
+              />
             );
           case "timeSignature":
             return (
