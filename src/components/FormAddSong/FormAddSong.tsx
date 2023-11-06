@@ -12,6 +12,7 @@ import {
 
 import TextConstants from "@/constants/textConstants";
 import PolyrhythmsInput from "../PolyrhythmsInput/PolyrhythmsInput";
+import TimeSignaturesInput from "../TimeSignaturesInput/TimeSignaturesInput";
 
 const initialValues = {
   title: "",
@@ -189,44 +190,26 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
                   (inputFields.polyrhythm as PolyrhythmProp).against
                 }
                 baseValue={(inputFields.polyrhythm as PolyrhythmProp).base}
-                againstChange={handlePolyrhythmChange("against")}
-                baseChange={handlePolyrhythmChange("base")}
+                againstHandleChange={handlePolyrhythmChange("against")}
+                baseHandleChange={handlePolyrhythmChange("base")}
               />
             );
           case "timeSignature":
             return (
-              <div key={index}>
-                <strong>{timeSignatureLabel}</strong>
-                <br />
-                <div>
-                  <input
-                    type="number"
-                    id="timeSignatureNumerator"
-                    name="timeSignatureNumerator"
-                    min="2"
-                    max="30"
-                    value={
-                      (inputFields.timeSignature as TimeSignatureProp).numerator
-                    }
-                    onChange={handleTimeSignatureChange("numerator")}
-                  />
-                </div>
-                <span>-</span>
-                <div>
-                  <input
-                    type="number"
-                    id="timeSignatureDenominator"
-                    name="timeSignatureDenominator"
-                    min="2"
-                    max="30"
-                    value={
-                      (inputFields.timeSignature as TimeSignatureProp)
-                        .denominator
-                    }
-                    onChange={handleTimeSignatureChange("denominator")}
-                  />
-                </div>
-              </div>
+              <TimeSignaturesInput
+                key={index}
+                headingLabel={timeSignatureLabel}
+                numeratorValue={
+                  (inputFields.timeSignature as TimeSignatureProp).numerator
+                }
+                denominatorValue={
+                  (inputFields.timeSignature as TimeSignatureProp).denominator
+                }
+                numeratorHandleChange={handleTimeSignatureChange("numerator")}
+                denominatorHandleChange={handleTimeSignatureChange(
+                  "denominator"
+                )}
+              />
             );
           case "source":
             return (
@@ -243,7 +226,6 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
             return null;
         }
       })}
-
       <Button type="submit" label="send" />
     </form>
   );

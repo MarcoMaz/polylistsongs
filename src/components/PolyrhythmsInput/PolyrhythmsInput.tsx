@@ -5,8 +5,8 @@ interface PolyrhythmsInputProps {
   againstLabel: string;
   againstValue: number;
   baseValue: number;
-  againstChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  baseChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  againstHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  baseHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
@@ -14,8 +14,8 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
   againstLabel,
   againstValue,
   baseValue,
-  againstChange,
-  baseChange,
+  againstHandleChange,
+  baseHandleChange,
 }) => {
   return (
     <div>
@@ -29,7 +29,7 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
           min="2"
           max="30"
           value={againstValue}
-          onChange={againstChange}
+          onChange={againstHandleChange}
         />
       </div>
       <span>{againstLabel}</span>
@@ -41,7 +41,7 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
           min="2"
           max="30"
           value={baseValue}
-          onChange={baseChange}
+          onChange={baseHandleChange}
         />
       </div>
     </div>
