@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import Button from "../base/Button/Button";
 import Dropdown from "../base/Dropdown/Dropdown";
 import InputNumber from "../base/InputNumber/InputNumber";
@@ -88,33 +88,48 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
       }));
     };
 
-  const handleAgainstChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (
-      typeof inputFields.polyrhythm !== "string" &&
-      typeof inputFields.polyrhythm !== "number"
-    ) {
-      const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
-      setInputFields((prevInputFields) => ({
-        ...prevInputFields,
-        polyrhythm: { ...updatedPolyrhythm, against: parseInt(value) },
-      }));
-    }
-  };
+  const handlePolyrhythmChange =
+    (key: "against" | "base") => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      if (
+        typeof inputFields.polyrhythm !== "string" &&
+        typeof inputFields.polyrhythm !== "number"
+      ) {
+        const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
+        setInputFields((prevInputFields) => ({
+          ...prevInputFields,
+          polyrhythm: { ...updatedPolyrhythm, [key]: parseInt(value) },
+        }));
+      }
+    };
 
-  const handleBaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (
-      typeof inputFields.polyrhythm !== "string" &&
-      typeof inputFields.polyrhythm !== "number"
-    ) {
-      const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
-      setInputFields((prevInputFields) => ({
-        ...prevInputFields,
-        polyrhythm: { ...updatedPolyrhythm, base: parseInt(value) },
-      }));
-    }
-  };
+  // const handleAgainstChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = e.target;
+  //   if (
+  //     typeof inputFields.polyrhythm !== "string" &&
+  //     typeof inputFields.polyrhythm !== "number"
+  //   ) {
+  //     const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
+  //     setInputFields((prevInputFields) => ({
+  //       ...prevInputFields,
+  //       polyrhythm: { ...updatedPolyrhythm, against: parseInt(value) },
+  //     }));
+  //   }
+  // };
+
+  // const handleBaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = e.target;
+  //   if (
+  //     typeof inputFields.polyrhythm !== "string" &&
+  //     typeof inputFields.polyrhythm !== "number"
+  //   ) {
+  //     const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
+  //     setInputFields((prevInputFields) => ({
+  //       ...prevInputFields,
+  //       polyrhythm: { ...updatedPolyrhythm, base: parseInt(value) },
+  //     }));
+  //   }
+  // };
 
   const handleTimeSignatureNumeratorChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -213,7 +228,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
                 min="2"
                 max="30"
                 value={(inputFields.polyrhythm as PolyrhythmProp).against}
-                onChange={handleAgainstChange}
+                onChange={handlePolyrhythmChange("against")}
               />
             </div>
             <span>{polyrhythmLabels.against}</span>
@@ -225,7 +240,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
                 min="2"
                 max="30"
                 value={(inputFields.polyrhythm as PolyrhythmProp).base}
-                onChange={handleBaseChange}
+                onChange={handlePolyrhythmChange("base")}
               />
             </div>
           </div>

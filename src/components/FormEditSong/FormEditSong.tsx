@@ -117,33 +117,20 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
       }));
     };
 
-  const handleAgainstChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (
-      typeof inputFields.polyrhythm !== "string" &&
-      typeof inputFields.polyrhythm !== "number"
-    ) {
-      const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
-      setInputFields((prevInputFields) => ({
-        ...prevInputFields,
-        polyrhythm: { ...updatedPolyrhythm, against: parseInt(value) },
-      }));
-    }
-  };
-
-  const handleBaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (
-      typeof inputFields.polyrhythm !== "string" &&
-      typeof inputFields.polyrhythm !== "number"
-    ) {
-      const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
-      setInputFields((prevInputFields) => ({
-        ...prevInputFields,
-        polyrhythm: { ...updatedPolyrhythm, base: parseInt(value) },
-      }));
-    }
-  };
+  const handlePolyrhythmChange =
+    (key: "against" | "base") => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      if (
+        typeof inputFields.polyrhythm !== "string" &&
+        typeof inputFields.polyrhythm !== "number"
+      ) {
+        const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
+        setInputFields((prevInputFields) => ({
+          ...prevInputFields,
+          polyrhythm: { ...updatedPolyrhythm, [key]: parseInt(value) },
+        }));
+      }
+    };
 
   const handleTimeSignatureNumeratorChange = (
     e: React.ChangeEvent<HTMLInputElement>
@@ -268,7 +255,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
                 min="2"
                 max="30"
                 value={(inputFields.polyrhythm as PolyrhythmProp).against}
-                onChange={handleAgainstChange}
+                onChange={handlePolyrhythmChange("against")}
               />
             </div>
             <span>{polyrhythmLabels.against}</span>
@@ -280,7 +267,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
                 min="2"
                 max="30"
                 value={(inputFields.polyrhythm as PolyrhythmProp).base}
-                onChange={handleBaseChange}
+                onChange={handlePolyrhythmChange("base")}
               />
             </div>
           </div>
