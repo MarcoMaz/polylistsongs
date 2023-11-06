@@ -153,15 +153,17 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
     event.preventDefault();
     if (selectedSong) {
       const formData = new FormData(event.target as HTMLFormElement);
+      const formDataEntries: [string, FormDataEntryValue][] = [
+        ...formData.entries(),
+      ];
+
+      const updatedPolyrhythm: Partial<PolyrhythmProp> = {};
+      const updatedTimeSignature: Partial<TimeSignatureProp> = {};
       const updatedSong: Record<
         string,
         string | PolyrhythmProp | TimeSignatureProp
       > = {};
-      const updatedPolyrhythm: Partial<PolyrhythmProp> = {};
-      const updatedTimeSignature: Partial<TimeSignatureProp> = {};
-      const formDataEntries: [string, FormDataEntryValue][] = [
-        ...formData.entries(),
-      ];
+
       for (let pair of formDataEntries) {
         if (pair[0] === "against" || pair[0] === "base") {
           updatedPolyrhythm[pair[0]] = parseInt(pair[1] as string);
@@ -171,6 +173,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
           updatedSong[pair[0]] = String(pair[1]);
         }
       }
+
       updatedSong.polyrhythm = {
         ...(inputFields.polyrhythm as PolyrhythmProp),
         ...updatedPolyrhythm,
@@ -179,14 +182,13 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         ...(inputFields.timeSignature as TimeSignatureProp),
         ...updatedTimeSignature,
       };
-      updatedSong.polyType = String(inputFields.polyType);
-      updatedSong.source = String(inputFields.source);
       const updatedSongs = songs.map((song) => {
         if (song.id === selectedSong.id) {
           return { ...song, ...updatedSong };
         }
         return song;
       });
+
       setSongs(updatedSongs);
       setIsDialogOpen(false);
       setSelectedSong("");
