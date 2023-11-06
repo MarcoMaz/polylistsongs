@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useEffect } from "react";
 import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
 import Button from "../base/Button/Button";
@@ -7,24 +7,7 @@ import TextConstants from "@/constants/textConstants";
 
 import useSongForm from "@/hooks/useSongForm";
 
-const initialValues = {
-  title: "",
-  album: "",
-  artist: "",
-  drummer: "",
-  polyType: "",
-  year: 2023,
-  timestamp: "00:00",
-  polyrhythm: {
-    against: 3,
-    base: 2,
-  },
-  timeSignature: {
-    numerator: 4,
-    denominator: 4,
-  },
-  source: "",
-};
+import { initialValues } from "@/constants/initialValues";
 
 interface FormEditSongProps {
   selectedSong: SongProp | null;
