@@ -197,103 +197,125 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
 
   return (
     <form onSubmit={handleFormSubmit}>
-      {tableFields.map((field, index) =>
-        field === "polyType" ? (
-          <Dropdown
-            key={index}
-            label={polyrhythmTypeLabel}
-            field={field}
-            onChange={handleSelectChange("polyType")}
-            inputFields={inputFields}
-            types={polyTypes}
-          />
-        ) : field === "source" ? (
-          <Dropdown
-            key={index}
-            label={sourceLabel}
-            field={field}
-            inputFields={inputFields}
-            types={sourceTypes}
-            onChange={handleSelectChange("source")}
-          />
-        ) : field === "year" ? (
-          <InputNumber
-            key={index}
-            field={field}
-            inputFields={inputFields}
-            label={yearLabel}
-            min={1950}
-            max={2023}
-            handleChange={handleInputChange}
-          />
-        ) : field === "scoreUrl" ? null : field === "polyrhythm" ? (
-          <div key={index}>
-            <strong>{polyrhythmLabels.heading}</strong>
-            <div>
-              <input
-                type="number"
-                id="against"
-                name="against"
-                min="2"
-                max="30"
-                value={(inputFields.polyrhythm as PolyrhythmProp).against}
-                onChange={handlePolyrhythmChange("against")}
+      {tableFields.map((field, index) => {
+        switch (field) {
+          case "title":
+          case "album":
+          case "artist":
+          case "drummer":
+          case "timestamp":
+            return (
+              <InputText
+                key={index}
+                field={field}
+                handleChange={handleInputChange}
+                inputFields={inputFields}
+                label={field}
               />
-            </div>
-            <span>{polyrhythmLabels.against}</span>
-            <div>
-              <input
-                type="number"
-                id="base"
-                name="base"
-                min="2"
-                max="30"
-                value={(inputFields.polyrhythm as PolyrhythmProp).base}
-                onChange={handlePolyrhythmChange("base")}
+            );
+          case "polyType":
+            return (
+              <Dropdown
+                key={index}
+                label={polyrhythmTypeLabel}
+                field={field}
+                inputFields={inputFields}
+                types={polyTypes}
+                onChange={handleSelectChange("polyType")}
               />
-            </div>
-          </div>
-        ) : field === "timeSignature" ? (
-          <div key={index}>
-            <strong>{timeSignatureLabel}</strong>
-            <div>
-              <input
-                type="number"
-                id="timeSignatureNumerator"
-                name="timeSignatureNumerator"
-                min="1"
-                max="32"
-                value={
-                  (inputFields.timeSignature as TimeSignatureProp).numerator
-                }
-                onChange={handleTimeSignatureChange("numerator")}
+            );
+          case "year":
+            return (
+              <InputNumber
+                key={field}
+                field={field}
+                inputFields={inputFields}
+                label={yearLabel}
+                min={1950}
+                max={2023}
+                handleChange={handleInputChange}
               />
-            </div>
-            <span>-</span>
-            <div>
-              <input
-                type="number"
-                id="timeSignatureDenominator"
-                name="timeSignatureDenominator"
-                min="2"
-                max="32"
-                value={
-                  (inputFields.timeSignature as TimeSignatureProp).denominator
-                }
-                onChange={handleTimeSignatureChange("denominator")}
+            );
+          case "polyrhythm":
+            return (
+              <div key={index}>
+                <strong>{polyrhythmLabels.heading}</strong>
+                <br />
+                <div>
+                  <input
+                    type="number"
+                    id="against"
+                    name="against"
+                    min="2"
+                    max="30"
+                    value={(inputFields.polyrhythm as PolyrhythmProp).against}
+                    onChange={handlePolyrhythmChange("against")}
+                  />
+                </div>
+                <span>{polyrhythmLabels.against}</span>
+                <div>
+                  <input
+                    type="number"
+                    id="base"
+                    name="base"
+                    min="2"
+                    max="30"
+                    value={(inputFields.polyrhythm as PolyrhythmProp).base}
+                    onChange={handlePolyrhythmChange("base")}
+                  />
+                </div>
+              </div>
+            );
+          case "timeSignature":
+            return (
+              <div key={index}>
+                <strong>{timeSignatureLabel}</strong>
+                <br />
+                <div>
+                  <input
+                    type="number"
+                    id="timeSignatureNumerator"
+                    name="timeSignatureNumerator"
+                    min="2"
+                    max="30"
+                    value={
+                      (inputFields.timeSignature as TimeSignatureProp).numerator
+                    }
+                    onChange={handleTimeSignatureChange("numerator")}
+                  />
+                </div>
+                <span>-</span>
+                <div>
+                  <input
+                    type="number"
+                    id="timeSignatureDenominator"
+                    name="timeSignatureDenominator"
+                    min="2"
+                    max="30"
+                    value={
+                      (inputFields.timeSignature as TimeSignatureProp)
+                        .denominator
+                    }
+                    onChange={handleTimeSignatureChange("denominator")}
+                  />
+                </div>
+              </div>
+            );
+          case "source":
+            return (
+              <Dropdown
+                key={index}
+                label={sourceLabel}
+                field={field}
+                inputFields={inputFields}
+                types={sourceTypes}
+                onChange={handleSelectChange("source")}
               />
-            </div>
-          </div>
-        ) : (
-          <InputText
-            key={index}
-            field={field}
-            handleChange={handleInputChange}
-            inputFields={inputFields}
-            label={field}
-          />
-        )
-      )}
+            );
+          default:
+            return null;
+        }
+      })}
       <Button type="submit" label="save" />
     </form>
   );
