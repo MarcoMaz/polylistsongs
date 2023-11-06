@@ -132,42 +132,22 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
       }
     };
 
-  const handleTimeSignatureNumeratorChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { value } = e.target;
-    if (
-      typeof inputFields.timeSignature !== "string" &&
-      typeof inputFields.timeSignature !== "number"
-    ) {
-      const updatedTimeSignature =
-        inputFields.timeSignature as TimeSignatureProp;
-      setInputFields((prevInputFields) => ({
-        ...prevInputFields,
-        timeSignature: { ...updatedTimeSignature, numerator: parseInt(value) },
-      }));
-    }
-  };
-
-  const handleTimeSignatureDenominatorChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { value } = e.target;
-    if (
-      typeof inputFields.timeSignature !== "string" &&
-      typeof inputFields.timeSignature !== "number"
-    ) {
-      const updatedTimeSignature =
-        inputFields.timeSignature as TimeSignatureProp;
-      setInputFields((prevInputFields) => ({
-        ...prevInputFields,
-        timeSignature: {
-          ...updatedTimeSignature,
-          denominator: parseInt(value),
-        },
-      }));
-    }
-  };
+  const handleTimeSignatureChange =
+    (key: "numerator" | "denominator") =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      if (
+        typeof inputFields.timeSignature !== "string" &&
+        typeof inputFields.timeSignature !== "number"
+      ) {
+        const updatedTimeSignature =
+          inputFields.timeSignature as TimeSignatureProp;
+        setInputFields((prevInputFields) => ({
+          ...prevInputFields,
+          timeSignature: { ...updatedTimeSignature, [key]: parseInt(value) },
+        }));
+      }
+    };
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -284,7 +264,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
                 value={
                   (inputFields.timeSignature as TimeSignatureProp).numerator
                 }
-                onChange={handleTimeSignatureNumeratorChange}
+                onChange={handleTimeSignatureChange("numerator")}
               />
             </div>
             <span>-</span>
@@ -298,7 +278,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
                 value={
                   (inputFields.timeSignature as TimeSignatureProp).denominator
                 }
-                onChange={handleTimeSignatureDenominatorChange}
+                onChange={handleTimeSignatureChange("denominator")}
               />
             </div>
           </div>

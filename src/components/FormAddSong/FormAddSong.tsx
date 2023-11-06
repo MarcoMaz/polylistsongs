@@ -103,70 +103,22 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
       }
     };
 
-  // const handleAgainstChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { value } = e.target;
-  //   if (
-  //     typeof inputFields.polyrhythm !== "string" &&
-  //     typeof inputFields.polyrhythm !== "number"
-  //   ) {
-  //     const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
-  //     setInputFields((prevInputFields) => ({
-  //       ...prevInputFields,
-  //       polyrhythm: { ...updatedPolyrhythm, against: parseInt(value) },
-  //     }));
-  //   }
-  // };
-
-  // const handleBaseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { value } = e.target;
-  //   if (
-  //     typeof inputFields.polyrhythm !== "string" &&
-  //     typeof inputFields.polyrhythm !== "number"
-  //   ) {
-  //     const updatedPolyrhythm = inputFields.polyrhythm as PolyrhythmProp;
-  //     setInputFields((prevInputFields) => ({
-  //       ...prevInputFields,
-  //       polyrhythm: { ...updatedPolyrhythm, base: parseInt(value) },
-  //     }));
-  //   }
-  // };
-
-  const handleTimeSignatureNumeratorChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { value } = e.target;
-    if (
-      typeof inputFields.timeSignature !== "string" &&
-      typeof inputFields.timeSignature !== "number"
-    ) {
-      const updatedTimeSignature =
-        inputFields.timeSignature as TimeSignatureProp;
-      setInputFields((prevInputFields) => ({
-        ...prevInputFields,
-        timeSignature: { ...updatedTimeSignature, numerator: parseInt(value) },
-      }));
-    }
-  };
-
-  const handleTimeSignatureDenominatorChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { value } = e.target;
-    if (
-      typeof inputFields.timeSignature !== "string" &&
-      typeof inputFields.timeSignature !== "number"
-    ) {
-      const updatedTimeSignature =
-        inputFields.timeSignature as TimeSignatureProp;
-      setInputFields((prevInputFields) => ({
-        ...prevInputFields,
-        timeSignature: {
-          ...updatedTimeSignature,
-          denominator: parseInt(value),
-        },
-      }));
-    }
-  };
+  const handleTimeSignatureChange =
+    (key: "numerator" | "denominator") =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      if (
+        typeof inputFields.timeSignature !== "string" &&
+        typeof inputFields.timeSignature !== "number"
+      ) {
+        const updatedTimeSignature =
+          inputFields.timeSignature as TimeSignatureProp;
+        setInputFields((prevInputFields) => ({
+          ...prevInputFields,
+          timeSignature: { ...updatedTimeSignature, [key]: parseInt(value) },
+        }));
+      }
+    };
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -258,7 +210,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
                 value={
                   (inputFields.timeSignature as TimeSignatureProp).numerator
                 }
-                onChange={handleTimeSignatureNumeratorChange}
+                onChange={handleTimeSignatureChange("numerator")}
               />
             </div>
             <span>-</span>
@@ -272,7 +224,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
                 value={
                   (inputFields.timeSignature as TimeSignatureProp).denominator
                 }
-                onChange={handleTimeSignatureDenominatorChange}
+                onChange={handleTimeSignatureChange("denominator")}
               />
             </div>
           </div>
