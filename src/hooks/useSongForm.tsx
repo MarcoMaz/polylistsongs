@@ -1,8 +1,4 @@
-import {
-  InputsProps,
-  PolyrhythmProp,
-  TimeSignatureProp,
-} from "@/models/model";
+import { InputsProps, PolyrhythmProp, TimeSignatureProp } from "@/models/model";
 import { useState } from "react";
 
 const useSongForm = (initialValues: InputsProps | (() => InputsProps)) => {

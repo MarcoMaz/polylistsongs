@@ -1,13 +1,10 @@
 import React, { SetStateAction } from "react";
-import Button from "../base/Button/Button";
-import Dropdown from "../base/Dropdown/Dropdown";
-import InputNumber from "../base/InputNumber/InputNumber";
-import InputText from "../base/InputText/InputText";
-import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
+import { SongProp } from "@/models/model";
 
+import Button from "../base/Button/Button";
+import FormSong from "../FormSong/FormSong";
 import TextConstants from "@/constants/textConstants";
-import PolyrhythmsInput from "../PolyrhythmsInput/PolyrhythmsInput";
-import TimeSignaturesInput from "../TimeSignaturesInput/TimeSignaturesInput";
+
 import useSongForm from "@/hooks/useSongForm";
 
 const initialValues = {
@@ -86,91 +83,21 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
 
   return (
     <form onSubmit={handleFormSubmit}>
-      {tableFields.map((field, index) => {
-        switch (field) {
-          case "title":
-          case "album":
-          case "artist":
-          case "drummer":
-          case "timestamp":
-            return (
-              <InputText
-                key={index}
-                field={field}
-                handleChange={handleInputChange}
-                inputFields={inputFields}
-                label={field}
-              />
-            );
-          case "polyType":
-            return (
-              <Dropdown
-                key={index}
-                label={polyrhythmTypeLabel}
-                field={field}
-                inputFields={inputFields}
-                types={polyTypes}
-                onChange={handleSelectChange("polyType")}
-              />
-            );
-          case "year":
-            return (
-              <InputNumber
-                key={field}
-                field={field}
-                inputFields={inputFields}
-                label={yearLabel}
-                min={1950}
-                max={2023}
-                handleChange={handleInputChange}
-              />
-            );
-          case "polyrhythm":
-            return (
-              <PolyrhythmsInput
-                key={index}
-                headingLabel={polyrhythmLabels.heading}
-                againstLabel={polyrhythmLabels.against}
-                againstValue={
-                  (inputFields.polyrhythm as PolyrhythmProp).against
-                }
-                baseValue={(inputFields.polyrhythm as PolyrhythmProp).base}
-                againstHandleChange={handlePolyrhythmChange("against")}
-                baseHandleChange={handlePolyrhythmChange("base")}
-              />
-            );
-          case "timeSignature":
-            return (
-              <TimeSignaturesInput
-                key={index}
-                headingLabel={timeSignatureLabel}
-                numeratorValue={
-                  (inputFields.timeSignature as TimeSignatureProp).numerator
-                }
-                denominatorValue={
-                  (inputFields.timeSignature as TimeSignatureProp).denominator
-                }
-                numeratorHandleChange={handleTimeSignatureChange("numerator")}
-                denominatorHandleChange={handleTimeSignatureChange(
-                  "denominator"
-                )}
-              />
-            );
-          case "source":
-            return (
-              <Dropdown
-                key={index}
-                label={sourceLabel}
-                field={field}
-                inputFields={inputFields}
-                types={sourceTypes}
-                onChange={handleSelectChange("source")}
-              />
-            );
-          default:
-            return null;
-        }
-      })}
+      <FormSong
+        handleSelectChange={handleSelectChange}
+        inputFields={inputFields}
+        polyrhythmLabels={polyrhythmLabels}
+        polyrhythmTypeLabel={polyrhythmTypeLabel}
+        polyTypes={polyTypes}
+        sourceLabel={sourceLabel}
+        sourceTypes={sourceTypes}
+        tableFields={tableFields}
+        timeSignatureLabel={timeSignatureLabel}
+        handleInputChange={handleInputChange}
+        handlePolyrhythmChange={handlePolyrhythmChange}
+        handleTimeSignatureChange={handleTimeSignatureChange}
+        yearLabel={yearLabel}
+      />
       <Button type="submit" label="send" />
     </form>
   );
