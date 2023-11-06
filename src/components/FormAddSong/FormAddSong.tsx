@@ -79,21 +79,14 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     }
   };
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    setInputFields((prevInputFields) => ({
-      ...prevInputFields,
-      polyType: value,
-    }));
-  };
-
-  const handleSource = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    setInputFields((prevInputFields) => ({
-      ...prevInputFields,
-      source: value,
-    }));
-  };
+  const handleSelectChange =
+    (key: keyof InputsProps) => (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const { value } = e.target;
+      setInputFields((prevInputFields) => ({
+        ...prevInputFields,
+        [key]: value,
+      }));
+    };
 
   const handleAgainstChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -187,7 +180,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
             field={field}
             inputFields={inputFields}
             types={polyTypes}
-            onChange={handleSelect}
+            onChange={handleSelectChange("polyType")}
           />
         ) : field === "year" ? (
           <InputNumber
@@ -206,7 +199,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
             field={field}
             inputFields={inputFields}
             types={sourceTypes}
-            onChange={handleSource}
+            onChange={handleSelectChange("source")}
           />
         ) : field === "scoreUrl" ? null : field === "polyrhythm" ? (
           <div key={index}>
