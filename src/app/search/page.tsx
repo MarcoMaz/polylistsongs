@@ -54,16 +54,16 @@ const Search = () => {
       self.findIndex((s) => s.against === song.against && s.base === song.base)
   );
 
-  const timeSig = songsData.map((song) => song.timeSignature)
+  const timeSig = songsData.map((song) => song.timeSignature);
   const uniqueTimeSig = timeSig.filter(
     (song, index, self) =>
       index ===
-      self.findIndex((s) => s.numerator === song.numerator && s.denominator === song.denominator)
+      self.findIndex(
+        (s) =>
+          s.numerator === song.numerator && s.denominator === song.denominator
+      )
   );
-
-
-  // console.log(uniqueTimeSig)
-
+  
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedPolytypes, setSelectedPolytypes] = useState<string[]>([]);
@@ -102,38 +102,34 @@ const Search = () => {
     setSelectedUniqueTimeSig(updatedTimeSig.filter((x) => x.selected));
   };
 
-
-
-
-
-  const filteredSongsData = songsData.filter(
-    (song) =>
+  const filteredSongsData = songsData.filter((song) => {
+    if (
       (selectedDrummers.length === 0 ||
         selectedDrummers.includes(song.drummer)) &&
       (selectedArtists.length === 0 || selectedArtists.includes(song.artist)) &&
       (selectedPolytypes.length === 0 ||
         selectedPolytypes.includes(song.polyType))
-  );
-
-  const filteredByPolySongsData = filteredSongsData.filter((song) =>
-    selectedUniquePolys.length === 0
-      ? true
-      : selectedUniquePolys.some(
+    ) {
+      if (
+        selectedUniquePolys.length === 0 ||
+        selectedUniquePolys.some(
           (poly) =>
             poly.against === song.polyrhythm.against &&
             poly.base === song.polyrhythm.base
         )
-  );
-
-  const filteredByTimeSigSongsData = filteredByPolySongsData.filter((song) =>
-    selectedUniqueTimeSig.length === 0
-      ? true
-      : selectedUniqueTimeSig.some(
-          (timeSig) =>
-          timeSig.numerator === song.timeSignature.numerator &&
-          timeSig.denominator === song.timeSignature.denominator
-        )
-  );
+      ) {
+        return (
+          selectedUniqueTimeSig.length === 0 ||
+          selectedUniqueTimeSig.some(
+            (timeSig) =>
+              timeSig.numerator === song.timeSignature.numerator &&
+              timeSig.denominator === song.timeSignature.denominator
+          )
+        );
+      }
+    }
+    return false;
+  });
 
   const numberOfResults =
     filteredSongsData.length === 1
@@ -229,7 +225,9 @@ const Search = () => {
                   id={`timeSig${index}`}
                   name={`timeSig${index}`}
                   checked={selectedUniqueTimeSig.some(
-                    (timeSig) => timeSig.numerator === x.numerator && timeSig.denominator === x.denominator
+                    (timeSig) =>
+                      timeSig.numerator === x.numerator &&
+                      timeSig.denominator === x.denominator
                   )}
                   onChange={() => handleTimeSigSelection(index)}
                 />
@@ -243,7 +241,7 @@ const Search = () => {
       </aside>
       <main>
         <ul>
-          {filteredByTimeSigSongsData.map(
+          {filteredSongsData.map(
             (
               {
                 title,
