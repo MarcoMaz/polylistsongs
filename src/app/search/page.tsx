@@ -5,10 +5,13 @@ import { useState } from "react";
 import { songsData } from "../../../pages/api/songs";
 
 const Search = () => {
-  const drummers: string[] = [...new Set(songsData.map((song) => song.drummer))];
-  console.log("drummers", drummers)
+  const drummers: string[] = [
+    ...new Set(songsData.map((song) => song.drummer)),
+  ];
+  const artists: string[] = [...new Set(songsData.map((song) => song.artist))];
 
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
+  const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
 
   const handleDrummerSelection = (drummer: string) => {
     if (selectedDrummers.includes(drummer)) {
@@ -17,11 +20,20 @@ const Search = () => {
       setSelectedDrummers([...selectedDrummers, drummer]);
     }
   };
+  const handleArtistSelection = (artist: string) => {
+    if (selectedArtists.includes(artist)) {
+      setSelectedArtists(selectedArtists.filter((item) => item !== artist));
+    } else {
+      setSelectedArtists([...selectedArtists, artist]);
+    }
+  };
 
-  const filteredSongsData =
-    selectedDrummers.length === 0
-      ? songsData
-      : songsData.filter((song) => selectedDrummers.includes(song.drummer));
+  const filteredSongsData = songsData.filter(
+    (song) =>
+      (selectedDrummers.length === 0 ||
+        selectedDrummers.includes(song.drummer)) &&
+      (selectedArtists.length === 0 || selectedArtists.includes(song.artist))
+  );
 
   return (
     <div className="container">
@@ -39,6 +51,21 @@ const Search = () => {
                 onChange={() => handleDrummerSelection(drummer)}
               />
               <label htmlFor={`drummer${index}`}>{drummer}</label>
+            </div>
+          );
+        })}
+        <strong>Artists</strong>
+        {artists.map((artist, index) => {
+          return (
+            <div key={index}>
+              <input
+                type="checkbox"
+                id={`artist${index}`}
+                name={`artist${index}`}
+                checked={selectedArtists.includes(artist)}
+                onChange={() => handleArtistSelection(artist)}
+              />
+              <label htmlFor={`artist${index}`}>{artist}</label>
             </div>
           );
         })}
