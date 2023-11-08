@@ -6,6 +6,7 @@ import { songsData } from "../../../pages/api/songs";
 import Link from "next/link";
 import { PolyrhythmProp, TimeSignatureProp } from "@/models/model";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
+import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
 
 const DRUMMERS: string[] = [...new Set(songsData.map((song) => song.drummer))];
 const ARTISTS: string[] = [...new Set(songsData.map((song) => song.artist))];
@@ -166,54 +167,18 @@ const Search = () => {
           }
           label="Types"
         />
-        <strong>Polyrhythms</strong>
-        <div>
-          {POLYRHYTHMS.map((polyrhythm, index) => {
-            const uniqueId = `polyrhythm-${index}`;
-            return (
-              <div key={index}>
-                <input
-                  type="checkbox"
-                  id={uniqueId}
-                  name={uniqueId}
-                  checked={selectedPolyrhythms.some(
-                    (poly) =>
-                      poly.against === polyrhythm.against &&
-                      poly.base === polyrhythm.base
-                  )}
-                  onChange={() => handlePolyrhythmSelection(index)}
-                />
-                <label htmlFor={uniqueId}>
-                  {polyrhythm.against}:{polyrhythm.base}
-                </label>
-              </div>
-            );
-          })}
-        </div>
-        <strong>Time Signatures</strong>
-        <div>
-          {TIME_SIGNATURES.map((timeSignature, index) => {
-            const uniqueId = `time-signature-${index}`;
-            return (
-              <div key={index}>
-                <input
-                  type="checkbox"
-                  id={uniqueId}
-                  name={uniqueId}
-                  checked={selectedTimeSignatures.some(
-                    (timeSig) =>
-                      timeSig.numerator === timeSignature.numerator &&
-                      timeSig.denominator === timeSignature.denominator
-                  )}
-                  onChange={() => handleTimeSignatureSelection(index)}
-                />
-                <label htmlFor={uniqueId}>
-                  {timeSignature.numerator}/{timeSignature.denominator}
-                </label>
-              </div>
-            );
-          })}
-        </div>
+        <CheckboxPair
+          data={POLYRHYTHMS}
+          heading="Polyrhythms"
+          selectedData={selectedPolyrhythms}
+          onSelection={handlePolyrhythmSelection}
+        />
+        <CheckboxPair
+          data={TIME_SIGNATURES}
+          heading="Time Signatures"
+          selectedData={selectedTimeSignatures}
+          onSelection={handleTimeSignatureSelection}
+        />
       </aside>
       <main>
         <ul>
