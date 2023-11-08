@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { songsData } from "../../../pages/api/songs";
+import Link from "next/link";
 
 interface SelectionComponentProps {
   items: string[];
@@ -41,7 +42,9 @@ const Search = () => {
     ...new Set(songsData.map((song) => song.drummer)),
   ];
   const artists: string[] = [...new Set(songsData.map((song) => song.artist))];
-  const polyTypes: string[] = [...new Set(songsData.map((song) => song.polyType))];
+  const polyTypes: string[] = [
+    ...new Set(songsData.map((song) => song.polyType)),
+  ];
 
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
@@ -61,14 +64,53 @@ const Search = () => {
 
   const filteredSongsData = songsData.filter(
     (song) =>
-      (selectedDrummers.length === 0 || selectedDrummers.includes(song.drummer)) &&
+      (selectedDrummers.length === 0 ||
+        selectedDrummers.includes(song.drummer)) &&
       (selectedArtists.length === 0 || selectedArtists.includes(song.artist)) &&
-      (selectedPolytypes.length === 0 || selectedPolytypes.includes(song.polyType))
+      (selectedPolytypes.length === 0 ||
+        selectedPolytypes.includes(song.polyType))
   );
+
+  const numberOfResults =
+    filteredSongsData.length === 1
+      ? "1 song found"
+      : `${filteredSongsData.length} songs found`;
 
   return (
     <div className="container">
-      <header>Im header</header>
+      <header>
+        {numberOfResults}
+        {/* <div>
+          <label htmlFor="site-search">Search the site:</label>
+          <input type="search" id="site-search" name="q" />
+          <button>Search</button>
+        </div>
+        <select name="pets" id="pet-select">
+          <option value="">--Please choose an option--</option>
+          <option value="dog">Title: A to Z</option>
+          <option value="cat">Title: Z to A</option>
+          <option value="hamster">Drummer: A to Z</option>
+          <option value="parrot">Drummer: Z to A</option>
+          <option value="spider">Artist: A to Z</option>
+          <option value="goldfish">Artist: Z to A</option>
+        </select>
+        <button>grid</button>
+        <div>
+          <input
+            aria-orientation="vertical"
+            type="range"
+            id="volume"
+            name="volume"
+            min="0"
+            max="11"
+          />
+        </div> */}
+        <Link href={"/"}>
+          <button>
+            home
+          </button>
+        </Link>
+      </header>
       <aside>
         <SelectionComponent
           items={drummers}

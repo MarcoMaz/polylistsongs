@@ -12,6 +12,7 @@ import TableSongs from "@/components/TableSongs/TableSongs";
 import { SongProp } from "@/models/model";
 
 import TextConstants from "@/constants/textConstants";
+import Link from "next/link";
 
 export default function Home() {
   const [songs, setSongs] = useState<SongProp[]>([]);
@@ -77,6 +78,9 @@ export default function Home() {
       {isDataLoading && <strong>{loadingData}</strong>}
       {songs.length ? (
         <>
+          <Link href={"/search"}>
+            <button>search</button>
+          </Link>
           <TableSongs
             tableFields={tableFields}
             songs={songs}
