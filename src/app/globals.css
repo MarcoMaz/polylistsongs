@@ -8,3 +8,43 @@ tfoot {
   background-color: #333;
   color: #fff;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+}
+
+/* Grid */
+.container {
+  display: grid;
+  grid-template-areas: 
+    "header header"
+    "aside main";
+  grid-template-columns: repeat(12, 1fr);
+  height: 100vh;
+}
+
+header {
+  background-color: red;
+  grid-area: header;
+  grid-column: span 12;
+  grid-row: span 2;
+}
+
+aside {
+  background-color: orange;
+  grid-area: aside;
+  grid-column: span 3;
+  grid-row: span 10;
+}
+
+main {
+  background-color: yellow;
+  grid-area: main;
+  grid-column: span 9;
+  grid-row: span 10;
+}
