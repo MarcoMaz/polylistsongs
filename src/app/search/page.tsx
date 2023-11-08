@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { songsData } from "../../../pages/api/songs";
 import Link from "next/link";
-import { PolyrhythmProp } from "@/models/model";
+import { PolyrhythmProp, TimeSignatureProp } from "@/models/model";
 
 interface SelectionComponentProps {
   items: string[];
@@ -48,18 +48,30 @@ const Search = () => {
   ];
 
   const polys = songsData.map((song) => song.polyrhythm);
-
   const uniquePolys = polys.filter(
     (song, index, self) =>
       index ===
       self.findIndex((s) => s.against === song.against && s.base === song.base)
   );
 
+  const timeSig = songsData.map((song) => song.timeSignature)
+  const uniqueTimeSig = timeSig.filter(
+    (song, index, self) =>
+      index ===
+      self.findIndex((s) => s.numerator === song.numerator && s.denominator === song.denominator)
+  );
+
+
+  // console.log(uniqueTimeSig)
+
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedPolytypes, setSelectedPolytypes] = useState<string[]>([]);
   const [selectedUniquePolys, setSelectedUniquePolys] = useState<
     (PolyrhythmProp & { selected: boolean })[]
+  >([]);
+  const [selectedUniqueTimeSig, setSelectedUniqueTimeSig] = useState<
+    (TimeSignatureProp & { selected: boolean })[]
   >([]);
 
   const handleSelection = (
@@ -82,6 +94,18 @@ const Search = () => {
     setSelectedUniquePolys(updatedPolys.filter((x) => x.selected));
   };
 
+  const handleTimeSigSelection = (index: number): void => {
+    const updatedTimeSig = [...uniqueTimeSig] as (TimeSignatureProp & {
+      selected: boolean;
+    })[];
+    updatedTimeSig[index].selected = !updatedTimeSig[index].selected;
+    setSelectedUniqueTimeSig(updatedTimeSig.filter((x) => x.selected));
+  };
+
+
+
+
+
   const filteredSongsData = songsData.filter(
     (song) =>
       (selectedDrummers.length === 0 ||
@@ -98,6 +122,16 @@ const Search = () => {
           (poly) =>
             poly.against === song.polyrhythm.against &&
             poly.base === song.polyrhythm.base
+        )
+  );
+
+  const filteredByTimeSigSongsData = filteredByPolySongsData.filter((song) =>
+    selectedUniqueTimeSig.length === 0
+      ? true
+      : selectedUniqueTimeSig.some(
+          (timeSig) =>
+          timeSig.numerator === song.timeSignature.numerator &&
+          timeSig.denominator === song.timeSignature.denominator
         )
   );
 
@@ -185,10 +219,31 @@ const Search = () => {
             );
           })}
         </div>
+        <strong>Time Signatures</strong>
+        <div>
+          {uniqueTimeSig.map((x, index) => {
+            return (
+              <div key={index}>
+                <input
+                  type="checkbox"
+                  id={`timeSig${index}`}
+                  name={`timeSig${index}`}
+                  checked={selectedUniqueTimeSig.some(
+                    (timeSig) => timeSig.numerator === x.numerator && timeSig.denominator === x.denominator
+                  )}
+                  onChange={() => handleTimeSigSelection(index)}
+                />
+                <label htmlFor={`timeSig${index}`}>
+                  {x.numerator}/{x.denominator}
+                </label>
+              </div>
+            );
+          })}
+        </div>
       </aside>
       <main>
         <ul>
-          {filteredByPolySongsData.map(
+          {filteredByTimeSigSongsData.map(
             (
               {
                 title,
