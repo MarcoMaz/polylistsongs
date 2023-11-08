@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { songsData } from "../../../pages/api/songs";
 import Link from "next/link";
+import { PolyrhythmProp } from "@/models/model";
 
 interface SelectionComponentProps {
   items: string[];
@@ -46,9 +47,20 @@ const Search = () => {
     ...new Set(songsData.map((song) => song.polyType)),
   ];
 
+  const polys = songsData.map((song) => song.polyrhythm);
+
+  const uniquePolys = polys.filter(
+    (song, index, self) =>
+      index ===
+      self.findIndex((s) => s.against === song.against && s.base === song.base)
+  );
+
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedPolytypes, setSelectedPolytypes] = useState<string[]>([]);
+  const [selectedUniquePolys, setSelectedUniquePolys] = useState<
+    (PolyrhythmProp & { selected: boolean })[]
+  >([]);
 
   const handleSelection = (
     item: string,
@@ -62,6 +74,14 @@ const Search = () => {
     }
   };
 
+  const handlePolySelection = (index: number): void => {
+    const updatedPolys = [...uniquePolys] as (PolyrhythmProp & {
+      selected: boolean;
+    })[];
+    updatedPolys[index].selected = !updatedPolys[index].selected;
+    setSelectedUniquePolys(updatedPolys.filter((x) => x.selected));
+  };
+
   const filteredSongsData = songsData.filter(
     (song) =>
       (selectedDrummers.length === 0 ||
@@ -69,6 +89,16 @@ const Search = () => {
       (selectedArtists.length === 0 || selectedArtists.includes(song.artist)) &&
       (selectedPolytypes.length === 0 ||
         selectedPolytypes.includes(song.polyType))
+  );
+
+  const filteredByPolySongsData = filteredSongsData.filter((song) =>
+    selectedUniquePolys.length === 0
+      ? true
+      : selectedUniquePolys.some(
+          (poly) =>
+            poly.against === song.polyrhythm.against &&
+            poly.base === song.polyrhythm.base
+        )
   );
 
   const numberOfResults =
@@ -106,9 +136,7 @@ const Search = () => {
           />
         </div> */}
         <Link href={"/"}>
-          <button>
-            home
-          </button>
+          <button>home</button>
         </Link>
       </header>
       <aside>
@@ -136,10 +164,31 @@ const Search = () => {
           }
           label="Types"
         />
+        <strong>Polyrhythms</strong>
+        <div>
+          {uniquePolys.map((x, index) => {
+            return (
+              <div key={index}>
+                <input
+                  type="checkbox"
+                  id={`poly${index}`}
+                  name={`poly${index}`}
+                  checked={selectedUniquePolys.some(
+                    (poly) => poly.against === x.against && poly.base === x.base
+                  )}
+                  onChange={() => handlePolySelection(index)}
+                />
+                <label htmlFor={`poly${index}`}>
+                  {x.against}:{x.base}
+                </label>
+              </div>
+            );
+          })}
+        </div>
       </aside>
       <main>
         <ul>
-          {filteredSongsData.map(
+          {filteredByPolySongsData.map(
             (
               {
                 title,
