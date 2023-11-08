@@ -41,9 +41,11 @@ const Search = () => {
     ...new Set(songsData.map((song) => song.drummer)),
   ];
   const artists: string[] = [...new Set(songsData.map((song) => song.artist))];
+  const polyTypes: string[] = [...new Set(songsData.map((song) => song.polyType))];
 
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
+  const [selectedPolytypes, setSelectedPolytypes] = useState<string[]>([]);
 
   const handleSelection = (
     item: string,
@@ -59,9 +61,9 @@ const Search = () => {
 
   const filteredSongsData = songsData.filter(
     (song) =>
-      (selectedDrummers.length === 0 ||
-        selectedDrummers.includes(song.drummer)) &&
-      (selectedArtists.length === 0 || selectedArtists.includes(song.artist))
+      (selectedDrummers.length === 0 || selectedDrummers.includes(song.drummer)) &&
+      (selectedArtists.length === 0 || selectedArtists.includes(song.artist)) &&
+      (selectedPolytypes.length === 0 || selectedPolytypes.includes(song.polyType))
   );
 
   return (
@@ -83,6 +85,14 @@ const Search = () => {
             handleSelection(artist, setSelectedArtists, selectedArtists)
           }
           label="Artists"
+        />
+        <SelectionComponent
+          items={polyTypes}
+          selectedItems={selectedPolytypes}
+          onSelection={(polyType) =>
+            handleSelection(polyType, setSelectedPolytypes, selectedPolytypes)
+          }
+          label="Types"
         />
       </aside>
       <main>
