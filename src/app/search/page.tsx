@@ -4,6 +4,38 @@
 import { useState } from "react";
 import { songsData } from "../../../pages/api/songs";
 
+interface SelectionComponentProps {
+  items: string[];
+  selectedItems: string[];
+  onSelection: (item: string) => void;
+  label: string;
+}
+
+const SelectionComponent: React.FunctionComponent<SelectionComponentProps> = ({
+  items,
+  selectedItems,
+  onSelection,
+  label,
+}) => {
+  return (
+    <div>
+      <strong>{label}</strong>
+      {items.map((item, index) => (
+        <div key={index}>
+          <input
+            type="checkbox"
+            id={`${label}${index}`}
+            name={`${label}${index}`}
+            checked={selectedItems.includes(item)}
+            onChange={() => onSelection(item)}
+          />
+          <label htmlFor={`${label}${index}`}>{item}</label>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const Search = () => {
   const drummers: string[] = [
     ...new Set(songsData.map((song) => song.drummer)),
@@ -13,18 +45,15 @@ const Search = () => {
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
 
-  const handleDrummerSelection = (drummer: string) => {
-    if (selectedDrummers.includes(drummer)) {
-      setSelectedDrummers(selectedDrummers.filter((item) => item !== drummer));
+  const handleSelection = (
+    item: string,
+    setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>,
+    selectedItems: string[]
+  ) => {
+    if (selectedItems.includes(item)) {
+      setSelectedItems(selectedItems.filter((i) => i !== item));
     } else {
-      setSelectedDrummers([...selectedDrummers, drummer]);
-    }
-  };
-  const handleArtistSelection = (artist: string) => {
-    if (selectedArtists.includes(artist)) {
-      setSelectedArtists(selectedArtists.filter((item) => item !== artist));
-    } else {
-      setSelectedArtists([...selectedArtists, artist]);
+      setSelectedItems([...selectedItems, item]);
     }
   };
 
@@ -39,36 +68,22 @@ const Search = () => {
     <div className="container">
       <header>Im header</header>
       <aside>
-        <strong>Drummers</strong>
-        {drummers.map((drummer, index) => {
-          return (
-            <div key={index}>
-              <input
-                type="checkbox"
-                id={`drummer${index}`}
-                name={`drummer${index}`}
-                checked={selectedDrummers.includes(drummer)}
-                onChange={() => handleDrummerSelection(drummer)}
-              />
-              <label htmlFor={`drummer${index}`}>{drummer}</label>
-            </div>
-          );
-        })}
-        <strong>Artists</strong>
-        {artists.map((artist, index) => {
-          return (
-            <div key={index}>
-              <input
-                type="checkbox"
-                id={`artist${index}`}
-                name={`artist${index}`}
-                checked={selectedArtists.includes(artist)}
-                onChange={() => handleArtistSelection(artist)}
-              />
-              <label htmlFor={`artist${index}`}>{artist}</label>
-            </div>
-          );
-        })}
+        <SelectionComponent
+          items={drummers}
+          selectedItems={selectedDrummers}
+          onSelection={(drummer) =>
+            handleSelection(drummer, setSelectedDrummers, selectedDrummers)
+          }
+          label="Drummers"
+        />
+        <SelectionComponent
+          items={artists}
+          selectedItems={selectedArtists}
+          onSelection={(artist) =>
+            handleSelection(artist, setSelectedArtists, selectedArtists)
+          }
+          label="Artists"
+        />
       </aside>
       <main>
         <ul>
