@@ -5,38 +5,7 @@ import { useState } from "react";
 import { songsData } from "../../../pages/api/songs";
 import Link from "next/link";
 import { PolyrhythmProp, TimeSignatureProp } from "@/models/model";
-
-interface SelectionComponentProps {
-  items: string[];
-  selectedItems: string[];
-  onSelection: (item: string) => void;
-  label: string;
-}
-
-const SelectionComponent: React.FunctionComponent<SelectionComponentProps> = ({
-  items,
-  selectedItems,
-  onSelection,
-  label,
-}) => {
-  return (
-    <div>
-      <strong>{label}</strong>
-      {items.map((item, index) => (
-        <div key={index}>
-          <input
-            type="checkbox"
-            id={`${label}${index}`}
-            name={`${label}${index}`}
-            checked={selectedItems.includes(item)}
-            onChange={() => onSelection(item)}
-          />
-          <label htmlFor={`${label}${index}`}>{item}</label>
-        </div>
-      ))}
-    </div>
-  );
-};
+import Checkbox from "@/components/base/Checkbox/Checkbox";
 
 const Search = () => {
   const drummers: string[] = [
@@ -63,7 +32,7 @@ const Search = () => {
           s.numerator === song.numerator && s.denominator === song.denominator
       )
   );
-  
+
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedPolytypes, setSelectedPolytypes] = useState<string[]>([]);
@@ -170,7 +139,7 @@ const Search = () => {
         </Link>
       </header>
       <aside>
-        <SelectionComponent
+        <Checkbox
           items={drummers}
           selectedItems={selectedDrummers}
           onSelection={(drummer) =>
@@ -178,7 +147,7 @@ const Search = () => {
           }
           label="Drummers"
         />
-        <SelectionComponent
+        <Checkbox
           items={artists}
           selectedItems={selectedArtists}
           onSelection={(artist) =>
@@ -186,7 +155,7 @@ const Search = () => {
           }
           label="Artists"
         />
-        <SelectionComponent
+        <Checkbox
           items={polyTypes}
           selectedItems={selectedPolytypes}
           onSelection={(polyType) =>
