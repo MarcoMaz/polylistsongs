@@ -5,7 +5,8 @@ import { useState } from "react";
 import { songsData } from "../../../pages/api/songs";
 
 const Search = () => {
-  const drummers: string[] = songsData.map((song) => song.drummer);
+  const drummers: string[] = [...new Set(songsData.map((song) => song.drummer))];
+  console.log("drummers", drummers)
 
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
 
