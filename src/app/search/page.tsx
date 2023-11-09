@@ -119,32 +119,6 @@ const Search = () => {
       ? "1 song found"
       : `${filteredSongsData.length} songs found`;
 
-  const handleSortOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = e.target.value;
-    switch (selectedOption) {
-      case "titleAtoZ":
-        filteredSongsData.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      case "titleZtoA":
-        filteredSongsData.sort((a, b) => b.title.localeCompare(a.title));
-        break;
-      case "drummerAtoZ":
-        filteredSongsData.sort((a, b) => a.drummer.localeCompare(b.drummer));
-        break;
-      case "drummerZtoA":
-        filteredSongsData.sort((a, b) => b.drummer.localeCompare(a.drummer));
-        break;
-      case "artistAtoZ":
-        filteredSongsData.sort((a, b) => a.artist.localeCompare(b.artist));
-        break;
-      case "artistZtoA":
-        filteredSongsData.sort((a, b) => b.artist.localeCompare(a.artist));
-        break;
-      default:
-        break;
-    }
-  };
-
   return (
     <div className="container">
       <header>
