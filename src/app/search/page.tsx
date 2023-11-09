@@ -43,7 +43,6 @@ const Search = () => {
   >([]);
   const [showScore, setShowScore] = useState(false);
 
-
   const handleSelection = (
     item: string,
     setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>,
@@ -80,7 +79,6 @@ const Search = () => {
   const handleShowScore = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShowScore(e.target.checked);
   };
-
 
   const filteredSongsData = songsData.filter((song) => {
     if (
@@ -121,6 +119,32 @@ const Search = () => {
       ? "1 song found"
       : `${filteredSongsData.length} songs found`;
 
+  const handleSortOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOption = e.target.value;
+    switch (selectedOption) {
+      case "titleAtoZ":
+        filteredSongsData.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "titleZtoA":
+        filteredSongsData.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case "drummerAtoZ":
+        filteredSongsData.sort((a, b) => a.drummer.localeCompare(b.drummer));
+        break;
+      case "drummerZtoA":
+        filteredSongsData.sort((a, b) => b.drummer.localeCompare(a.drummer));
+        break;
+      case "artistAtoZ":
+        filteredSongsData.sort((a, b) => a.artist.localeCompare(b.artist));
+        break;
+      case "artistZtoA":
+        filteredSongsData.sort((a, b) => b.artist.localeCompare(a.artist));
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="container">
       <header>
@@ -129,17 +153,16 @@ const Search = () => {
           <label htmlFor="site-search">Search the site:</label>
           <input type="search" id="site-search" name="q" />
           <button>Search</button>
-        </div>
-        <select name="pets" id="pet-select">
-          <option value="">--Please choose an option--</option>
-          <option value="dog">Title: A to Z</option>
-          <option value="cat">Title: Z to A</option>
-          <option value="hamster">Drummer: A to Z</option>
-          <option value="parrot">Drummer: Z to A</option>
-          <option value="spider">Artist: A to Z</option>
-          <option value="goldfish">Artist: Z to A</option>
+        </div> */}
+        <select name="songs-order" id="songs-order">
+          <option value="titleAtoZ">Title (A-Z)</option>
+          <option value="titleZtoA">Title (Z-A)</option>
+          <option value="drummerAtoZ">Drummer (A-Z)</option>
+          <option value="drummerZtoA">Drummer (Z-A)</option>
+          <option value="artistAtoZ">Artist (A-Z)</option>
+          <option value="artistZtoA">Artist (Z-A)</option>
         </select>
-        <button>grid</button>
+        {/* <button>grid</button>
         <div>
           <input
             aria-orientation="vertical"
