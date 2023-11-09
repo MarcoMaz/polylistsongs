@@ -178,12 +178,16 @@ const Search = () => {
           heading="Polyrhythms"
           selectedData={selectedPolyrhythms}
           onSelection={handlePolyrhythmSelection}
+          songsData={songsData}
+          type="polyrhythm"
         />
         <CheckboxPair
           data={TIME_SIGNATURES}
           heading="Time Signatures"
           selectedData={selectedTimeSignatures}
           onSelection={handleTimeSignatureSelection}
+          songsData={songsData}
+          type="timeSignature"
         />
       </aside>
       <main>
