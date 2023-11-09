@@ -41,6 +41,8 @@ const Search = () => {
   const [selectedTimeSignatures, setSelectedTimeSignatures] = useState<
     (TimeSignatureProp & { selected: boolean })[]
   >([]);
+  const [showScore, setShowScore] = useState(false);
+
 
   const handleSelection = (
     item: string,
@@ -75,6 +77,11 @@ const Search = () => {
     );
   };
 
+  const handleShowScore = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowScore(e.target.checked);
+  };
+
+
   const filteredSongsData = songsData.filter((song) => {
     if (
       (selectedDrummers.length === 0 ||
@@ -91,14 +98,19 @@ const Search = () => {
             poly.base === song.polyrhythm.base
         )
       ) {
-        return (
+        if (
           selectedTimeSignatures.length === 0 ||
           selectedTimeSignatures.some(
             (timeSig) =>
               timeSig.numerator === song.timeSignature.numerator &&
               timeSig.denominator === song.timeSignature.denominator
           )
-        );
+        ) {
+          if (showScore) {
+            return !!song.scoreUrl;
+          }
+          return true;
+        }
       }
     }
     return false;
@@ -189,6 +201,17 @@ const Search = () => {
           songsData={songsData}
           type="timeSignature"
         />
+        <strong>Score</strong>
+        <div>
+          <input
+            type="checkbox"
+            id="score"
+            name="score"
+            checked={showScore}
+            onChange={handleShowScore}
+          />
+          <label htmlFor="score">Score</label>
+        </div>
       </aside>
       <main>
         <ul>
