@@ -150,6 +150,8 @@ const Search = () => {
             handleSelection(drummer, setSelectedDrummers, selectedDrummers)
           }
           label="Drummers"
+          songsData={songsData}
+          type="drummer"
         />
         <Checkbox
           items={ARTISTS}
@@ -158,6 +160,8 @@ const Search = () => {
             handleSelection(artist, setSelectedArtists, selectedArtists)
           }
           label="Artists"
+          songsData={songsData}
+          type="artist"
         />
         <Checkbox
           items={POLY_TYPES}
@@ -166,6 +170,8 @@ const Search = () => {
             handleSelection(polyType, setSelectedPolytypes, selectedPolytypes)
           }
           label="Types"
+          songsData={songsData}
+          type="polyType"
         />
         <CheckboxPair
           data={POLYRHYTHMS}
