@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { songsData } from "../../../pages/api/songs";
 import Link from "next/link";
 import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
@@ -42,6 +42,74 @@ const Search = () => {
     (TimeSignatureProp & { selected: boolean })[]
   >([]);
   const [showScore, setShowScore] = useState(false);
+  const [filteredSongsData, setFilteredSongsData] = useState<SongProp[]>([]);
+  const [sortBy, setSortBy] = useState("titleAtoZ");
+
+  useEffect(() => {
+    // Function to determine sorting order
+    const getSortingFunction = () => {
+      switch (sortBy) {
+        case "titleAtoZ":
+          return (a: SongProp, b: SongProp) => sortAlphabetically(a, b);
+        case "titleZtoA":
+          return (a: SongProp, b: SongProp) => -sortAlphabetically(a, b);
+        // Add other cases for different sorting options if needed
+        default:
+          return (a: SongProp, b: SongProp) => sortAlphabetically(a, b);
+      }
+    };
+
+    const updatedFilteredSongs = songsData
+      .filter((song) => {
+        if (
+          (selectedDrummers.length === 0 ||
+            selectedDrummers.includes(song.drummer)) &&
+          (selectedArtists.length === 0 ||
+            selectedArtists.includes(song.artist)) &&
+          (selectedPolytypes.length === 0 ||
+            selectedPolytypes.includes(song.polyType))
+        ) {
+          if (
+            selectedPolyrhythms.length === 0 ||
+            selectedPolyrhythms.some(
+              (poly) =>
+                poly.against === song.polyrhythm.against &&
+                poly.base === song.polyrhythm.base
+            )
+          ) {
+            if (
+              selectedTimeSignatures.length === 0 ||
+              selectedTimeSignatures.some(
+                (timeSig) =>
+                  timeSig.numerator === song.timeSignature.numerator &&
+                  timeSig.denominator === song.timeSignature.denominator
+              )
+            ) {
+              if (showScore) {
+                return !!song.scoreUrl;
+              }
+              return true;
+            }
+          }
+        }
+        return false;
+      })
+      .sort(getSortingFunction());
+
+    setFilteredSongsData(updatedFilteredSongs);
+  }, [
+    selectedDrummers,
+    selectedArtists,
+    selectedPolytypes,
+    selectedPolyrhythms,
+    selectedTimeSignatures,
+    showScore,
+    sortBy,
+  ]);
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value);
+  };
 
   const handleSelection = (
     item: string,
@@ -93,43 +161,6 @@ const Search = () => {
     return 0;
   };
 
-  const filteredSongsData = songsData
-    .filter((song) => {
-      if (
-        (selectedDrummers.length === 0 ||
-          selectedDrummers.includes(song.drummer)) &&
-        (selectedArtists.length === 0 ||
-          selectedArtists.includes(song.artist)) &&
-        (selectedPolytypes.length === 0 ||
-          selectedPolytypes.includes(song.polyType))
-      ) {
-        if (
-          selectedPolyrhythms.length === 0 ||
-          selectedPolyrhythms.some(
-            (poly) =>
-              poly.against === song.polyrhythm.against &&
-              poly.base === song.polyrhythm.base
-          )
-        ) {
-          if (
-            selectedTimeSignatures.length === 0 ||
-            selectedTimeSignatures.some(
-              (timeSig) =>
-                timeSig.numerator === song.timeSignature.numerator &&
-                timeSig.denominator === song.timeSignature.denominator
-            )
-          ) {
-            if (showScore) {
-              return !!song.scoreUrl;
-            }
-            return true;
-          }
-        }
-      }
-      return false;
-    })
-    .sort(sortAlphabetically);
-
   const numberOfResults =
     filteredSongsData.length === 1
       ? "1 song found"
@@ -144,7 +175,12 @@ const Search = () => {
           <input type="search" id="site-search" name="q" />
           <button>Search</button>
         </div> */}
-        <select name="songs-order" id="songs-order">
+        <select
+          name="songs-order"
+          id="songs-order"
+          onChange={handleSortChange}
+          value={sortBy}
+        >
           <option value="titleAtoZ">Title (A-Z)</option>
           <option value="titleZtoA">Title (Z-A)</option>
           <option value="drummerAtoZ">Drummer (A-Z)</option>
