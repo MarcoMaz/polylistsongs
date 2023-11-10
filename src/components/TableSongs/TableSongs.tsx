@@ -31,7 +31,6 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
     <table>
       <thead>
         <tr>
-          <th></th>
           {tableFields.map((str, index) => {
             return <th key={index}>{str}</th>;
           })}
@@ -41,7 +40,6 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
         {songs.map(({ ...props }) => {
           return (
             <tr key={props.id}>
-              <td>{props.id}</td>
               <td>{props.title}</td>
               <td>{props.album}</td>
               <td>{props.artist}</td>
