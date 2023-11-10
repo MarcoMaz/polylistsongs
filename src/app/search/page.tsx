@@ -298,60 +298,64 @@ const Search = () => {
         </div>
       </aside>
       <main>
-        <ul>
-          {filteredSongsData.map(
-            (
-              {
-                title,
-                album,
-                artist,
-                drummer,
-                polyType,
-                year,
-                timestamp,
-                polyrhythm,
-                timeSignature,
-                source,
-                scoreUrl,
-              },
-              index
-            ) => {
-              return (
-                <li key={index}>
-                  <details>
-                    <summary>
-                      {title} by {artist} - {polyrhythm.against}:
-                      {polyrhythm.base}
-                    </summary>
-                    {title} by {artist}, from <em>{album}</em> ({year})<br />
-                    drummer: {drummer} - type: {polyType} <br />
-                    <br />
-                    {polyrhythm.against}:{polyrhythm.base} starting at{" "}
-                    {timestamp} <br />
-                    <br />
-                    Time signature: {timeSignature.numerator} -{" "}
-                    {timeSignature.denominator} <br />
-                    <br />
-                    {scoreUrl && (
-                      <>
-                        score{" "}
-                        <img
-                          src={scoreUrl}
-                          alt="image"
-                          width={20}
-                          height={20}
-                        />{" "}
-                        <br />
-                        <br />
-                      </>
-                    )}
-                    source: {source}
-                  </details>
-                </li>
-              );
-            }
-          )}
-        </ul>
+        {filteredSongsData.length > 0 ? (
+          <ul>
+            {filteredSongsData.map(
+              (
+                {
+                  title,
+                  album,
+                  artist,
+                  drummer,
+                  polyType,
+                  year,
+                  timestamp,
+                  polyrhythm,
+                  timeSignature,
+                  source,
+                  scoreUrl,
+                },
+                index
+              ) => {
+                return (
+                  <li key={index}>
+                    <details>
+                      <summary>
+                        {title} by {artist} - {polyrhythm.against}:
+                        {polyrhythm.base}
+                      </summary>
+                      {title} by {artist}, from <em>{album}</em> ({year})<br />
+                      drummer: {drummer} - type: {polyType} <br />
+                      <br />
+                      {polyrhythm.against}:{polyrhythm.base} starting at{" "}
+                      {timestamp} <br />
+                      <br />
+                      Time signature: {timeSignature.numerator} -{" "}
+                      {timeSignature.denominator} <br />
+                      <br />
+                      {scoreUrl && (
+                        <>
+                          score{" "}
+                          <img
+                            src={scoreUrl}
+                            alt="image"
+                            width={20}
+                            height={20}
+                          />{" "}
+                          <br />
+                          <br />
+                        </>
+                      )}
+                      source: {source}
+                    </details>
+                  </li>
+                );
+              }
+            )}
+          </ul>
+        ) : (
+          <strong>0 Songs found</strong>
+        )}
       </main>
     </div>
   );
