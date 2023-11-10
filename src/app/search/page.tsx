@@ -205,7 +205,6 @@ const Search = () => {
             value={searchQuery}
             onChange={handleSearchChange} // Call the new search input change function
           />
-          <button>Search</button>
         </div>
         <select
           name="songs-order"
