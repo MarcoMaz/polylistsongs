@@ -2,7 +2,8 @@ const TextConstants = {
   app: {
     loadingData: "Data is loading...",
     noSongs: "No songs available",
-    buttonSearch: "search"
+    buttonSearch: "search",
+    buttonHome: "home"
   },
   formAddSong: {
     polyrhythmTypeLabel: "Type:",
@@ -25,7 +26,8 @@ const TextConstants = {
     timeSignatureLabel: "Time Signature",
   },
   searchHeader: {
-    inputLabel: "Search the site:"
+    inputLabel: "Search the site:",
+    gridButton: "grid"
   }
 };
 

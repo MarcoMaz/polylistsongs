@@ -24,6 +24,7 @@ import InputSearch from "@/components/base/InputSearch/InputSearch";
 import TextConstants from "@/constants/textConstants";
 import Select from "@/components/base/Select/Select";
 import { sortingOptions } from "@/constants/sortingConstants";
+import Button from "@/components/base/Button/Button";
 
 const Search = () => {
   // Context
@@ -45,7 +46,8 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Text
-  const { inputLabel } = TextConstants.searchHeader;
+  const { gridButton, inputLabel } = TextConstants.searchHeader;
+  const { buttonHome } = TextConstants.app;
 
   useEffect(() => {
     const updatedFilteredSongs = songs
@@ -136,7 +138,7 @@ const Search = () => {
           value={sortBy}
           handleChange={handleSortChange}
         />
-        <button>grid</button>
+        <Button type="button" label={gridButton} />
         <div>
           <input
             aria-orientation="vertical"
@@ -148,7 +150,7 @@ const Search = () => {
           />
         </div>
         <Link href={"/"}>
-          <button>home</button>
+          <Button type="button" label={buttonHome} />
         </Link>
       </header>
       <aside>
