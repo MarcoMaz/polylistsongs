@@ -7,6 +7,7 @@ import Link from "next/link";
 import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
+import { useAppContext } from "../layout";
 
 const DRUMMERS: string[] = [...new Set(songsData.map((song) => song.drummer))];
 const ARTISTS: string[] = [...new Set(songsData.map((song) => song.artist))];
@@ -32,6 +33,8 @@ const TIME_SIGNATURES = songsData
   );
 
 const Search = () => {
+  const { songs } = useAppContext();
+
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedPolytypes, setSelectedPolytypes] = useState<string[]>([]);
@@ -85,7 +88,7 @@ const Search = () => {
       }
     };
 
-    const updatedFilteredSongs = songsData
+    const updatedFilteredSongs = songs
       .filter((song) => {
         const isMatch =
           song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -120,6 +123,7 @@ const Search = () => {
     setFilteredSongsData(updatedFilteredSongs);
   }, [
     searchQuery,
+    songs,
     selectedDrummers,
     selectedArtists,
     selectedPolytypes,

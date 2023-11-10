@@ -1,7 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
-
-import { songsData } from "../../pages/api/songs";
+import React, { useState } from "react";
 
 import Button from "@/components/base/Button/Button";
 import Dialog from "@/components/base/Dialog/Dialog";
@@ -13,29 +11,13 @@ import { SongProp } from "@/models/model";
 
 import TextConstants from "@/constants/textConstants";
 import Link from "next/link";
+import { useAppContext } from "./layout";
 
 export default function Home() {
-  const [songs, setSongs] = useState<SongProp[]>([]);
+  const { isDataLoading, isFetchSuccessful, songs, setSongs } = useAppContext();
+
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [selectedSong, setSelectedSong] = useState<SongProp | "">("");
-  const [isDataLoading, setIsDataLoading] = useState<boolean>(true);
-  const [isFetchSuccessful, setIsFetchSuccessful] = useState<boolean>(true);
-
-  useEffect(() => {
-    async function fetchDataAndSetState() {
-      try {
-        setIsDataLoading(true);
-        setSongs(songsData);
-        setIsFetchSuccessful(true);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setIsFetchSuccessful(false);
-      } finally {
-        setIsDataLoading(false);
-      }
-    }
-    fetchDataAndSetState();
-  }, []);
 
   const { loadingData, noSongs } = TextConstants.app;
 
