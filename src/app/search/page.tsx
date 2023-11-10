@@ -44,6 +44,7 @@ const Search = () => {
   const [showScore, setShowScore] = useState(false);
   const [filteredSongsData, setFilteredSongsData] = useState<SongProp[]>([]);
   const [sortBy, setSortBy] = useState("titleAtoZ");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     // Function to determine sorting order
@@ -86,43 +87,39 @@ const Search = () => {
 
     const updatedFilteredSongs = songsData
       .filter((song) => {
-        if (
+        const isMatch =
+          song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          song.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          song.drummer.toLowerCase().includes(searchQuery.toLowerCase());
+
+        return (
+          isMatch &&
           (selectedDrummers.length === 0 ||
             selectedDrummers.includes(song.drummer)) &&
           (selectedArtists.length === 0 ||
             selectedArtists.includes(song.artist)) &&
           (selectedPolytypes.length === 0 ||
-            selectedPolytypes.includes(song.polyType))
-        ) {
-          if (
-            selectedPolyrhythms.length === 0 ||
+            selectedPolytypes.includes(song.polyType)) &&
+          (selectedPolyrhythms.length === 0 ||
             selectedPolyrhythms.some(
               (poly) =>
                 poly.against === song.polyrhythm.against &&
                 poly.base === song.polyrhythm.base
-            )
-          ) {
-            if (
-              selectedTimeSignatures.length === 0 ||
-              selectedTimeSignatures.some(
-                (timeSig) =>
-                  timeSig.numerator === song.timeSignature.numerator &&
-                  timeSig.denominator === song.timeSignature.denominator
-              )
-            ) {
-              if (showScore) {
-                return !!song.scoreUrl;
-              }
-              return true;
-            }
-          }
-        }
-        return false;
+            )) &&
+          (selectedTimeSignatures.length === 0 ||
+            selectedTimeSignatures.some(
+              (timeSig) =>
+                timeSig.numerator === song.timeSignature.numerator &&
+                timeSig.denominator === song.timeSignature.denominator
+            )) &&
+          (showScore ? !!song.scoreUrl : true)
+        );
       })
       .sort(getSortingFunction());
 
     setFilteredSongsData(updatedFilteredSongs);
   }, [
+    searchQuery,
     selectedDrummers,
     selectedArtists,
     selectedPolytypes,
@@ -131,6 +128,10 @@ const Search = () => {
     showScore,
     sortBy,
   ]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(e.target.value);
@@ -195,11 +196,17 @@ const Search = () => {
     <div className="container">
       <header>
         {numberOfResults}
-        {/* <div>
+        <div>
           <label htmlFor="site-search">Search the site:</label>
-          <input type="search" id="site-search" name="q" />
+          <input
+            type="search"
+            id="site-search"
+            name="q"
+            value={searchQuery}
+            onChange={handleSearchChange} // Call the new search input change function
+          />
           <button>Search</button>
-        </div> */}
+        </div>
         <select
           name="songs-order"
           id="songs-order"
