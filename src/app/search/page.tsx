@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { useAppContext } from "../layout";
 import { filterSongs } from "./utils/filtering";
@@ -22,6 +22,8 @@ import {
 import Results from "@/components/Results/Results";
 import InputSearch from "@/components/base/InputSearch/InputSearch";
 import TextConstants from "@/constants/textConstants";
+import Select from "@/components/base/Select/Select";
+import { sortingOptions } from "@/constants/sortingConstants";
 
 const Search = () => {
   // Context
@@ -128,19 +130,12 @@ const Search = () => {
           value={searchQuery}
           handleChange={handleSearchChange}
         />
-        <select
-          name="songs-order"
+        <Select
+          data={sortingOptions}
           id="songs-order"
-          onChange={handleSortChange}
           value={sortBy}
-        >
-          <option value="titleAtoZ">Title (A-Z)</option>
-          <option value="titleZtoA">Title (Z-A)</option>
-          <option value="drummerAtoZ">Drummer (A-Z)</option>
-          <option value="drummerZtoA">Drummer (Z-A)</option>
-          <option value="artistAtoZ">Artist (A-Z)</option>
-          <option value="artistZtoA">Artist (Z-A)</option>
-        </select>
+          handleChange={handleSortChange}
+        />
         <button>grid</button>
         <div>
           <input
