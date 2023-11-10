@@ -19,6 +19,7 @@ import {
   POLYRHYTHMS,
   TIME_SIGNATURES,
 } from "@/constants/searchConstants";
+import Results from "@/components/Results/Results";
 
 const Search = () => {
   const { songs } = useAppContext();
@@ -110,15 +111,10 @@ const Search = () => {
     setShowScore(e.target.checked);
   };
 
-  const numberOfResults =
-    filteredSongsData.length === 1
-      ? "1 song found"
-      : `${filteredSongsData.length} songs found`;
-
   return (
     <div className="container">
       <header>
-        {numberOfResults}
+        <Results data={filteredSongsData} />
         <div>
           <label htmlFor="site-search">Search the site:</label>
           <input
@@ -217,64 +213,61 @@ const Search = () => {
         </div>
       </aside>
       <main>
-        {filteredSongsData.length > 0 ? (
-          <ul>
-            {filteredSongsData.map(
-              (
-                {
-                  title,
-                  album,
-                  artist,
-                  drummer,
-                  polyType,
-                  year,
-                  timestamp,
-                  polyrhythm,
-                  timeSignature,
-                  source,
-                  scoreUrl,
-                },
-                index
-              ) => {
-                return (
-                  <li key={index}>
-                    <details>
-                      <summary>
-                        {title} by {artist} - {polyrhythm.against}:
-                        {polyrhythm.base}
-                      </summary>
-                      {title} by {artist}, from <em>{album}</em> ({year})<br />
-                      drummer: {drummer} - type: {polyType} <br />
-                      <br />
-                      {polyrhythm.against}:{polyrhythm.base} starting at{" "}
-                      {timestamp} <br />
-                      <br />
-                      Time signature: {timeSignature.numerator} -{" "}
-                      {timeSignature.denominator} <br />
-                      <br />
-                      {scoreUrl && (
-                        <>
-                          score{" "}
-                          <img
-                            src={scoreUrl}
-                            alt="image"
-                            width={20}
-                            height={20}
-                          />{" "}
-                          <br />
-                          <br />
-                        </>
-                      )}
-                      source: {source}
-                    </details>
-                  </li>
-                );
-              }
-            )}
-          </ul>
-        ) : (
-          <strong>0 Songs found</strong>
-        )}
+        <ul>
+          {filteredSongsData.map(
+            (
+              {
+                title,
+                album,
+                artist,
+                drummer,
+                polyType,
+                year,
+                timestamp,
+                polyrhythm,
+                timeSignature,
+                source,
+                scoreUrl,
+              },
+              index
+            ) => {
+              return (
+                <li key={index}>
+                  <details>
+                    <summary>
+                      {title} by {artist} - {polyrhythm.against}:
+                      {polyrhythm.base}
+                    </summary>
+                    {title} by {artist}, from <em>{album}</em> ({year})<br />
+                    drummer: {drummer} - type: {polyType} <br />
+                    <br />
+                    {polyrhythm.against}:{polyrhythm.base} starting at{" "}
+                    {timestamp} <br />
+                    <br />
+                    Time signature: {timeSignature.numerator} -{" "}
+                    {timeSignature.denominator} <br />
+                    <br />
+                    {scoreUrl && (
+                      <>
+                        score{" "}
+                        <img
+                          src={scoreUrl}
+                          alt="image"
+                          width={20}
+                          height={20}
+                        />{" "}
+                        <br />
+                        <br />
+                      </>
+                    )}
+                    source: {source}
+                  </details>
+                </li>
+              );
+            }
+          )}
+        </ul>
+        {filteredSongsData.length === 0 && <Results data={filteredSongsData} />}
       </main>
     </div>
   );
