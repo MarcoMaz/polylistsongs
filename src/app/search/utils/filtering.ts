@@ -24,15 +24,15 @@ export const filterSongs = (
       selectedPolytypes.includes(song.polyType)) &&
     (selectedPolyrhythms.length === 0 ||
       selectedPolyrhythms.some(
-        (poly: { against: any; base: any }) =>
-          poly.against === song.polyrhythm.against &&
-          poly.base === song.polyrhythm.base
+        (polyrhythm: { against: any; base: any }) =>
+          polyrhythm.against === song.polyrhythm.against &&
+          polyrhythm.base === song.polyrhythm.base
       )) &&
     (selectedTimeSignatures.length === 0 ||
       selectedTimeSignatures.some(
-        (timeSig: { numerator: any; denominator: any }) =>
-          timeSig.numerator === song.timeSignature.numerator &&
-          timeSig.denominator === song.timeSignature.denominator
+        (timeSignature: { numerator: any; denominator: any }) =>
+          timeSignature.numerator === song.timeSignature.numerator &&
+          timeSignature.denominator === song.timeSignature.denominator
       )) &&
     (showScore ? !!song.scoreUrl : true)
   );
