@@ -20,10 +20,14 @@ import {
   TIME_SIGNATURES,
 } from "@/constants/searchConstants";
 import Results from "@/components/Results/Results";
+import InputSearch from "@/components/base/InputSearch/InputSearch";
+import TextConstants from "@/constants/textConstants";
 
 const Search = () => {
+  // Context
   const { songs } = useAppContext();
 
+  // Local state
   const [selectedDrummers, setSelectedDrummers] = useState<string[]>([]);
   const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedPolytypes, setSelectedPolytypes] = useState<string[]>([]);
@@ -37,6 +41,9 @@ const Search = () => {
   const [filteredSongsData, setFilteredSongsData] = useState<SongProp[]>([]);
   const [sortBy, setSortBy] = useState<string>("titleAtoZ");
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  // Text
+  const { inputLabel } = TextConstants.searchHeader;
 
   useEffect(() => {
     const updatedFilteredSongs = songs
@@ -115,16 +122,12 @@ const Search = () => {
     <div className="container">
       <header>
         <Results data={filteredSongsData} />
-        <div>
-          <label htmlFor="site-search">Search the site:</label>
-          <input
-            type="search"
-            id="site-search"
-            name="q"
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-        </div>
+        <InputSearch
+          label={inputLabel}
+          id="site-search"
+          value={searchQuery}
+          handleChange={handleSearchChange}
+        />
         <select
           name="songs-order"
           id="songs-order"

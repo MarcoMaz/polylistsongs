@@ -24,6 +24,9 @@ const TextConstants = {
     },
     timeSignatureLabel: "Time Signature",
   },
+  searchHeader: {
+    inputLabel: "Search the site:"
+  }
 };
 
 export default TextConstants;
