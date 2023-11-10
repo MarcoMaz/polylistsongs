@@ -26,6 +26,7 @@ import Select from "@/components/base/Select/Select";
 import { sortingOptions } from "@/constants/sortingConstants";
 import Button from "@/components/base/Button/Button";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
+import Slider from "@/components/base/Slider/Slider";
 
 const Search = () => {
   // Context
@@ -140,16 +141,7 @@ const Search = () => {
           handleChange={handleSortChange}
         />
         <Button type="button" label={gridButton} />
-        <div>
-          <input
-            aria-orientation="vertical"
-            type="range"
-            id="volume"
-            name="volume"
-            min="0"
-            max="11"
-          />
-        </div>
+        <Slider id="card-grid" min={0} max={10} orientation="vertical" />
         <Link href={"/"}>
           <Button type="button" label={buttonHome} />
         </Link>
