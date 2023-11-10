@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAppContext } from "../layout";
+import { filterSongs } from "./filtering";
+import { sortingSongs } from "./sorting";
 
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
@@ -30,80 +32,26 @@ const Search = () => {
   const [selectedTimeSignatures, setSelectedTimeSignatures] = useState<
     (TimeSignatureProp & { selected: boolean })[]
   >([]);
-  const [showScore, setShowScore] = useState(false);
+  const [showScore, setShowScore] = useState<boolean>(false);
   const [filteredSongsData, setFilteredSongsData] = useState<SongProp[]>([]);
-  const [sortBy, setSortBy] = useState("titleAtoZ");
+  const [sortBy, setSortBy] = useState<string>("titleAtoZ");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
-    const getSortingFunction = () => {
-      switch (sortBy) {
-        case "titleAtoZ":
-          return (a: SongProp, b: SongProp) => sortAlphabetically(a, b);
-        case "titleZtoA":
-          return (a: SongProp, b: SongProp) => -sortAlphabetically(a, b);
-        case "drummerAtoZ":
-          return (a: SongProp, b: SongProp) => {
-            const drummerA = a.drummer.toLowerCase();
-            const drummerB = b.drummer.toLowerCase();
-            return drummerA.localeCompare(drummerB);
-          };
-        case "drummerZtoA":
-          return (a: SongProp, b: SongProp) => {
-            const drummerA = a.drummer.toLowerCase();
-            const drummerB = b.drummer.toLowerCase();
-            return drummerB.localeCompare(drummerA);
-          };
-        case "artistAtoZ":
-          return (a: SongProp, b: SongProp) => {
-            const artistA = a.artist.toLowerCase();
-            const artistB = b.artist.toLowerCase();
-            return artistA.localeCompare(artistB);
-          };
-        case "artistZtoA":
-          return (a: SongProp, b: SongProp) => {
-            const artistA = a.artist.toLowerCase();
-            const artistB = b.artist.toLowerCase();
-            return artistB.localeCompare(artistA);
-          };
-
-        default:
-          return (a: SongProp, b: SongProp) => sortAlphabetically(a, b);
-      }
-    };
-
     const updatedFilteredSongs = songs
-      .filter((song) => {
-        const isMatch =
-          song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          song.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          song.drummer.toLowerCase().includes(searchQuery.toLowerCase());
-
-        return (
-          isMatch &&
-          (selectedDrummers.length === 0 ||
-            selectedDrummers.includes(song.drummer)) &&
-          (selectedArtists.length === 0 ||
-            selectedArtists.includes(song.artist)) &&
-          (selectedPolytypes.length === 0 ||
-            selectedPolytypes.includes(song.polyType)) &&
-          (selectedPolyrhythms.length === 0 ||
-            selectedPolyrhythms.some(
-              (poly) =>
-                poly.against === song.polyrhythm.against &&
-                poly.base === song.polyrhythm.base
-            )) &&
-          (selectedTimeSignatures.length === 0 ||
-            selectedTimeSignatures.some(
-              (timeSig) =>
-                timeSig.numerator === song.timeSignature.numerator &&
-                timeSig.denominator === song.timeSignature.denominator
-            )) &&
-          (showScore ? !!song.scoreUrl : true)
-        );
-      })
-      .sort(getSortingFunction());
-
+      .filter((song) =>
+        filterSongs(
+          song,
+          searchQuery,
+          selectedDrummers,
+          selectedArtists,
+          selectedPolytypes,
+          selectedPolyrhythms,
+          selectedTimeSignatures,
+          showScore
+        )
+      )
+      .sort(sortingSongs(sortBy));
     setFilteredSongsData(updatedFilteredSongs);
   }, [
     searchQuery,
@@ -160,19 +108,6 @@ const Search = () => {
 
   const handleShowScore = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShowScore(e.target.checked);
-  };
-
-  const sortAlphabetically = (a: SongProp, b: SongProp) => {
-    const titleA = a.title.toLowerCase();
-    const titleB = b.title.toLowerCase();
-
-    if (titleA < titleB) {
-      return -1;
-    }
-    if (titleA > titleB) {
-      return 1;
-    }
-    return 0;
   };
 
   const numberOfResults =
