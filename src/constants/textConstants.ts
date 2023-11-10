@@ -2,6 +2,7 @@ const TextConstants = {
   app: {
     loadingData: "Data is loading...",
     noSongs: "No songs available",
+    buttonSearch: "search"
   },
   formAddSong: {
     polyrhythmTypeLabel: "Type:",

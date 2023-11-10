@@ -1,13 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-
 import { useEffect, useState } from "react";
-import { songsData } from "../../../pages/api/songs";
 import Link from "next/link";
-import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
+import { useAppContext } from "../layout";
+
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
-import { useAppContext } from "../layout";
+
+import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
+
+import { songsData } from "../../../pages/api/songs";
 
 const DRUMMERS: string[] = [...new Set(songsData.map((song) => song.drummer))];
 const ARTISTS: string[] = [...new Set(songsData.map((song) => song.artist))];

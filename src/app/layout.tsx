@@ -1,9 +1,11 @@
 "use client";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { SongProp } from "@/models/model";
 import { createContext, useContext, useEffect, useState } from "react";
+
+import "./globals.css";
+import { Inter } from "next/font/google";
 import { songsData } from "../../pages/api/songs";
+
+import { SongProp } from "@/models/model";
 
 interface AppContextType {
   isDataLoading: boolean;

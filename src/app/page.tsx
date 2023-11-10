@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 
 import Button from "@/components/base/Button/Button";
 import Dialog from "@/components/base/Dialog/Dialog";
@@ -9,59 +10,42 @@ import TableSongs from "@/components/TableSongs/TableSongs";
 
 import { SongProp } from "@/models/model";
 
-import TextConstants from "@/constants/textConstants";
-import Link from "next/link";
 import { useAppContext } from "./layout";
 
+import TextConstants from "@/constants/textConstants";
+import {
+  polyTypes,
+  sourceTypes,
+  tableFields,
+} from "@/constants/tableConstants";
+
 export default function Home() {
+  // Context
   const { isDataLoading, isFetchSuccessful, songs, setSongs } = useAppContext();
 
+  // Local state
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [selectedSong, setSelectedSong] = useState<SongProp | "">("");
 
-  const { loadingData, noSongs } = TextConstants.app;
+  // Text
+  const { buttonSearch, loadingData, noSongs } = TextConstants.app;
 
-  const tableFields: string[] = [
-    "title",
-    "album",
-    "artist",
-    "drummer",
-    "polyType",
-    "year",
-    "timestamp",
-    "polyrhythm",
-    "timeSignature",
-    "source",
-    "scoreUrl",
-  ];
-  const polyTypes: string[] = ["groove", "section", "fill"];
-  const sourceTypes: string[] = [
-    "Mike Portnoy Book",
-    "Frank Zappa Book",
-    "Modern Drummer Collection",
-    "Virgil Donati Book",
-    "Vinnie Colaiuta Book",
-    "My Archive",
-    "Minneman Book",
-    "Virgil Donati Book",
-  ];
-
-  const addSongButtonClick = () => {
+  function addSongButtonClick() {
     setIsDialogOpen(true);
-  };
+  }
 
-  const closeDialog = () => {
+  function closeDialog() {
     setIsDialogOpen(false);
     setSelectedSong("");
-  };
+  }
 
   return (
     <main>
       {isDataLoading && <strong>{loadingData}</strong>}
       {songs.length ? (
         <>
-          <Link href={"/search"}>
-            <button>search</button>
+          <Link href="/search">
+            <Button type="button" label={buttonSearch} />
           </Link>
           <TableSongs
             tableFields={tableFields}
