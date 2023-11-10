@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAppContext } from "../layout";
-import { filterSongs } from "./filtering";
-import { sortingSongs } from "./sorting";
+import { filterSongs } from "./utils/filtering";
+import { sortingSongs } from "./utils/sorting";
 
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
