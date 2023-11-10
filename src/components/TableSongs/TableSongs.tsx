@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { SetStateAction } from "react";
+import { SetStateAction, useState } from "react";
 import Button from "../base/Button/Button";
 import { SongProp } from "@/models/model";
 
@@ -18,6 +18,39 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
   setSelectedSong,
   setIsDialogOpen,
 }) => {
+  const [sortBy, setSortBy] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+
+  const handleSort = (field: string) => {
+    if (field === "polyrhythm" || field === "timeSignature") {
+      return;
+    }
+
+    if (sortBy === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(field);
+      setSortOrder("asc");
+    }
+  };
+
+  const sortedSongs = () => {
+    if (sortBy && sortBy !== "polyrhythm" && sortBy !== "timeSignature") {
+      return [...songs].sort((a, b) => {
+        const valueA = String(a[sortBy as keyof SongProp]);
+        const valueB = String(b[sortBy as keyof SongProp]);
+  
+        if (sortOrder === "asc") {
+          return valueA.localeCompare(valueB);
+        } else {
+          return valueB.localeCompare(valueA);
+        }
+      });
+    }
+  
+    return songs;
+  };
+  
   const handleButtonClick = (el: number) => {
     setSongs(songs.filter((a) => a.id !== el));
   };
@@ -31,52 +64,47 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
     <table>
       <thead>
         <tr>
-          {tableFields.map((str, index) => {
-            return <th key={index}>{str}</th>;
-          })}
+          {tableFields.map((field, index) => (
+            <th key={index} onClick={() => handleSort(field)}>
+              {field}
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        {songs.map(({ ...props }) => {
-          return (
-            <tr key={props.id}>
-              <td>{props.title}</td>
-              <td>{props.album}</td>
-              <td>{props.artist}</td>
-              <td>{props.drummer}</td>
-              <td>{props.polyType}</td>
-              <td>{props.year}</td>
-              <td>{props.timestamp}</td>
-              <td>{`${props.polyrhythm.against}:${props.polyrhythm.base}`}</td>
-              <td>{`${props.timeSignature.numerator}/${props.timeSignature.denominator}`}</td>
-              <td>{props.source}</td>
-              <td>
-                {props.scoreUrl ? (
-                  <img
-                    src={props.scoreUrl}
-                    alt="image"
-                    width={30}
-                    height={30}
-                  />
-                ) : null}
-              </td>
-              <td>
-                <Button
-                  type="button"
-                  label="edit"
-                  onClick={() => handleEditClick(props)}
-                />
-              </td>
-              <td>
-                <Button
-                  type="button"
-                  label="remove"
-                  onClick={() => handleButtonClick(props.id)}
-                />
-              </td>
-            </tr>
-          );
-        })}
+        {sortedSongs().map(({ ...props }) => (
+          <tr key={props.id}>
+            <td>{props.title}</td>
+            <td>{props.album}</td>
+            <td>{props.artist}</td>
+            <td>{props.drummer}</td>
+            <td>{props.polyType}</td>
+            <td>{props.year}</td>
+            <td>{props.timestamp}</td>
+            <td>{`${props.polyrhythm.against}:${props.polyrhythm.base}`}</td>
+            <td>{`${props.timeSignature.numerator}/${props.timeSignature.denominator}`}</td>
+            <td>{props.source}</td>
+            <td>
+              {props.scoreUrl ? (
+                <img src={props.scoreUrl} alt="image" width={30} height={30} />
+              ) : null}
+            </td>
+            <td>
+              <Button
+                type="button"
+                label="edit"
+                onClick={() => handleEditClick(props)}
+              />
+            </td>
+            <td>
+              <Button
+                type="button"
+                label="remove"
+                onClick={() => handleButtonClick(props.id)}
+              />
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
