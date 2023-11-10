@@ -1,58 +1,34 @@
-import { SongProp } from "@/models/model";
+import { ChangeEventHandler } from "react";
 
 interface CheckboxProps {
-  items: string[];
+  checked: boolean;
+  heading: string;
+  id: string;
   label: string;
-  selectedItems: string[];
-  songsData: SongProp[];
-  type: keyof SongProp;
-  onSelection: (item: string) => void;
+  handleChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 const Checkbox: React.FunctionComponent<CheckboxProps> = ({
-  items,
+  checked,
+  heading,
+  id,
   label,
-  selectedItems,
-  songsData,
-  type,
-  onSelection,
+  handleChange,
 }) => {
-  const countTypeOccurrences = (
-    dataArray: SongProp[],
-    key: keyof SongProp
-  ): Record<string, number> => {
-    const counts: Record<string, number> = {};
-    dataArray.forEach((item) => {
-      const keyValue = item[key] as string;
-      if (keyValue in counts) {
-        counts[keyValue]++;
-      } else {
-        counts[keyValue] = 1;
-      }
-    });
-    return counts;
-  };
-
-  const itemsCount = countTypeOccurrences(songsData, type);
-
   return (
-    <div>
-      <strong>{label}</strong>
-      {items.map((item, index) => (
-        <div key={index}>
-          <input
-            type="checkbox"
-            id={`${label}${index}`}
-            name={`${label}${index}`}
-            checked={selectedItems.includes(item)}
-            onChange={() => onSelection(item)}
-          />
-          <label htmlFor={`${label}${index}`}>
-            {item} ({itemsCount[item] || 0})
-          </label>
-        </div>
-      ))}
-    </div>
+    <>
+      <strong>{heading}</strong>
+      <div>
+        <input
+          type="checkbox"
+          id={id}
+          name={id}
+          checked={checked}
+          onChange={handleChange}
+        />
+        <label htmlFor={id}>{label}</label>
+      </div>
+    </>
   );
 };
 

@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAppContext } from "../layout";
 import { filterSongs } from "./utils/filtering";
 import { sortingSongs } from "./utils/sorting";
 
-import Checkbox from "@/components/base/Checkbox/Checkbox";
+import CheckboxGroup from "@/components/base/CheckboxGroup/CheckboxGroup";
 import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
 
 import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
@@ -25,6 +25,7 @@ import TextConstants from "@/constants/textConstants";
 import Select from "@/components/base/Select/Select";
 import { sortingOptions } from "@/constants/sortingConstants";
 import Button from "@/components/base/Button/Button";
+import Checkbox from "@/components/base/Checkbox/Checkbox";
 
 const Search = () => {
   // Context
@@ -154,7 +155,7 @@ const Search = () => {
         </Link>
       </header>
       <aside>
-        <Checkbox
+        <CheckboxGroup
           items={DRUMMERS}
           selectedItems={selectedDrummers}
           onSelection={(drummer) =>
@@ -164,7 +165,7 @@ const Search = () => {
           songsData={songsData}
           type="drummer"
         />
-        <Checkbox
+        <CheckboxGroup
           items={ARTISTS}
           selectedItems={selectedArtists}
           onSelection={(artist) =>
@@ -174,7 +175,7 @@ const Search = () => {
           songsData={songsData}
           type="artist"
         />
-        <Checkbox
+        <CheckboxGroup
           items={POLY_TYPES}
           selectedItems={selectedPolytypes}
           onSelection={(polyType) =>
@@ -200,17 +201,13 @@ const Search = () => {
           songsData={songsData}
           type="timeSignature"
         />
-        <strong>Score</strong>
-        <div>
-          <input
-            type="checkbox"
-            id="score"
-            name="score"
-            checked={showScore}
-            onChange={handleShowScore}
-          />
-          <label htmlFor="score">Score</label>
-        </div>
+        <Checkbox
+          checked={showScore}
+          heading="Score"
+          id="score"
+          label="Score"
+          handleChange={handleShowScore}
+        />
       </aside>
       <main>
         <ul>
