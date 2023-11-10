@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { songsData } from "../../../pages/api/songs";
 import Link from "next/link";
-import { PolyrhythmProp, TimeSignatureProp } from "@/models/model";
+import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
 
@@ -80,39 +80,55 @@ const Search = () => {
     setShowScore(e.target.checked);
   };
 
-  const filteredSongsData = songsData.filter((song) => {
-    if (
-      (selectedDrummers.length === 0 ||
-        selectedDrummers.includes(song.drummer)) &&
-      (selectedArtists.length === 0 || selectedArtists.includes(song.artist)) &&
-      (selectedPolytypes.length === 0 ||
-        selectedPolytypes.includes(song.polyType))
-    ) {
+  const sortAlphabetically = (a: SongProp, b: SongProp) => {
+    const titleA = a.title.toLowerCase();
+    const titleB = b.title.toLowerCase();
+
+    if (titleA < titleB) {
+      return -1;
+    }
+    if (titleA > titleB) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const filteredSongsData = songsData
+    .filter((song) => {
       if (
-        selectedPolyrhythms.length === 0 ||
-        selectedPolyrhythms.some(
-          (poly) =>
-            poly.against === song.polyrhythm.against &&
-            poly.base === song.polyrhythm.base
-        )
+        (selectedDrummers.length === 0 ||
+          selectedDrummers.includes(song.drummer)) &&
+        (selectedArtists.length === 0 ||
+          selectedArtists.includes(song.artist)) &&
+        (selectedPolytypes.length === 0 ||
+          selectedPolytypes.includes(song.polyType))
       ) {
         if (
-          selectedTimeSignatures.length === 0 ||
-          selectedTimeSignatures.some(
-            (timeSig) =>
-              timeSig.numerator === song.timeSignature.numerator &&
-              timeSig.denominator === song.timeSignature.denominator
+          selectedPolyrhythms.length === 0 ||
+          selectedPolyrhythms.some(
+            (poly) =>
+              poly.against === song.polyrhythm.against &&
+              poly.base === song.polyrhythm.base
           )
         ) {
-          if (showScore) {
-            return !!song.scoreUrl;
+          if (
+            selectedTimeSignatures.length === 0 ||
+            selectedTimeSignatures.some(
+              (timeSig) =>
+                timeSig.numerator === song.timeSignature.numerator &&
+                timeSig.denominator === song.timeSignature.denominator
+            )
+          ) {
+            if (showScore) {
+              return !!song.scoreUrl;
+            }
+            return true;
           }
-          return true;
         }
       }
-    }
-    return false;
-  });
+      return false;
+    })
+    .sort(sortAlphabetically);
 
   const numberOfResults =
     filteredSongsData.length === 1
