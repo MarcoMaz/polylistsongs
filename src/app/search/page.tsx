@@ -10,29 +10,13 @@ import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
 import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
 import { songsData } from "../../../pages/api/songs";
-
-const DRUMMERS: string[] = [...new Set(songsData.map((song) => song.drummer))];
-const ARTISTS: string[] = [...new Set(songsData.map((song) => song.artist))];
-const POLY_TYPES: string[] = [
-  ...new Set(songsData.map((song) => song.polyType)),
-];
-const POLYRHYTHMS = songsData
-  .map((song) => song.polyrhythm)
-  .filter(
-    (song, index, self) =>
-      index ===
-      self.findIndex((s) => s.against === song.against && s.base === song.base)
-  );
-const TIME_SIGNATURES = songsData
-  .map((song) => song.timeSignature)
-  .filter(
-    (song, index, self) =>
-      index ===
-      self.findIndex(
-        (s) =>
-          s.numerator === song.numerator && s.denominator === song.denominator
-      )
-  );
+import {
+  ARTISTS,
+  DRUMMERS,
+  POLY_TYPES,
+  POLYRHYTHMS,
+  TIME_SIGNATURES,
+} from "@/constants/searchConstants";
 
 const Search = () => {
   const { songs } = useAppContext();
@@ -52,14 +36,12 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
-    // Function to determine sorting order
     const getSortingFunction = () => {
       switch (sortBy) {
         case "titleAtoZ":
           return (a: SongProp, b: SongProp) => sortAlphabetically(a, b);
         case "titleZtoA":
           return (a: SongProp, b: SongProp) => -sortAlphabetically(a, b);
-        // Add other cases for different sorting options if needed
         case "drummerAtoZ":
           return (a: SongProp, b: SongProp) => {
             const drummerA = a.drummer.toLowerCase();
@@ -209,7 +191,7 @@ const Search = () => {
             id="site-search"
             name="q"
             value={searchQuery}
-            onChange={handleSearchChange} // Call the new search input change function
+            onChange={handleSearchChange}
           />
         </div>
         <select
