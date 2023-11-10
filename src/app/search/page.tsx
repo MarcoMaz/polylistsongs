@@ -54,6 +54,31 @@ const Search = () => {
         case "titleZtoA":
           return (a: SongProp, b: SongProp) => -sortAlphabetically(a, b);
         // Add other cases for different sorting options if needed
+        case "drummerAtoZ":
+          return (a: SongProp, b: SongProp) => {
+            const drummerA = a.drummer.toLowerCase();
+            const drummerB = b.drummer.toLowerCase();
+            return drummerA.localeCompare(drummerB);
+          };
+        case "drummerZtoA":
+          return (a: SongProp, b: SongProp) => {
+            const drummerA = a.drummer.toLowerCase();
+            const drummerB = b.drummer.toLowerCase();
+            return drummerB.localeCompare(drummerA);
+          };
+        case "artistAtoZ":
+          return (a: SongProp, b: SongProp) => {
+            const artistA = a.artist.toLowerCase();
+            const artistB = b.artist.toLowerCase();
+            return artistA.localeCompare(artistB);
+          };
+        case "artistZtoA":
+          return (a: SongProp, b: SongProp) => {
+            const artistA = a.artist.toLowerCase();
+            const artistB = b.artist.toLowerCase();
+            return artistB.localeCompare(artistA);
+          };
+
         default:
           return (a: SongProp, b: SongProp) => sortAlphabetically(a, b);
       }
