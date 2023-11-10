@@ -220,7 +220,7 @@ const Search = () => {
           <option value="artistAtoZ">Artist (A-Z)</option>
           <option value="artistZtoA">Artist (Z-A)</option>
         </select>
-        {/* <button>grid</button>
+        <button>grid</button>
         <div>
           <input
             aria-orientation="vertical"
@@ -230,7 +230,7 @@ const Search = () => {
             min="0"
             max="11"
           />
-        </div> */}
+        </div>
         <Link href={"/"}>
           <button>home</button>
         </Link>
