@@ -27,6 +27,7 @@ import { sortingOptions } from "@/constants/sortingConstants";
 import Button from "@/components/base/Button/Button";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 import Slider from "@/components/base/Slider/Slider";
+import SongCard from "@/components/SongCard/SongCard";
 
 const Search = () => {
   // Context
@@ -203,58 +204,9 @@ const Search = () => {
       </aside>
       <main>
         <ul>
-          {filteredSongsData.map(
-            (
-              {
-                title,
-                album,
-                artist,
-                drummer,
-                polyType,
-                year,
-                timestamp,
-                polyrhythm,
-                timeSignature,
-                source,
-                scoreUrl,
-              },
-              index
-            ) => {
-              return (
-                <li key={index}>
-                  <details>
-                    <summary>
-                      {title} by {artist} - {polyrhythm.against}:
-                      {polyrhythm.base}
-                    </summary>
-                    {title} by {artist}, from <em>{album}</em> ({year})<br />
-                    drummer: {drummer} - type: {polyType} <br />
-                    <br />
-                    {polyrhythm.against}:{polyrhythm.base} starting at{" "}
-                    {timestamp} <br />
-                    <br />
-                    Time signature: {timeSignature.numerator} -{" "}
-                    {timeSignature.denominator} <br />
-                    <br />
-                    {scoreUrl && (
-                      <>
-                        score{" "}
-                        <img
-                          src={scoreUrl}
-                          alt="image"
-                          width={20}
-                          height={20}
-                        />{" "}
-                        <br />
-                        <br />
-                      </>
-                    )}
-                    source: {source}
-                  </details>
-                </li>
-              );
-            }
-          )}
+          {filteredSongsData.map((song, index) => (
+            <SongCard key={index} {...song} />
+          ))}
         </ul>
         {filteredSongsData.length === 0 && <Results data={filteredSongsData} />}
       </main>
