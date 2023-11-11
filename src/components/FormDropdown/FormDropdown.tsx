@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 import { InputsProps, PolyrhythmProp } from "@/models/model";
 
-interface DropdownProps {
+interface FormDropdownProps {
   field: string;
   inputFields: InputsProps;
   label?: string;
@@ -9,7 +9,7 @@ interface DropdownProps {
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const Dropdown: React.FunctionComponent<DropdownProps> = ({
+const FormDropdown: React.FunctionComponent<FormDropdownProps> = ({
   field,
   inputFields,
   label,
@@ -49,4 +49,4 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({
   );
 };
 
-export default Dropdown;
+export default FormDropdown;

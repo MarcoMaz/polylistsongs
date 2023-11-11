@@ -1,14 +1,14 @@
 import { ChangeEvent } from "react";
 import { InputsProps, PolyrhythmProp } from "@/models/model";
 
-interface InputTextProps {
+interface FormInputTextProps {
   label?: string;
   field: string;
   inputFields: InputsProps;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputText: React.FunctionComponent<InputTextProps> = ({
+const FormInputText: React.FunctionComponent<FormInputTextProps> = ({
   label,
   field,
   inputFields,
@@ -37,4 +37,4 @@ const InputText: React.FunctionComponent<InputTextProps> = ({
   );
 };
 
-export default InputText;
+export default FormInputText;

@@ -1,8 +1,8 @@
 import { InputsProps, PolyrhythmProp, TimeSignatureProp } from "@/models/model";
 
-import Dropdown from "../base/Dropdown/Dropdown";
-import InputNumber from "../base/InputNumber/InputNumber";
-import InputText from "../base/InputText/InputText";
+import FormDropdown from "../FormDropdown/FormDropdown";
+import FormInputNumber from "../FormInputNumber/FormInputNumber";
+import FormInputText from "../FormInputText/FormInputText";
 import PolyrhythmsInput from "../PolyrhythmsInput/PolyrhythmsInput";
 import TimeSignaturesInput from "../TimeSignaturesInput/TimeSignaturesInput";
 
@@ -56,7 +56,7 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
           case "drummer":
           case "timestamp":
             return (
-              <InputText
+              <FormInputText
                 key={index}
                 field={field}
                 handleChange={handleInputChange}
@@ -66,7 +66,7 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
             );
           case "polyType":
             return (
-              <Dropdown
+              <FormDropdown
                 key={index}
                 label={polyrhythmTypeLabel}
                 field={field}
@@ -77,7 +77,7 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
             );
           case "year":
             return (
-              <InputNumber
+              <FormInputNumber
                 key={field}
                 field={field}
                 inputFields={inputFields}
@@ -120,7 +120,7 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
             );
           case "source":
             return (
-              <Dropdown
+              <FormDropdown
                 key={index}
                 label={sourceLabel}
                 field={field}

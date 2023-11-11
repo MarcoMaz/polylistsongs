@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 import { InputsProps, PolyrhythmProp } from "@/models/model";
 
-interface InputNumberProps {
+interface FormInputNumberProps {
   field: string;
   label?: string;
   inputFields: InputsProps;
@@ -10,7 +10,7 @@ interface InputNumberProps {
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputNumber: React.FunctionComponent<InputNumberProps> = ({
+const FormInputNumber: React.FunctionComponent<FormInputNumberProps> = ({
   field,
   label,
   inputFields,
@@ -42,4 +42,4 @@ const InputNumber: React.FunctionComponent<InputNumberProps> = ({
   );
 };
 
-export default InputNumber;
+export default FormInputNumber;
