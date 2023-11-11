@@ -1,17 +1,19 @@
-import { InputsProps, PolyrhythmProp, TimeSignatureProp } from "@/models/model";
-
 import FormDropdown from "../FormDropdown/FormDropdown";
 import FormInputNumber from "../FormInputNumber/FormInputNumber";
 import FormInputText from "../FormInputText/FormInputText";
 import PolyrhythmsInput from "../PolyrhythmsInput/PolyrhythmsInput";
 import TimeSignaturesInput from "../TimeSignaturesInput/TimeSignaturesInput";
 
+import { InputsProps, PolyrhythmProp, TimeSignatureProp } from "@/models/model";
+
+interface PolyrhythLabelProps {
+  heading: string;
+  against: string;
+}
+
 interface FormSongProps {
   inputFields: InputsProps;
-  polyrhythmLabels: {
-    heading: string;
-    against: string;
-  };
+  polyrhythmLabels: PolyrhythLabelProps;
   polyrhythmTypeLabel: string;
   polyTypes: string[];
   sourceLabel: string;
@@ -68,9 +70,9 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
             return (
               <FormDropdown
                 key={index}
-                label={polyrhythmTypeLabel}
                 field={field}
                 inputFields={inputFields}
+                label={polyrhythmTypeLabel}
                 types={polyTypes}
                 onChange={handleSelectChange("polyType")}
               />
@@ -91,12 +93,12 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
             return (
               <PolyrhythmsInput
                 key={index}
-                headingLabel={polyrhythmLabels.heading}
                 againstLabel={polyrhythmLabels.against}
                 againstValue={
                   (inputFields.polyrhythm as PolyrhythmProp).against
                 }
                 baseValue={(inputFields.polyrhythm as PolyrhythmProp).base}
+                headingLabel={polyrhythmLabels.heading}
                 againstHandleChange={handlePolyrhythmChange("against")}
                 baseHandleChange={handlePolyrhythmChange("base")}
               />
@@ -105,12 +107,12 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
             return (
               <TimeSignaturesInput
                 key={index}
+                denominatorValue={
+                  (inputFields.timeSignature as TimeSignatureProp).denominator
+                }
                 headingLabel={timeSignatureLabel}
                 numeratorValue={
                   (inputFields.timeSignature as TimeSignatureProp).numerator
-                }
-                denominatorValue={
-                  (inputFields.timeSignature as TimeSignatureProp).denominator
                 }
                 numeratorHandleChange={handleTimeSignatureChange("numerator")}
                 denominatorHandleChange={handleTimeSignatureChange(
@@ -122,9 +124,9 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
             return (
               <FormDropdown
                 key={index}
-                label={sourceLabel}
                 field={field}
                 inputFields={inputFields}
+                label={sourceLabel}
                 types={sourceTypes}
                 onChange={handleSelectChange("source")}
               />

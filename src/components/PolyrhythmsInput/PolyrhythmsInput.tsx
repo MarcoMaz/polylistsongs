@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useId } from "react";
 
 interface PolyrhythmsInputProps {
-  headingLabel: string;
   againstLabel: string;
   againstValue: number;
   baseValue: number;
+  headingLabel: string;
   againstHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   baseHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
-  headingLabel,
   againstLabel,
   againstValue,
   baseValue,
+  headingLabel,
   againstHandleChange,
   baseHandleChange,
 }) => {
+  const againstId = useId();
+  const baseId = useId();
+
   return (
     <div>
       <strong>{headingLabel}</strong>
@@ -24,8 +27,8 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
       <div>
         <input
           type="number"
-          id="against"
-          name="against"
+          id={againstId}
+          name={againstId}
           min="2"
           max="30"
           value={againstValue}
@@ -36,8 +39,8 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
       <div>
         <input
           type="number"
-          id="base"
-          name="base"
+          id={baseId}
+          name={baseId}
           min="2"
           max="30"
           value={baseValue}

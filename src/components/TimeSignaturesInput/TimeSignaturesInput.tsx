@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useId } from "react";
 
 interface TimeSignaturesInputProps {
+  denominatorValue: number;
   headingLabel: string;
   numeratorValue: number;
-  denominatorValue: number;
-  numeratorHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   denominatorHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  numeratorHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TimeSignaturesInput: React.FunctionComponent<
   TimeSignaturesInputProps
 > = ({
+  denominatorValue,
   headingLabel,
   numeratorValue,
-  denominatorValue,
-  numeratorHandleChange,
   denominatorHandleChange,
+  numeratorHandleChange,
 }) => {
+  const numeratorId = useId();
+  const denominatorId = useId();
+
   return (
     <div>
       <strong>{headingLabel}</strong>
@@ -24,8 +27,8 @@ const TimeSignaturesInput: React.FunctionComponent<
       <div>
         <input
           type="number"
-          id="timeSignatureNumerator"
-          name="timeSignatureNumerator"
+          id={numeratorId}
+          name={numeratorId}
           min="2"
           max="30"
           value={numeratorValue}
@@ -36,8 +39,8 @@ const TimeSignaturesInput: React.FunctionComponent<
       <div>
         <input
           type="number"
-          id="timeSignatureDenominator"
-          name="timeSignatureDenominator"
+          id={denominatorId}
+          name={denominatorId}
           min="2"
           max="30"
           value={denominatorValue}

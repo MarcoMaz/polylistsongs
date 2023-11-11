@@ -3,8 +3,8 @@ import { InputsProps, PolyrhythmProp } from "@/models/model";
 
 interface FormInputNumberProps {
   field: string;
-  label?: string;
   inputFields: InputsProps;
+  label?: string;
   max: number;
   min: number;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -12,8 +12,8 @@ interface FormInputNumberProps {
 
 const FormInputNumber: React.FunctionComponent<FormInputNumberProps> = ({
   field,
-  label,
   inputFields,
+  label,
   max,
   min,
   handleChange,

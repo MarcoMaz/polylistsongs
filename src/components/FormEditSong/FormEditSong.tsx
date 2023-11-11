@@ -3,48 +3,48 @@ import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
 import Button from "../base/Button/Button";
 import FormSong from "../FormSong/FormSong";
-import TextConstants from "@/constants/textConstants";
 
 import useSongForm from "@/hooks/useSongForm";
 
 import { initialValues } from "@/constants/initialValues";
+import TextConstants from "@/constants/textConstants";
 
 interface FormEditSongProps {
-  selectedSong: SongProp | null;
-  tableFields: string[];
-  songs: SongProp[];
   polyTypes: string[];
+  selectedSong: SongProp | null;
+  songs: SongProp[];
   sourceTypes: string[];
-  setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
+  tableFields: string[];
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
   setSelectedSong: React.Dispatch<SetStateAction<SongProp | "">>;
+  setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
 }
 
 const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
-  selectedSong,
-  tableFields,
-  songs,
   polyTypes,
+  selectedSong,
+  songs,
   sourceTypes,
-  setSongs,
+  tableFields,
   setIsDialogOpen,
   setSelectedSong,
+  setSongs,
 }) => {
   const {
     inputFields,
-    setInputFields,
     handleInputChange,
-    handleSelectChange,
     handlePolyrhythmChange,
+    handleSelectChange,
     handleTimeSignatureChange,
+    setInputFields,
   } = useSongForm(initialValues);
 
   const {
-    polyrhythmTypeLabel,
-    yearLabel,
-    sourceLabel,
     polyrhythmLabels,
+    polyrhythmTypeLabel,
+    sourceLabel,
     timeSignatureLabel,
+    yearLabel,
   } = TextConstants.formEditSong;
 
   useEffect(() => {
@@ -61,6 +61,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         timeSignature,
         source,
       } = selectedSong;
+
       setInputFields({
         title: title,
         album: album,
@@ -76,7 +77,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
     }
   }, [selectedSong, setInputFields]);
 
-  const handleFormSubmit = (event: React.FormEvent) => {
+  function handleFormSubmit(event: React.FormEvent): void {
     event.preventDefault();
     if (selectedSong) {
       const formData = new FormData(event.target as HTMLFormElement);
@@ -120,7 +121,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
       setIsDialogOpen(false);
       setSelectedSong("");
     }
-  };
+  }
 
   return (
     <form onSubmit={handleFormSubmit}>

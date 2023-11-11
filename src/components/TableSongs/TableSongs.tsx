@@ -1,30 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
 import { SetStateAction, useState } from "react";
+
 import Button from "../base/Button/Button";
+
 import { SongProp } from "@/models/model";
 
 interface TableSongsProps {
-  tableFields: string[];
   songs: SongProp[];
-  setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
-  setSelectedSong: React.Dispatch<SetStateAction<SongProp | "">>;
+  tableFields: string[];
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
+  setSelectedSong: React.Dispatch<SetStateAction<SongProp | "">>;
+  setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
 }
 
 const TableSongs: React.FunctionComponent<TableSongsProps> = ({
-  tableFields,
   songs,
-  setSongs,
-  setSelectedSong,
+  tableFields,
   setIsDialogOpen,
+  setSelectedSong,
+  setSongs,
 }) => {
   const [sortBy, setSortBy] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
-  const handleSort = (field: string) => {
-    if (field === "polyrhythm" || field === "timeSignature") {
-      return;
-    }
+  function handleSort(field: string): void {
+    if (field === "polyrhythm" || field === "timeSignature") return;
 
     if (sortBy === field) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
@@ -32,14 +32,14 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
       setSortBy(field);
       setSortOrder("asc");
     }
-  };
+  }
 
-  const sortedSongs = () => {
+  function sortedSongs(): SongProp[] {
     if (sortBy && sortBy !== "polyrhythm" && sortBy !== "timeSignature") {
       return [...songs].sort((a, b) => {
         const valueA = String(a[sortBy as keyof SongProp]);
         const valueB = String(b[sortBy as keyof SongProp]);
-  
+
         if (sortOrder === "asc") {
           return valueA.localeCompare(valueB);
         } else {
@@ -47,18 +47,17 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
         }
       });
     }
-  
     return songs;
-  };
-  
-  const handleButtonClick = (el: number) => {
-    setSongs(songs.filter((a) => a.id !== el));
-  };
+  }
 
-  const handleEditClick = (props: SongProp) => {
+  function handleButtonClick(el: number): void {
+    setSongs(songs.filter((a) => a.id !== el));
+  }
+
+  function handleEditClick(props: SongProp): void {
     setSelectedSong(props);
     setIsDialogOpen(true);
-  };
+  }
 
   return (
     <table>

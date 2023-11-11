@@ -2,16 +2,16 @@ import { ChangeEvent } from "react";
 import { InputsProps, PolyrhythmProp } from "@/models/model";
 
 interface FormInputTextProps {
-  label?: string;
   field: string;
   inputFields: InputsProps;
+  label?: string;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const FormInputText: React.FunctionComponent<FormInputTextProps> = ({
-  label,
   field,
   inputFields,
+  label,
   handleChange,
 }) => {
   let value;

@@ -10,44 +10,44 @@ import useSongForm from "@/hooks/useSongForm";
 import { initialValues } from "@/constants/initialValues";
 
 interface FormAddSongProps {
-  tableFields: string[];
-  songs: SongProp[];
   polyTypes: string[];
+  songs: SongProp[];
   sourceTypes: string[];
-  setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
+  tableFields: string[];
   setIsDialogOpen: React.Dispatch<SetStateAction<boolean>>;
+  setSongs: React.Dispatch<SetStateAction<SongProp[]>>;
 }
 
 const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
-  tableFields,
-  songs,
   polyTypes,
+  songs,
   sourceTypes,
-  setSongs,
+  tableFields,
   setIsDialogOpen,
+  setSongs,
 }) => {
   const {
     inputFields,
-    setInputFields,
     handleInputChange,
-    handleSelectChange,
     handlePolyrhythmChange,
+    handleSelectChange,
     handleTimeSignatureChange,
+    setInputFields,
   } = useSongForm(initialValues);
 
   const {
-    polyrhythmTypeLabel,
-    yearLabel,
-    sourceLabel,
     polyrhythmLabels,
+    polyrhythmTypeLabel,
+    sourceLabel,
     timeSignatureLabel,
+    yearLabel,
   } = TextConstants.formAddSong;
 
-  const generateRandomId = () => {
+  function generateRandomId(): number {
     return Math.floor(Math.random() * 1000);
-  };
+  }
 
-  const handleFormSubmit = (event: React.FormEvent) => {
+  function handleFormSubmit(event: React.FormEvent): void {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const newSong = Object.fromEntries(formData.entries());
@@ -62,7 +62,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     setSongs([...songs, newSongWithID as SongProp]);
     setInputFields(initialValues);
     setIsDialogOpen(false);
-  };
+  }
 
   return (
     <form onSubmit={handleFormSubmit}>
