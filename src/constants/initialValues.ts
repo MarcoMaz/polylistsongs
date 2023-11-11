@@ -1,4 +1,6 @@
-export const initialValues = {
+import { InputsProps } from "@/models/model";
+
+export const initialValues: InputsProps = {
   title: "",
   album: "",
   artist: "",
