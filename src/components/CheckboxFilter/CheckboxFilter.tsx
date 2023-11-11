@@ -1,6 +1,6 @@
 import { SongProp } from "@/models/model";
 
-interface CheckboxGroupProps {
+interface CheckboxFilterProps {
   items: string[];
   label: string;
   selectedItems: string[];
@@ -9,7 +9,7 @@ interface CheckboxGroupProps {
   onSelection: (item: string) => void;
 }
 
-const CheckboxGroup: React.FunctionComponent<CheckboxGroupProps> = ({
+const CheckboxFilterGroup: React.FunctionComponent<CheckboxFilterProps> = ({
   items,
   label,
   selectedItems,
@@ -56,4 +56,4 @@ const CheckboxGroup: React.FunctionComponent<CheckboxGroupProps> = ({
   );
 };
 
-export default CheckboxGroup;
+export default CheckboxFilterGroup;

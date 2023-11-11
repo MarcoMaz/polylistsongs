@@ -8,7 +8,7 @@ import { songsData } from "../../../pages/api/songs";
 
 import Button from "@/components/base/Button/Button";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
-import CheckboxGroup from "@/components/base/CheckboxGroup/CheckboxGroup";
+import CheckboxFilter from "@/components/CheckboxFilter/CheckboxFilter";
 import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
 import InputSearch from "@/components/base/InputSearch/InputSearch";
 import Results from "@/components/Results/Results";
@@ -150,7 +150,7 @@ const Search = () => {
         </Link>
       </header>
       <aside>
-        <CheckboxGroup
+        <CheckboxFilter
           items={DRUMMERS}
           selectedItems={selectedDrummers}
           onSelection={(drummer) =>
@@ -160,7 +160,7 @@ const Search = () => {
           songsData={songsData}
           type="drummer"
         />
-        <CheckboxGroup
+        <CheckboxFilter
           items={ARTISTS}
           selectedItems={selectedArtists}
           onSelection={(artist) =>
@@ -170,7 +170,7 @@ const Search = () => {
           songsData={songsData}
           type="artist"
         />
-        <CheckboxGroup
+        <CheckboxFilter
           items={POLY_TYPES}
           selectedItems={selectedPolytypes}
           onSelection={(polyType) =>
