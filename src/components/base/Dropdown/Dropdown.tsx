@@ -3,14 +3,14 @@ interface OptionProp {
   label: string;
 }
 
-interface SelectProps {
+interface DropdownProps {
   data: OptionProp[];
   id: string;
   value: string;
   handleChange: React.ChangeEventHandler<HTMLSelectElement>;
 }
 
-const Select: React.FunctionComponent<SelectProps> = ({
+const Dropdown: React.FunctionComponent<DropdownProps> = ({
   data,
   id,
   value,
@@ -27,4 +27,4 @@ const Select: React.FunctionComponent<SelectProps> = ({
   );
 };
 
-export default Select;
+export default Dropdown;

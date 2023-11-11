@@ -12,7 +12,7 @@ import CheckboxFilter from "@/components/CheckboxFilter/CheckboxFilter";
 import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
 import InputSearch from "@/components/base/InputSearch/InputSearch";
 import Results from "@/components/Results/Results";
-import Select from "@/components/base/Select/Select";
+import Dropdown from "@/components/base/Dropdown/Dropdown";
 import Slider from "@/components/base/Slider/Slider";
 import SongCard from "@/components/SongCard/SongCard";
 import TextConstants from "@/constants/textConstants";
@@ -137,7 +137,7 @@ const Search = () => {
           value={searchQuery}
           handleChange={handleSearchChange}
         />
-        <Select
+        <Dropdown
           data={sortingOptions}
           id="songs-order"
           value={sortBy}
