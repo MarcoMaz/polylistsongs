@@ -6,14 +6,14 @@ import { useAppContext } from "../layout";
 
 import { songsData } from "../../../pages/api/songs";
 
-import Button from "@/components/base/Button/Button";
-import Checkbox from "@/components/base/Checkbox/Checkbox";
+import Button from "@/components/common/Button/Button";
+import Checkbox from "@/components/common/Checkbox/Checkbox";
 import CheckboxFilter from "@/components/CheckboxFilter/CheckboxFilter";
 import CheckboxPair from "@/components/CheckboxPair/CheckboxPair";
-import InputSearch from "@/components/base/InputSearch/InputSearch";
+import InputSearch from "@/components/common/InputSearch/InputSearch";
 import Results from "@/components/Results/Results";
-import Dropdown from "@/components/base/Dropdown/Dropdown";
-import Slider from "@/components/base/Slider/Slider";
+import Dropdown from "@/components/common/Dropdown/Dropdown";
+import Slider from "@/components/common/Slider/Slider";
 import SongCard from "@/components/SongCard/SongCard";
 import TextConstants from "@/constants/textConstants";
 

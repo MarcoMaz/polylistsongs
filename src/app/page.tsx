@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-import Button from "@/components/base/Button/Button";
-import Dialog from "@/components/base/Dialog/Dialog";
+import Button from "@/components/common/Button/Button";
+import Dialog from "@/components/common/Dialog/Dialog";
 import FormAddSong from "@/components/FormAddSong/FormAddSong";
 import FormEditSong from "@/components/FormEditSong/FormEditSong";
 import TableSongs from "@/components/TableSongs/TableSongs";

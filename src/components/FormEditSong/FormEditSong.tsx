@@ -1,7 +1,7 @@
 import { SetStateAction, useEffect } from "react";
 import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
-import Button from "../base/Button/Button";
+import Button from "../common/Button/Button";
 import FormSong from "../FormSong/FormSong";
 
 import useSongForm from "@/hooks/useSongForm";

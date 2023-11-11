@@ -1,7 +1,7 @@
 import React, { SetStateAction } from "react";
 import { SongProp } from "@/models/model";
 
-import Button from "../base/Button/Button";
+import Button from "../common/Button/Button";
 import FormSong from "../FormSong/FormSong";
 import TextConstants from "@/constants/textConstants";
 
