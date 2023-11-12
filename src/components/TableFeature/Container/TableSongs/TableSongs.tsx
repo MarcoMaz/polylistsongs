@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { SetStateAction, useState } from "react";
 
+import ArrowsIcon from "../../Presentational/ArrowsIcon/ArrowsIcon";
 import Button from "../../../common/Button/Button";
 
 import { SongProp } from "@/models/model";
@@ -65,6 +66,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
         <tr>
           {tableFields.map((field, index) => (
             <th key={index} onClick={() => handleSort(field)}>
+              <ArrowsIcon />
               {field}
             </th>
           ))}
