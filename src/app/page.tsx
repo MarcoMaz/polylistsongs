@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 
 import Button from "../components/common/Button/Button";
 import Dialog from "../components/common/Dialog/Dialog";
@@ -23,7 +22,7 @@ export default function Home() {
   const [selectedSong, setSelectedSong] = useState<SongProp | "">("");
 
   // Text
-  const { buttonSearch, loadingData, noSongs } = TextConstants.app;
+  const { loadingData, noSongs } = TextConstants.app;
   const { tableFields, polyTypes, sources } = TextConstants.tableSong;
 
   function addSongButtonClick() {
@@ -40,9 +39,6 @@ export default function Home() {
       {isDataLoading && <strong>{loadingData}</strong>}
       {songs.length ? (
         <>
-          <Link href="/search">
-            <Button type="button" label={buttonSearch} />
-          </Link>
           <TableSongs
             tableFields={tableFields}
             songs={songs}

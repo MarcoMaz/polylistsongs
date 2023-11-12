@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 import { useAppContext } from "../layout";
 
@@ -53,7 +52,6 @@ const Search = () => {
 
   // Text
   const { gridButton, inputLabel } = TextConstants.searchHeader;
-  const { buttonHome } = TextConstants.app;
 
   useEffect(() => {
     const updatedFilteredSongs = songs
@@ -131,12 +129,12 @@ const Search = () => {
   return (
     <div className="container">
       <header>
-        <Results data={filteredSongsData} />
         <InputSearch
           label={inputLabel}
           value={searchQuery}
           handleChange={handleSearchChange}
         />
+        <Results data={filteredSongsData} />
         <Dropdown
           data={sortingOptions}
           value={sortBy}
@@ -144,9 +142,6 @@ const Search = () => {
         />
         <Button type="button" label={gridButton} />
         <Slider min={0} max={10} orientation="vertical" />
-        <Link href={"/"}>
-          <Button type="button" label={buttonHome} />
-        </Link>
       </header>
       <aside>
         <CheckboxFilter

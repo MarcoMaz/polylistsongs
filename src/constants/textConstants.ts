@@ -1,5 +1,6 @@
 const TextConstants = {
   app: {
+    appName: "PolyListSongs",
     loadingData: "Data is loading...",
     noSongs: "No songs available",
     buttonSearch: "search",

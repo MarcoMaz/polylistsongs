@@ -5,6 +5,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { songsData } from "../../pages/api/songs";
 
+import Header from "../components/Header/Header";
+
 import { SongProp } from "@/models/model";
 
 interface AppContextType {
@@ -63,6 +65,7 @@ export default function RootLayout({
             setSongs,
           }}
         >
+          <Header />
           {children}
         </AppContext.Provider>
       </body>
