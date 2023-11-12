@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-import Button from "@/components/Common/Button/Button";
-import Dialog from "@/components/Common/Dialog/Dialog";
-import FormAddSong from "@/components/TableFeature/Container/FormAddSong/FormAddSong";
-import FormEditSong from "@/components/TableFeature/Container/FormEditSong/FormEditSong";
-import TableSongs from "@/components/TableFeature/Container/TableSongs/TableSongs";
+import Button from "../components/common/Button/Button";
+import Dialog from "../components/common/Dialog/Dialog";
+import FormAddSong from "../components/TableFeature/Container/FormAddSong/FormAddSong";
+import FormEditSong from "../components/TableFeature/Container/FormEditSong/FormEditSong";
+import TableSongs from "../components/TableFeature/Container/TableSongs/TableSongs";
 
 import { SongProp } from "@/models/model";
 

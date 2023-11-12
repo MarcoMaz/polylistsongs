@@ -6,16 +6,16 @@ import { useAppContext } from "../layout";
 
 import { songsData } from "../../../pages/api/songs";
 
-import Button from "@/components/Common/Button/Button";
-import Checkbox from "@/components/Common/Checkbox/Checkbox";
-import CheckboxFilter from "@/components/SearchFeature/Container/CheckboxFilter/CheckboxFilter";
-import CheckboxPair from "@/components/SearchFeature/Container/CheckboxPair/CheckboxPair";
-import InputSearch from "@/components/Common/InputSearch/InputSearch";
-import Results from "@/components/SearchFeature/Presentational/Results/Results";
-import Dropdown from "@/components/Common/Dropdown/Dropdown";
-import Slider from "@/components/Common/Slider/Slider";
-import SongCard from "@/components/SearchFeature/Presentational/SongCard/SongCard";
-import TextConstants from "@/constants/textConstants";
+import Button from "../../components/common/Button/Button";
+import Checkbox from "../../components/common/Checkbox/Checkbox";
+import CheckboxFilter from "../../components/SearchFeature/Container/CheckboxFilter/CheckboxFilter";
+import CheckboxPair from "../../components/SearchFeature/Container/CheckboxPair/CheckboxPair";
+import InputSearch from "../../components/common/InputSearch/InputSearch";
+import Results from "../../components/SearchFeature/Presentational/Results/Results";
+import Dropdown from "../../components/common/Dropdown/Dropdown";
+import Slider from "../../components/common/Slider/Slider";
+import SongCard from "../../components/SearchFeature/Presentational/SongCard/SongCard";
+import TextConstants from "../../constants/textConstants";
 
 import { filterSongs } from "./utils/filtering";
 import { sortingSongs } from "./utils/sorting";
