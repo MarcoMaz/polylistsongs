@@ -1,16 +1,18 @@
+import { useId } from "react";
+
 interface InputSearchProps {
   label: string;
-  id: string;
   value: string;
   handleChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const InputSearch: React.FunctionComponent<InputSearchProps> = ({
   label,
-  id,
   value,
   handleChange,
 }) => {
+  const id = useId();
+  
   return (
     <div>
       <label htmlFor={id}>{label}</label>

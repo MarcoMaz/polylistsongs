@@ -134,18 +134,16 @@ const Search = () => {
         <Results data={filteredSongsData} />
         <InputSearch
           label={inputLabel}
-          id="site-search"
           value={searchQuery}
           handleChange={handleSearchChange}
         />
         <Dropdown
           data={sortingOptions}
-          id="songs-order"
           value={sortBy}
           handleChange={handleSortChange}
         />
         <Button type="button" label={gridButton} />
-        <Slider id="card-grid" min={0} max={10} orientation="vertical" />
+        <Slider min={0} max={10} orientation="vertical" />
         <Link href={"/"}>
           <Button type="button" label={buttonHome} />
         </Link>
@@ -200,7 +198,6 @@ const Search = () => {
         <Checkbox
           checked={showScore}
           heading={TextConstants.searchFilters[5]}
-          id="score"
           label={SHOW_SCORE_LABEL}
           handleChange={handleShowScore}
         />

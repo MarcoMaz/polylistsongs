@@ -36,9 +36,9 @@ const FormDropdown: React.FunctionComponent<FormDropdownProps> = ({
         onChange={onChange}
         value={value as string}
       >
-        {types.map((type, idx) => {
+        {types.map((type, index) => {
           return (
-            <option key={idx} value={type}>
+            <option key={index} value={type}>
               {type}
             </option>
           );

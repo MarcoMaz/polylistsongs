@@ -38,20 +38,24 @@ const CheckboxFilterGroup: React.FunctionComponent<CheckboxFilterProps> = ({
   return (
     <div>
       <strong>{heading}</strong>
-      {items.map((item, index) => (
-        <div key={index}>
-          <input
-            type="checkbox"
-            id={`${heading}${index}`}
-            name={`${heading}${index}`}
-            checked={selectedItems.includes(item)}
-            onChange={() => onSelection(item)}
-          />
-          <label htmlFor={`${heading}${index}`}>
-            {item} ({itemsCount[item] || 0})
-          </label>
-        </div>
-      ))}
+      {items.map((item, index) => {
+        const id = `${heading}${index}`;
+
+        return (
+          <div key={index}>
+            <input
+              type="checkbox"
+              id={id}
+              name={id}
+              checked={selectedItems.includes(item)}
+              onChange={() => onSelection(item)}
+            />
+            <label htmlFor={id}>
+              {item} ({itemsCount[item] || 0})
+            </label>
+          </div>
+        );
+      })}
     </div>
   );
 };

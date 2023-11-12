@@ -1,9 +1,8 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, useId } from "react";
 
 interface CheckboxProps {
   checked: boolean;
   heading: string;
-  id: string;
   label: string;
   handleChange: ChangeEventHandler<HTMLInputElement>;
 }
@@ -11,10 +10,11 @@ interface CheckboxProps {
 const Checkbox: React.FunctionComponent<CheckboxProps> = ({
   checked,
   heading,
-  id,
   label,
   handleChange,
 }) => {
+  const id = useId();
+
   return (
     <>
       <strong>{heading}</strong>

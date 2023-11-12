@@ -1,16 +1,18 @@
+import { useId } from "react";
+
 interface SliderProps {
-  id: string;
   min: number;
   max: number;
   orientation: "horizontal" | "vertical";
 }
 
 const Slider: React.FunctionComponent<SliderProps> = ({
-  id,
   min,
   max,
   orientation = "horizontal",
 }) => {
+  const id = useId();
+  
   return (
     <div>
       <input
