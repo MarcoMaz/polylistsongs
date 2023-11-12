@@ -68,6 +68,13 @@ const TextConstants = {
   searchResults: {
     oneSongMessage: "1 song found",
     songMessage: "songs found",
+    songCard: {
+      drumsLabel: "on drums",
+      tableHeading: "Polyrhythm Information",
+      tableFields: ["Polyrhythm", "Starting at", "Type", "Time Signature"],
+      scoreHeading: "Score",
+      sourceHeading: "Source",
+    },
   },
 };
 
