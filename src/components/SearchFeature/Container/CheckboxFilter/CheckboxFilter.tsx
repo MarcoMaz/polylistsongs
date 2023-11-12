@@ -2,7 +2,7 @@ import { SongProp } from "@/models/model";
 
 interface CheckboxFilterProps {
   items: string[];
-  label: string;
+  heading: string;
   selectedItems: string[];
   songsData: SongProp[];
   type: keyof SongProp;
@@ -11,7 +11,7 @@ interface CheckboxFilterProps {
 
 const CheckboxFilterGroup: React.FunctionComponent<CheckboxFilterProps> = ({
   items,
-  label,
+  heading,
   selectedItems,
   songsData,
   type,
@@ -37,17 +37,17 @@ const CheckboxFilterGroup: React.FunctionComponent<CheckboxFilterProps> = ({
 
   return (
     <div>
-      <strong>{label}</strong>
+      <strong>{heading}</strong>
       {items.map((item, index) => (
         <div key={index}>
           <input
             type="checkbox"
-            id={`${label}${index}`}
-            name={`${label}${index}`}
+            id={`${heading}${index}`}
+            name={`${heading}${index}`}
             checked={selectedItems.includes(item)}
             onChange={() => onSelection(item)}
           />
-          <label htmlFor={`${label}${index}`}>
+          <label htmlFor={`${heading}${index}`}>
             {item} ({itemsCount[item] || 0})
           </label>
         </div>

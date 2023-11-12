@@ -30,3 +30,5 @@ export const TIME_SIGNATURES = songsData
           s.numerator === song.numerator && s.denominator === song.denominator
       )
   );
+
+export const SHOW_SCORE_LABEL = "Score"

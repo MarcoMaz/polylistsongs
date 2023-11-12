@@ -1,7 +1,7 @@
 import React, { SetStateAction } from "react";
 import { SongProp } from "@/models/model";
 
-import Button from "../../../Common/Button/Button";
+import Button from "../../../common/Button/Button";
 import FormSong from "../../Presentational/FormSong/FormSong";
 import TextConstants from "../../../../constants/textConstants";
 
@@ -41,6 +41,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
     sourceLabel,
     timeSignatureLabel,
     yearLabel,
+    buttonCTA,
   } = TextConstants.formAddSong;
 
   function generateRandomId(): number {
@@ -81,7 +82,7 @@ const FormAddSong: React.FunctionComponent<FormAddSongProps> = ({
         handleTimeSignatureChange={handleTimeSignatureChange}
         yearLabel={yearLabel}
       />
-      <Button type="submit" label="send" />
+      <Button type="submit" label={buttonCTA} />
     </form>
   );
 };

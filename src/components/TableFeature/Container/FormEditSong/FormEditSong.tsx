@@ -1,7 +1,7 @@
 import { SetStateAction, useEffect } from "react";
 import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
-import Button from "../../../Common/Button/Button";
+import Button from "../../../common/Button/Button";
 import FormSong from "../../Presentational/FormSong/FormSong";
 
 import useSongForm from "@/hooks/useSongForm";
@@ -45,6 +45,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
     sourceLabel,
     timeSignatureLabel,
     yearLabel,
+    buttonCTA
   } = TextConstants.formEditSong;
 
   useEffect(() => {
@@ -140,7 +141,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         handleTimeSignatureChange={handleTimeSignatureChange}
         yearLabel={yearLabel}
       />
-      <Button type="submit" label="save" />
+      <Button type="submit" label={buttonCTA} />
     </form>
   );
 };

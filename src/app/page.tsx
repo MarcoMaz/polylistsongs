@@ -13,11 +13,6 @@ import { SongProp } from "@/models/model";
 import { useAppContext } from "./layout";
 
 import TextConstants from "@/constants/textConstants";
-import {
-  polyTypes,
-  sourceTypes,
-  tableFields,
-} from "@/constants/tableConstants";
 
 export default function Home() {
   // Context
@@ -29,6 +24,7 @@ export default function Home() {
 
   // Text
   const { buttonSearch, loadingData, noSongs } = TextConstants.app;
+  const { tableFields, polyTypes, sources } = TextConstants.tableSong;
 
   function addSongButtonClick() {
     setIsDialogOpen(true);
@@ -62,7 +58,7 @@ export default function Home() {
                 selectedSong={selectedSong}
                 songs={songs}
                 polyTypes={polyTypes}
-                sourceTypes={sourceTypes}
+                sourceTypes={sources}
                 setSongs={setSongs}
                 setIsDialogOpen={setIsDialogOpen}
                 setSelectedSong={setSelectedSong}
@@ -72,7 +68,7 @@ export default function Home() {
                 tableFields={tableFields}
                 songs={songs}
                 polyTypes={polyTypes}
-                sourceTypes={sourceTypes}
+                sourceTypes={sources}
                 setSongs={setSongs}
                 setIsDialogOpen={setIsDialogOpen}
               />

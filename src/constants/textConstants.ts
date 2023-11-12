@@ -3,7 +3,33 @@ const TextConstants = {
     loadingData: "Data is loading...",
     noSongs: "No songs available",
     buttonSearch: "search",
-    buttonHome: "home"
+    buttonHome: "home",
+  },
+  tableSong: {
+    tableFields: [
+      "title",
+      "album",
+      "artist",
+      "drummer",
+      "polyType",
+      "year",
+      "timestamp",
+      "polyrhythm",
+      "timeSignature",
+      "source",
+      "scoreUrl",
+    ],
+    polyTypes: ["groove", "section", "fill"],
+    sources: [
+      "Mike Portnoy Book",
+      "Frank Zappa Book",
+      "Modern Drummer Collection",
+      "Virgil Donati Book",
+      "Vinnie Colaiuta Book",
+      "My Archive",
+      "Minneman Book",
+      "Virgil Donati Book",
+    ],
   },
   formAddSong: {
     polyrhythmTypeLabel: "Type:",
@@ -14,6 +40,7 @@ const TextConstants = {
       against: "against",
     },
     timeSignatureLabel: "Time Signature",
+    buttonCTA: "add",
   },
   formEditSong: {
     polyrhythmTypeLabel: "Polyrhythmic type:",
@@ -24,11 +51,24 @@ const TextConstants = {
       against: "against",
     },
     timeSignatureLabel: "Time Signature",
+    buttonCTA: "save",
   },
   searchHeader: {
     inputLabel: "Search the site:",
-    gridButton: "grid"
-  }
+    gridButton: "grid",
+  },
+  searchFilters: [
+    "Drummers",
+    "Artists",
+    "Types",
+    "Polyrhythms",
+    "Time Signatures",
+    "Show score",
+  ],
+  searchResults: {
+    oneSongMessage: "1 song found",
+    songMessage: "songs found",
+  },
 };
 
 export default TextConstants;

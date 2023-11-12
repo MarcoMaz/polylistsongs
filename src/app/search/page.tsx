@@ -28,6 +28,7 @@ import {
   POLY_TYPES,
   POLYRHYTHMS,
   TIME_SIGNATURES,
+  SHOW_SCORE_LABEL,
 } from "@/constants/searchConstants";
 import { sortingOptions } from "@/constants/sortingConstants";
 
@@ -156,7 +157,7 @@ const Search = () => {
           onSelection={(drummer) =>
             handleSelection(drummer, setSelectedDrummers, selectedDrummers)
           }
-          label="Drummers"
+          heading={TextConstants.searchFilters[0]}
           songsData={songsData}
           type="drummer"
         />
@@ -166,7 +167,7 @@ const Search = () => {
           onSelection={(artist) =>
             handleSelection(artist, setSelectedArtists, selectedArtists)
           }
-          label="Artists"
+          heading={TextConstants.searchFilters[1]}
           songsData={songsData}
           type="artist"
         />
@@ -176,13 +177,13 @@ const Search = () => {
           onSelection={(polyType) =>
             handleSelection(polyType, setSelectedPolytypes, selectedPolytypes)
           }
-          label="Types"
+          heading={TextConstants.searchFilters[2]}
           songsData={songsData}
           type="polyType"
         />
         <CheckboxPair
           data={POLYRHYTHMS}
-          heading="Polyrhythms"
+          heading={TextConstants.searchFilters[3]}
           selectedData={selectedPolyrhythms}
           onSelection={handlePolyrhythmSelection}
           songsData={songsData}
@@ -190,7 +191,7 @@ const Search = () => {
         />
         <CheckboxPair
           data={TIME_SIGNATURES}
-          heading="Time Signatures"
+          heading={TextConstants.searchFilters[4]}
           selectedData={selectedTimeSignatures}
           onSelection={handleTimeSignatureSelection}
           songsData={songsData}
@@ -198,9 +199,9 @@ const Search = () => {
         />
         <Checkbox
           checked={showScore}
-          heading="Score"
+          heading={TextConstants.searchFilters[5]}
           id="score"
-          label="Score"
+          label={SHOW_SCORE_LABEL}
           handleChange={handleShowScore}
         />
       </aside>

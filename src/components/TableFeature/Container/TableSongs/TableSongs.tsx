@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { SetStateAction, useState } from "react";
 
-import Button from "../../../Common/Button/Button";
+import Button from "../../../common/Button/Button";
 
 import { SongProp } from "@/models/model";
 

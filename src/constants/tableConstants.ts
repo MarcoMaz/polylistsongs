@@ -1,16 +1,16 @@
-export const tableFields: string[] = [
-  "title",
-  "album",
-  "artist",
-  "drummer",
-  "polyType",
-  "year",
-  "timestamp",
-  "polyrhythm",
-  "timeSignature",
-  "source",
-  "scoreUrl",
-];
+// export const tableFields: string[] = [
+//   "title",
+//   "album",
+//   "artist",
+//   "drummer",
+//   "polyType",
+//   "year",
+//   "timestamp",
+//   "polyrhythm",
+//   "timeSignature",
+//   "source",
+//   "scoreUrl",
+// ];
 
 export const polyTypes: string[] = ["groove", "section", "fill"];
 
