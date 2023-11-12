@@ -90,6 +90,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
             </td>
             <td>
               <Button
+                icon="edit"
                 type="button"
                 label="edit"
                 onClick={() => handleEditClick(props)}
@@ -97,6 +98,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
             </td>
             <td>
               <Button
+                icon="trash"
                 type="button"
                 label="remove"
                 onClick={() => handleButtonClick(props.id)}

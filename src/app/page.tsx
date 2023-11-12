@@ -23,7 +23,8 @@ export default function Home() {
 
   // Text
   const { loadingData, noSongs } = TextConstants.app;
-  const { tableFields, polyTypes, sources } = TextConstants.tableSong;
+  const { addSongButton, tableFields, polyTypes, sources } =
+    TextConstants.tableSong;
 
   function addSongButtonClick() {
     setIsDialogOpen(true);
@@ -46,7 +47,12 @@ export default function Home() {
             setSelectedSong={setSelectedSong}
             setIsDialogOpen={setIsDialogOpen}
           />
-          <Button type="button" label="+" onClick={addSongButtonClick} />
+          <Button
+            type="button"
+            icon="plus"
+            label={addSongButton}
+            onClick={addSongButtonClick}
+          />
           <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
             {selectedSong ? (
               <FormEditSong

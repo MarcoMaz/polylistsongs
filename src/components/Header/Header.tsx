@@ -15,6 +15,7 @@ const Header = () => {
       <h1>{appName}</h1>
       <Link href={pathname === "/" ? "/search" : "/"}>
         <Button
+          icon={pathname === "/" ? "table" : "search"}
           type="button"
           label={pathname === "/" ? buttonSearch : buttonHome}
         />

@@ -140,7 +140,8 @@ const Search = () => {
           value={sortBy}
           handleChange={handleSortChange}
         />
-        <Button type="button" label={gridButton} />
+        <Button type="button" icon="filter" label="filter" />
+        <Button type="button" icon="grid" label={gridButton} />
         <Slider min={0} max={10} orientation="vertical" />
       </header>
       <aside>

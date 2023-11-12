@@ -31,6 +31,7 @@ const TextConstants = {
       "Minneman Book",
       "Virgil Donati Book",
     ],
+    addSongButton: "add song"
   },
   formAddSong: {
     polyrhythmTypeLabel: "Type:",
