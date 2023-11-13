@@ -66,8 +66,10 @@ export default function RootLayout({
             setSongs,
           }}
         >
-          <Header />
-          {children}
+          <div className="App">
+            <Header />
+            {children}
+          </div>
         </AppContext.Provider>
       </body>
     </html>
