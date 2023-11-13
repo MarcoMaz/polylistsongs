@@ -40,18 +40,19 @@ export default function Home() {
       {isDataLoading && <strong>{loadingData}</strong>}
       {songs.length ? (
         <>
+          <Button
+            type="button"
+            mode="primary"
+            icon="plus"
+            label={addSongButton}
+            onClick={addSongButtonClick}
+          />
           <TableSongs
             tableFields={tableFields}
             songs={songs}
             setSongs={setSongs}
             setSelectedSong={setSelectedSong}
             setIsDialogOpen={setIsDialogOpen}
-          />
-          <Button
-            type="button"
-            icon="plus"
-            label={addSongButton}
-            onClick={addSongButtonClick}
           />
           <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
             {selectedSong ? (
