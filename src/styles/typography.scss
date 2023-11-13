@@ -1,0 +1,52 @@
+html {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+body {
+  font-style: normal;
+  letter-spacing: 0.04em;
+}
+
+// reset
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button,
+ul {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+h1 {
+// style here
+}
+
+h2 {
+// style here
+}
+
+p {
+// style here
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: 0;
+}
+
+li {
+  display: flex;
+}
