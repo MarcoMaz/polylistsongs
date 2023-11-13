@@ -19,7 +19,7 @@ interface ButtonProps {
     | "table"
     | "trash"
     | "x";
-  label: string;
+  label?: string;
   type: "button" | "submit";
   onClick?: () => void;
 }

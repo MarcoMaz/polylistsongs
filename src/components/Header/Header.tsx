@@ -17,7 +17,6 @@ const Header = () => {
         <Button
           icon={pathname === "/" ? "table" : "search"}
           type="button"
-          label={pathname === "/" ? buttonSearch : buttonHome}
         />
       </Link>
     </header>

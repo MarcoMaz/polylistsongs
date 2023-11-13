@@ -8,6 +8,8 @@
 @import "./typography.scss";
 @import "./basics.scss";
 
+@import "../components/Header/Header.scss";
+
 /* Grid */
 .container {
   display: grid;
