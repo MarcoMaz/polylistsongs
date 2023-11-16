@@ -61,7 +61,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
   }
 
   return (
-    <table>
+    <table className="tableSongs">
       <thead>
         <tr>
           {tableFields.map((field, index) => (
