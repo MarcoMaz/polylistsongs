@@ -23,7 +23,6 @@ const SongCard: React.FunctionComponent<SongProp> = ({
   const polyrhythmLabel = `${polyrhythm.against}:${polyrhythm.base}`;
   const albumLabel = `${album} (${year})`;
   const drummerLabel = `${drummer} ${drumsLabel}`;
-  const timeSignatureLabel = `${timeSignature.numerator} - ${timeSignature.denominator}`;
 
   return (
     <li>
@@ -59,7 +58,12 @@ const SongCard: React.FunctionComponent<SongProp> = ({
               </tr>
               <tr>
                 <td>{tableFields[3]}</td>
-                <td>{timeSignatureLabel}</td>
+                <td>
+                  <div className="time-signature">
+                    <span>{timeSignature.numerator}</span>
+                    <span>{timeSignature.denominator}</span>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>

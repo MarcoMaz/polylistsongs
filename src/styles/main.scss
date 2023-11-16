@@ -10,31 +10,3 @@
 
 @import "../components/Header/Header.scss";
 @import "../components/TableFeature/Container/TableSongs/TableSongs.scss";
-
-/* Grid */
-.container {
-  display: grid;
-  grid-template-areas:
-    "header header"
-    "aside main";
-  grid-template-columns: repeat(12, 1fr);
-  height: 100vh;
-}
-
-header {
-  grid-area: header;
-  grid-column: span 12;
-  grid-row: span 2;
-}
-
-aside {
-  grid-area: aside;
-  grid-column: span 3;
-  grid-row: span 10;
-}
-
-main {
-  grid-area: main;
-  grid-column: span 9;
-  grid-row: span 10;
-}
