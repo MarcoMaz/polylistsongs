@@ -66,10 +66,13 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
         <tr>
           {tableFields.map((field, index) => (
             <th key={index} onClick={() => handleSort(field)}>
+              <span>{field}</span>
               <ArrowsIcon />
-              {field}
             </th>
           ))}
+          <th>
+            <span></span>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -79,13 +82,18 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
             <td>{props.album}</td>
             <td>{props.artist}</td>
             <td>{props.drummer}</td>
-            <td>{props.polyType}</td>
-            <td>{props.year}</td>
-            <td>{props.timestamp}</td>
-            <td>{`${props.polyrhythm.against}:${props.polyrhythm.base}`}</td>
-            <td>{`${props.timeSignature.numerator}/${props.timeSignature.denominator}`}</td>
+            <td className="col-s">{props.polyType}</td>
+            <td className="col-s">{props.year}</td>
+            <td className="col-s">{props.timestamp}</td>
+            <td className="col-s">{`${props.polyrhythm.against}:${props.polyrhythm.base}`}</td>
+            <td className="col-s">
+              <div className="ts">
+                <span>{props.timeSignature.numerator}</span>
+                <span>{props.timeSignature.denominator}</span>
+              </div>
+            </td>
             <td>{props.source}</td>
-            <td>
+            <td className="col-s">
               {props.scoreUrl ? (
                 <img src={props.scoreUrl} alt="image" width={30} height={30} />
               ) : null}
@@ -94,15 +102,11 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               <Button
                 icon="edit"
                 type="button"
-                label="edit"
                 onClick={() => handleEditClick(props)}
               />
-            </td>
-            <td>
               <Button
                 icon="trash"
                 type="button"
-                label="remove"
                 onClick={() => handleButtonClick(props.id)}
               />
             </td>

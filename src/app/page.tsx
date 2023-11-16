@@ -7,6 +7,8 @@ import FormAddSong from "../components/TableFeature/Container/FormAddSong/FormAd
 import FormEditSong from "../components/TableFeature/Container/FormEditSong/FormEditSong";
 import TableSongs from "../components/TableFeature/Container/TableSongs/TableSongs";
 
+import '../styles/main.scss';
+
 import { SongProp } from "@/models/model";
 
 import { useAppContext } from "./layout";
@@ -42,7 +44,6 @@ export default function Home() {
         <>
           <Button
             type="button"
-            mode="primary"
             icon="plus"
             label={addSongButton}
             onClick={addSongButtonClick}

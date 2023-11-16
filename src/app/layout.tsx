@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
-import '../styles/main.scss';
+// import '../styles/main.scss';
 
 import { Inter } from "next/font/google";
 import { songsData } from "../../pages/api/songs";
