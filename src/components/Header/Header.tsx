@@ -6,19 +6,23 @@ import Button from "../common/Button/Button";
 import TextConstants from "@/constants/textConstants";
 
 const Header = () => {
-  const { appName, buttonHome, buttonSearch } = TextConstants.app;
+  const { appName } = TextConstants.app;
 
   const pathname = usePathname();
 
   return (
-    <header>
+    <header className="header">
       <h1>{appName}</h1>
-      <Link href={pathname === "/" ? "/search" : "/"}>
+      <div className="header__toggle">
+        <Link href={pathname === "/" ? "/search" : "/"}>
+          <Button icon={pathname === "/" ? "search" : "table"} type="button" />
+        </Link>
         <Button
-          icon={pathname === "/" ? "search" : "table"}
+          icon={pathname === "/" ? "table" : "search"}
+          isDisabled
           type="button"
         />
-      </Link>
+      </div>
     </header>
   );
 };

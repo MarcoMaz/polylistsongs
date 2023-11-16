@@ -13,6 +13,13 @@
     background-color: $medium-gray-active;
   }
 
+  &:disabled {
+    color: mix($white, $light-gray, 70%);
+    cursor: default;
+    background-color: mix($backgroundColor, $medium-gray, 90%);
+    border: 1px solid mix($white, $dark-gray, 80%);
+  }
+
   // Colors
   &.-integrated {
     background-color: $white;

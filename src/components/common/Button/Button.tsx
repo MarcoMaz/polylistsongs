@@ -19,6 +19,7 @@ interface ButtonProps {
     | "table"
     | "trash"
     | "x";
+  isDisabled?: boolean;
   label?: string;
   type: "button" | "submit";
   variant?: "integrated" | "CTA" | "warning";
@@ -27,6 +28,7 @@ interface ButtonProps {
 
 const Button: React.FunctionComponent<ButtonProps> = ({
   icon,
+  isDisabled,
   label,
   type,
   variant,
@@ -37,7 +39,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   }${label && !icon ? " -text" : ""}${label && icon ? " -text-icon" : ""}`;
 
   return (
-    <button type={type} className={buttonClass} onClick={onClick}>
+    <button disabled={isDisabled} type={type} className={buttonClass} onClick={onClick}>
       {icon === "edit" && <Edit />}
       {icon === "filter" && <Filter />}
       {icon === "grid" && <Grid />}
