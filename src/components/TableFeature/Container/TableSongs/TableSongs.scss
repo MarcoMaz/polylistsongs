@@ -65,24 +65,28 @@ table {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
-  
+
     span:first-of-type {
       border-bottom: 2px solid $black;
       text-align: center;
       width: 1rem;
     }
-  }  
-}
+  }
 
-// FIX
-.col-s {
-  min-width: 11rem;
-}
+  & .col-xxs {
+    min-width: 7rem;
+  }
 
+  & .col-xs {
+    min-width: 10rem;
+  }
+
+  & .col-s {
+    min-width: 12rem;
+  }
+}
 
 /// TODO
-/// Different class col-xs, col-s etc.
-/// Proper names for table head
 /// Switch Logo Upper right
 /// Fix Normalize bottom color
 /// Buttons styling
