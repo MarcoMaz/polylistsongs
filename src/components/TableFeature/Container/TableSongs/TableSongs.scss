@@ -59,26 +59,26 @@ table {
       margin-right: 1rem;
     }
   }
+
+  .time-signature {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+  
+    span:first-of-type {
+      border-bottom: 2px solid $black;
+      text-align: center;
+      width: 1rem;
+    }
+  }  
 }
 
 // FIX
-
 .col-s {
   min-width: 11rem;
 }
 
-.ts {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  span:first-of-type {
-    border-bottom: 2px solid black;
-    width: 1rem;
-    text-align: center;
-  }
-}
 
 /// TODO
 /// Different class col-xs, col-s etc.

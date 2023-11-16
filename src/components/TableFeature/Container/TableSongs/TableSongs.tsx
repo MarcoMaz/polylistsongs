@@ -87,7 +87,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
             <td className="col-s">{props.timestamp}</td>
             <td className="col-s">{`${props.polyrhythm.against}:${props.polyrhythm.base}`}</td>
             <td className="col-s">
-              <div className="ts">
+              <div className="time-signature">
                 <span>{props.timeSignature.numerator}</span>
                 <span>{props.timeSignature.denominator}</span>
               </div>
