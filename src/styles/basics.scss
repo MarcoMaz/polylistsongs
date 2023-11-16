@@ -59,6 +59,10 @@ main {
   grid-area: main;
   grid-column: span 9;
   grid-row: span 10;
+  // overflow-x: scroll;
+}
+
+section {
   overflow-x: scroll;
 }
 
@@ -96,4 +100,8 @@ table {
       width: 1rem;
     }
   }
+}
+
+.add-song {
+  margin-bottom: 1rem;
 }

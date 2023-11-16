@@ -44,18 +44,21 @@ export default function Home() {
         <>
           <Button
             type="button"
+            additionalClassnames={["add-song"]}
             icon="plus"
             label={addSongButton}
             variant="CTA"
             onClick={addSongButtonClick}
           />
-          <TableSongs
-            tableFields={tableFields}
-            songs={songs}
-            setSongs={setSongs}
-            setSelectedSong={setSelectedSong}
-            setIsDialogOpen={setIsDialogOpen}
-          />
+          <section>
+            <TableSongs
+              tableFields={tableFields}
+              songs={songs}
+              setSongs={setSongs}
+              setSelectedSong={setSelectedSong}
+              setIsDialogOpen={setIsDialogOpen}
+            />
+          </section>
           <Dialog isOpen={isDialogOpen} onClose={closeDialog}>
             {selectedSong ? (
               <FormEditSong
