@@ -10,6 +10,7 @@ import {
 } from "react-feather";
 
 interface ButtonProps {
+  additionalClassnames?: string[];
   icon?:
     | "edit"
     | "filter"
@@ -27,6 +28,7 @@ interface ButtonProps {
 }
 
 const Button: React.FunctionComponent<ButtonProps> = ({
+  additionalClassnames,
   icon,
   isDisabled,
   label,
@@ -34,9 +36,13 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   variant,
   onClick,
 }) => {
-  const buttonClass = `button${variant ? ` -${variant}` : ""}${
+  const baseClass = `button${variant ? ` -${variant}` : ""}${
     icon && !label ? " -icon" : ""
   }${label && !icon ? " -text" : ""}${label && icon ? " -text-icon" : ""}`;
+
+  const buttonClass = additionalClassnames
+    ? `${baseClass} ${additionalClassnames.join(' ')}`
+    : baseClass;
 
   return (
     <button disabled={isDisabled} type={type} className={buttonClass} onClick={onClick}>
