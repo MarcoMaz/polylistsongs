@@ -3,6 +3,7 @@ main {
 }
 
 table {
+  background-color: white;
   border: 1px solid $gray;
   border-collapse: separate;
   border-radius: 10px;
@@ -87,5 +88,4 @@ table {
 }
 
 /// TODO
-/// Fix Normalize bottom color
 /// Buttons styling

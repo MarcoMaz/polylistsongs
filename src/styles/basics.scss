@@ -11,13 +11,16 @@ html {
   max-width: 100%;
 }
 
+html {
+  background-color: $backgroundColor;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {
   display: none; /* Chrome */
 }
 
 body {
-  background-color: $backgroundColor;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
