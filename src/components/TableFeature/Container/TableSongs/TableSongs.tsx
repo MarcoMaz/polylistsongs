@@ -99,18 +99,20 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               ) : null}
             </td>
             <td>
-              <Button
-                icon="edit"
-                type="button"
-                variant="integrated"
-                onClick={() => handleEditClick(props)}
-              />
-              <Button
-                icon="trash"
-                type="button"
-                variant="warning"
-                onClick={() => handleButtonClick(props.id)}
-              />
+              <div className="tableSongs__CTA">
+                <Button
+                  icon="edit"
+                  type="button"
+                  variant="integrated"
+                  onClick={() => handleEditClick(props)}
+                />
+                <Button
+                  icon="trash"
+                  type="button"
+                  variant="warning"
+                  onClick={() => handleButtonClick(props.id)}
+                />
+              </div>
             </td>
           </tr>
         ))}
