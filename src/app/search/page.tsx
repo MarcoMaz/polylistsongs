@@ -51,7 +51,7 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Text
-  const { gridButton, inputLabel } = TextConstants.searchHeader;
+  const { inputLabel } = TextConstants.searchHeader;
 
   useEffect(() => {
     const updatedFilteredSongs = songs
@@ -140,8 +140,8 @@ const Search = () => {
           value={sortBy}
           handleChange={handleSortChange}
         />
-        <Button type="button" icon="filter" label="filter" />
-        <Button type="button" icon="grid" label={gridButton} />
+        <Button type="button" icon="filter" label="filter" variant="integrated"/>
+        <Button type="button" icon="grid" variant="integrated"/>
         <Slider min={0} max={10} orientation="vertical" />
       </header>
       <aside>

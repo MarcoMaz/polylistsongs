@@ -26,7 +26,7 @@ const Dialog: React.FunctionComponent<DialogProps> = ({
   if (!isOpen) return null;
   return ReactDOM.createPortal(
     <dialog ref={dialogRef} aria-modal="true" aria-labelledby="dialog-title">
-      <Button type="button" label="x" onClick={onClose}/>
+      <Button type="button" label="x" onClick={onClose} />
       {children}
     </dialog>,
     document.body

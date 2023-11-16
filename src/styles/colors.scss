@@ -6,6 +6,18 @@ $blue: #2668ba;
 $blue-hover: darken($blue, 10%);
 $blue-active: darken($blue-hover, 10%);
 
-$gray: #b2b2b2;
-$gray-hover: darken($gray, 10%);
-$gray-active: darken($gray-hover, 10%);
+$light-gray: #b2b2b2;
+$light-gray-hover: darken($light-gray, 10%);
+$light-gray-active: darken($light-gray-hover, 10%);
+
+$medium-gray: lighten($light-gray, 30%);
+$medium-gray-hover: lighten($light-gray, 20%);
+$medium-gray-active: lighten($light-gray, 10%);
+
+$dark-gray: darken($light-gray, 40%);
+$dark-gray-hover: lighten($dark-gray, 50%);
+$dark-gray-active: darken($dark-gray, 10%);
+
+$warning: #ff7f00;
+$warning-hover: darken($warning, 10%);
+$warning-active: darken($warning-hover, 10%);

@@ -1,6 +1,6 @@
 .tableSongs {
   tbody tr:hover {
-    background-color: lighten($gray, 20%);
+    background-color: $medium-gray;
   }
 
   th {
@@ -16,7 +16,7 @@
 
     &:not(:first-child):not(:last-child):hover::before,
     &:not(:last-child):hover::after {
-      background-color: $gray-hover;
+      background-color: $light-gray-hover;
       content: "";
       height: 60%;
       position: absolute;
@@ -51,5 +51,9 @@
 }
 
 /// TODO
-/// Fix Dialog and names on top
 /// Buttons styling (default, integrated, cta, warning)
+/// Add disabled variant and both view buttons
+/// Add cancel on dialog
+/// Flex buttons in table
+/// 
+/// Fix Dialog and names on top

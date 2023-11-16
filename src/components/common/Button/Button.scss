@@ -1,0 +1,78 @@
+.button {
+  align-items: center;
+  border-radius: 0.375rem;
+  color: $dark-gray;
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+    background-color: $medium-gray-hover;
+  }
+
+  &:active {
+    background-color: $medium-gray-active;
+  }
+
+  // Colors
+  &.-integrated {
+    background-color: $white;
+    border: 1px solid $dark-gray;
+
+    svg {
+      stroke: $dark-gray;
+    }
+
+    &:hover {
+      border: 1px solid $dark-gray-hover;
+    }
+
+    &:active {
+      border: 1px solid $dark-gray-active;
+    }
+  }
+
+  &.-CTA {
+    background-color: $blue;
+    border: 0;
+    color: white;
+    
+    &:hover {
+      background-color: $blue-hover;      
+    }
+
+    &:active {
+      background-color: $blue-active;      
+    }
+  }
+
+  &.-warning {
+    background-color: $warning;
+    border: 0;
+    color: white;
+    
+    &:hover {
+      background-color: $warning-hover;      
+    }
+
+    &:active {
+      background-color: $warning-active;      
+    }
+  }
+
+  // Paddings
+  &.-icon {
+    padding: 0.5rem;
+  }
+
+  &.-text-icon {
+    padding: 0.5rem 1rem;
+
+    svg {
+      margin-right: 0.5rem;
+    }
+  }
+
+  &.-text {
+    padding: 0.5rem 1rem;
+  }
+}

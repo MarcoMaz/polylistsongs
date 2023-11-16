@@ -102,11 +102,13 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               <Button
                 icon="edit"
                 type="button"
+                variant="integrated"
                 onClick={() => handleEditClick(props)}
               />
               <Button
                 icon="trash"
                 type="button"
+                variant="warning"
                 onClick={() => handleButtonClick(props.id)}
               />
             </td>

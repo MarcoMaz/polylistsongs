@@ -57,7 +57,6 @@ const TextConstants = {
   },
   searchHeader: {
     inputLabel: "Search the site:",
-    gridButton: "grid",
   },
   searchFilters: [
     "Drummers",

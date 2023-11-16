@@ -21,6 +21,7 @@ interface ButtonProps {
     | "x";
   label?: string;
   type: "button" | "submit";
+  variant?: "integrated" | "CTA" | "warning";
   onClick?: () => void;
 }
 
@@ -28,10 +29,15 @@ const Button: React.FunctionComponent<ButtonProps> = ({
   icon,
   label,
   type,
+  variant,
   onClick,
 }) => {
+  const buttonClass = `button${variant ? ` -${variant}` : ""}${
+    icon && !label ? " -icon" : ""
+  }${label && !icon ? " -text" : ""}${label && icon ? " -text-icon" : ""}`;
+
   return (
-    <button type={type} onClick={onClick}>
+    <button type={type} className={buttonClass} onClick={onClick}>
       {icon === "edit" && <Edit />}
       {icon === "filter" && <Filter />}
       {icon === "grid" && <Grid />}

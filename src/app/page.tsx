@@ -46,6 +46,7 @@ export default function Home() {
             type="button"
             icon="plus"
             label={addSongButton}
+            variant="CTA"
             onClick={addSongButtonClick}
           />
           <TableSongs

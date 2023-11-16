@@ -141,7 +141,7 @@ const FormEditSong: React.FunctionComponent<FormEditSongProps> = ({
         handleTimeSignatureChange={handleTimeSignatureChange}
         yearLabel={yearLabel}
       />
-      <Button type="submit" label={buttonCTA} />
+      <Button type="submit" label={buttonCTA} variant="CTA"/>
     </form>
   );
 };
