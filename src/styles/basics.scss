@@ -107,12 +107,24 @@ table {
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+
+  > * {
+    grid-column: span 4;
+  }
+
+  .polyrhythmsInput {
+    grid-column: span 2;
+  }
+
+  .timeSignaturesInput {
+    grid-column: span 2;
+  }
 
   button {
-    align-self: flex-end;
+    justify-self: flex-end;
+    width: fit-content;
   }
 }

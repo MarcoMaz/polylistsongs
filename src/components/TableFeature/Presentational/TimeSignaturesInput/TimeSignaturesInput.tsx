@@ -21,10 +21,9 @@ const TimeSignaturesInput: React.FunctionComponent<
   const denominatorId = useId();
 
   return (
-    <div>
-      <strong>{headingLabel}</strong>
-      <br />
-      <div>
+    <div className="timeSignaturesInput">
+      <div className="timeSignaturesInput__heading">{headingLabel}</div>
+      <div className="timeSignaturesInput__content">
         <input
           type="number"
           id={numeratorId}
@@ -34,9 +33,6 @@ const TimeSignaturesInput: React.FunctionComponent<
           value={numeratorValue}
           onChange={numeratorHandleChange}
         />
-      </div>
-      <span>-</span>
-      <div>
         <input
           type="number"
           id={denominatorId}

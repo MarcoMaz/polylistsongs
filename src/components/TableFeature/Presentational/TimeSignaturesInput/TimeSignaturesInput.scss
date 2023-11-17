@@ -1,4 +1,4 @@
-.polyrhythmsInput {
+.timeSignaturesInput {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
@@ -8,19 +8,19 @@
   }
 
   &__content {
-    align-items: center;
     display: flex;
-    flex-direction: row;
-
-    span {
-      margin: 0 0.5rem;
-    }
+    flex-direction: column;
+    width: fit-content;
   }
 
   input {
     border: 1px solid black;
     border-radius: 0.375rem;
     padding: 0.5rem;
+
+    &:first-of-type {
+      margin-bottom: 0.5rem;
+    }
   }
 
 }

@@ -18,12 +18,12 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
   const againstId = useId();
   const baseId = useId();
 
-  const againstLabel = "against";
+  const againstLabel = ":";
 
   return (
-    <div className="PolyrhythmsInput">
-      <div className="PolyrhythmsInput__heading">{headingLabel}</div>
-      <div className="PolyrhythmsInput__content">
+    <div className="polyrhythmsInput">
+      <div className="polyrhythmsInput__heading">{headingLabel}</div>
+      <div className="polyrhythmsInput__content">
         <input
           type="number"
           id={againstId}
