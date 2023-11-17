@@ -33,6 +33,7 @@ body {
   padding: 2rem;
 }
 
+// SEARCH VIEW
 .search {
   display: grid;
   grid-template-areas:
@@ -57,7 +58,6 @@ body {
     grid-area: main;
     grid-column: span 9;
     grid-row: span 10;
-    // overflow-x: scroll;
   }
 }
 

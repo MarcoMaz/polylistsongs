@@ -69,12 +69,12 @@ const SongCard: React.FunctionComponent<SongProp> = ({
           </table>
           {scoreUrl && (
             <div className="songCard__score">
-              <h2>{scoreHeading}</h2>
+              <h3>{scoreHeading}</h3>
               <img src={scoreUrl} alt="image" width={20} height={20} />
             </div>
           )}
           <div className="songCard__source">
-            <h2>{sourceHeading}</h2>
+            <h3>{sourceHeading}</h3>
             <div>{source}</div>
           </div>
         </section>
