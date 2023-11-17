@@ -21,10 +21,9 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
   const againstLabel = "against";
 
   return (
-    <div>
-      <strong>{headingLabel}</strong>
-      <br />
-      <div>
+    <div className="PolyrhythmsInput">
+      <div className="PolyrhythmsInput__heading">{headingLabel}</div>
+      <div className="PolyrhythmsInput__content">
         <input
           type="number"
           id={againstId}
@@ -34,9 +33,7 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
           value={againstValue}
           onChange={againstHandleChange}
         />
-      </div>
-      <span>{againstLabel}</span>
-      <div>
+        <span>{againstLabel}</span>
         <input
           type="number"
           id={baseId}
