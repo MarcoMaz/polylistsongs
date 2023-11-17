@@ -49,9 +49,10 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
   return (
     <>
       {tableFields.map((field: string, index: number) => {
-        const label = (field in TextConstants.tableSong.labels)
-        ? TextConstants.tableSong.labels[field as keyof TableSongLabels]
-        : field;
+        const label =
+          field in TextConstants.tableSong.labels
+            ? TextConstants.tableSong.labels[field as keyof TableSongLabels]
+            : field;
 
         switch (field) {
           case "title":
