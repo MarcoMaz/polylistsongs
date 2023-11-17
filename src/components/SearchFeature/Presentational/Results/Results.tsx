@@ -12,7 +12,7 @@ const Results: React.FunctionComponent<ResultsProps> = ({ data }) => {
   const numberOfResults =
     data.length === 1 ? oneSongMessage : `${data.length} ${songMessage}`;
 
-  return <strong>{numberOfResults}</strong>;
+  return <strong className="results">{numberOfResults}</strong>;
 };
 
 export default Results;

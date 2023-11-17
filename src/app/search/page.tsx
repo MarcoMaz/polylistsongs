@@ -127,23 +127,28 @@ const Search = () => {
   }
 
   return (
-    <div className="container">
-      <header>
+    <main className="search">
+      <section className="search__query">
         <InputSearch
           label={inputLabel}
           value={searchQuery}
           handleChange={handleSearchChange}
         />
         <Results data={filteredSongsData} />
-        <Dropdown
-          data={sortingOptions}
-          value={sortBy}
-          handleChange={handleSortChange}
-        />
-        <Button type="button" icon="grid" variant="integrated"/>
-        <Slider min={0} max={10} orientation="vertical" />
-      </header>
-      <aside>
+      </section>
+      <section className="search__section">
+        <div>
+          <Dropdown
+            data={sortingOptions}
+            value={sortBy}
+            handleChange={handleSortChange}
+          />
+          <Button type="button" icon="grid" variant="integrated"/>
+          <Slider min={0} max={10} orientation="vertical" />
+        </div>
+      </section>
+
+      <aside className="search__aside">
         <CheckboxFilter
           items={DRUMMERS}
           selectedItems={selectedDrummers}
@@ -197,15 +202,15 @@ const Search = () => {
           handleChange={handleShowScore}
         />
       </aside>
-      <main>
+      <div className="search__results">
         <ul>
           {filteredSongsData.map((song, index) => (
             <SongCard key={index} {...song} />
           ))}
         </ul>
         {filteredSongsData.length === 0 && <Results data={filteredSongsData} />}
-      </main>
-    </div>
+      </div>
+    </main>
   );
 };
 
