@@ -43,7 +43,6 @@ const FormDropdown: React.FunctionComponent<FormDropdownProps> = ({
           );
         })}
       </select>
-      <br />
     </div>
   );
 };

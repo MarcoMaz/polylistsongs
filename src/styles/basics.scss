@@ -115,16 +115,12 @@ form {
     grid-column: span 4;
   }
 
-  .polyrhythmsInput {
-    grid-column: span 2;
-  }
-
+  .polyrhythmsInput,
   .timeSignaturesInput {
     grid-column: span 2;
   }
 
   button {
     justify-self: flex-end;
-    width: fit-content;
   }
 }
