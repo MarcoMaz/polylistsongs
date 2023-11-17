@@ -31,8 +31,10 @@ const Dialog: React.FunctionComponent<DialogProps> = ({
       aria-modal="true"
       aria-labelledby="dialog-title"
     >
-      <Button type="button" icon="x" onClick={onClose} />
-      {children}
+      <Button type="button" additionalClassnames={["dialog__close"]} icon="x" onClick={onClose} />
+      <div className="dialog__content">
+        {children}
+      </div>
     </dialog>,
     document.body
   );

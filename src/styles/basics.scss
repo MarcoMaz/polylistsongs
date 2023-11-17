@@ -105,3 +105,14 @@ table {
 .add-song {
   margin-bottom: 1rem;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+
+  button {
+    align-self: flex-end;
+  }
+}
