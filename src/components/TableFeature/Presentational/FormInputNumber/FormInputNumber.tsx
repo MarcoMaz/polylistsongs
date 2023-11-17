@@ -27,7 +27,7 @@ const FormInputNumber: React.FunctionComponent<FormInputNumberProps> = ({
   }
 
   return (
-    <div className="formInputNumber">
+    <div className="formInput">
       {label && <label htmlFor={field}>{label}</label>}
       <input
         type="number"

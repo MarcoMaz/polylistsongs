@@ -23,7 +23,7 @@ const FormInputText: React.FunctionComponent<FormInputTextProps> = ({
   }
 
   return (
-    <div className="formInputText">
+    <div className="formInput">
       <label htmlFor={field}>{label}</label>
       <input
         type="text"

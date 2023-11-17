@@ -27,7 +27,7 @@ const FormDropdown: React.FunctionComponent<FormDropdownProps> = ({
   }
 
   return (
-    <div className="formDropdown">
+    <div className="formInput">
       {label && <label htmlFor={field}>{label}</label>}
       <select
         name={field}
