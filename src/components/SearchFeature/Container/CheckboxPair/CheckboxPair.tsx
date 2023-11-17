@@ -77,7 +77,7 @@ const CheckboxPair: React.FC<CheckboxPairProps> = ({
   }
 
   return (
-    <div>
+    <div className="checkboxGroup">
       <strong>{heading}</strong>
       <div>
         {data.map((item, index) => {

@@ -16,7 +16,7 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = ({
   const id = useId();
 
   return (
-    <>
+    <div>
       <strong>{heading}</strong>
       <div>
         <input
@@ -28,7 +28,7 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = ({
         />
         <label htmlFor={id}>{label}</label>
       </div>
-    </>
+    </div>
   );
 };
 

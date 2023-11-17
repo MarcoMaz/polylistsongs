@@ -36,8 +36,8 @@ body {
 .search {
   display: grid;
   grid-template-areas:
-  "section section"
-  "aside main";
+    "section section"
+    "aside main";
   grid-template-columns: repeat(12, 1fr);
   height: 100vh;
 
@@ -46,13 +46,13 @@ body {
     grid-column: span 12;
     grid-row: span 2;
   }
-  
+
   &__aside {
     grid-area: aside;
     grid-column: span 3;
     grid-row: span 10;
   }
-  
+
   &__results {
     grid-area: main;
     grid-column: span 9;
@@ -141,13 +141,11 @@ form {
 }
 
 .search {
-
   &__query {
     grid-column: 4 / span 6;
   }
 
   &__change-view {
-
     display: flex;
     flex-direction: row;
     margin-bottom: 2rem;
@@ -155,6 +153,52 @@ form {
 
     select {
       margin-right: 1rem;
+    }
+  }
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+
+  strong {
+    margin-bottom: 1rem;
+  }
+
+  div {
+    margin-bottom: 0.5rem;
+
+    input {
+      height: 0;
+      opacity: 0;
+
+      &:checked + label::after {
+        content: "";
+        position: absolute;
+        width: 13px;
+        height: 7px;
+        left: -29px;
+        border-left: 0.125rem solid $black;
+        border-bottom: 0.125rem solid $black;
+        transform: rotate(314deg) translateY(5px);
+      }
+
+      label {
+        position: relative;
+        left: 1rem;
+        
+        &::before {
+          content: "";
+          position: absolute;
+          width: 1.5rem;
+          height: 1.5rem;
+          background: $white;
+          left: -29px;
+          border-radius: 0.375rem;
+          border: 0.0625rem solid $black;
+        }
+      }
     }
   }
 }

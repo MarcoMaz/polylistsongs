@@ -36,7 +36,7 @@ const CheckboxFilterGroup: React.FunctionComponent<CheckboxFilterProps> = ({
   const itemsCount = countTypeOccurrences(songsData, type);
 
   return (
-    <div>
+    <div className="checkboxGroup">
       <strong>{heading}</strong>
       {items.map((item, index) => {
         const id = `${heading}${index}`;
