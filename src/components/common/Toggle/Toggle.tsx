@@ -1,13 +1,13 @@
 import { ChangeEventHandler, useId } from "react";
 
-interface CheckboxProps {
+interface ToggleProps {
   checked: boolean;
   heading: string;
   label: string;
   handleChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-const Checkbox: React.FunctionComponent<CheckboxProps> = ({
+const Toggle: React.FunctionComponent<ToggleProps> = ({
   checked,
   heading,
   label,
@@ -32,4 +32,4 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = ({
   );
 };
 
-export default Checkbox;
+export default Toggle;

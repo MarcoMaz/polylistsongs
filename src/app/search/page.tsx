@@ -6,13 +6,12 @@ import { useAppContext } from "../layout";
 import { songsData } from "../../../pages/api/songs";
 
 import Button from "../../components/common/Button/Button";
-import Checkbox from "../../components/common/Checkbox/Checkbox";
+import Toggle from "../../components/common/Toggle/Toggle";
 import CheckboxFilter from "../../components/SearchFeature/Container/CheckboxFilter/CheckboxFilter";
 import CheckboxPair from "../../components/SearchFeature/Container/CheckboxPair/CheckboxPair";
 import InputSearch from "../../components/common/InputSearch/InputSearch";
 import Results from "../../components/SearchFeature/Presentational/Results/Results";
 import Dropdown from "../../components/common/Dropdown/Dropdown";
-import Slider from "../../components/common/Slider/Slider";
 import SongCard from "../../components/SearchFeature/Presentational/SongCard/SongCard";
 import TextConstants from "../../constants/textConstants";
 
@@ -192,7 +191,7 @@ const Search = () => {
           songsData={songsData}
           type="timeSignature"
         />
-        <Checkbox
+        <Toggle
           checked={showScore}
           heading={TextConstants.searchFilters[5]}
           label={SHOW_SCORE_LABEL}
