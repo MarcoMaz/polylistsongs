@@ -1,0 +1,26 @@
+.dialog {
+  // transform: translateX(50%) translateY(50%);
+  border: 0;
+  border-radius: 6px;
+  padding: 1.5rem;
+  flex-direction: column;
+  position: absolute;
+  width: 24rem;
+  left: calc(50% - 12rem);
+  height: 36rem;
+  top: calc(50% - 18rem);
+  display: flex;
+
+  &::backdrop {
+    background-color: #71767c40;
+    backdrop-filter: blur(0.25rem);
+  }
+
+  // button:first-of-type {
+  //   width: fit-content;
+  //   align-self: flex-end;
+  //   position: absolute;
+  //   top: 1rem;
+  //   right: 1rem;
+  // }
+}
