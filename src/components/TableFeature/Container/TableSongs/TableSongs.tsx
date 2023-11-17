@@ -6,6 +6,8 @@ import Button from "../../../common/Button/Button";
 
 import { SongProp } from "@/models/model";
 
+import TextConstants, { TableSongLabels } from "@/constants/textConstants";
+
 interface TableSongsProps {
   songs: SongProp[];
   tableFields: string[];
@@ -66,7 +68,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
         <tr>
           {tableFields.map((field, index) => (
             <th key={index} onClick={() => handleSort(field)}>
-              <span>{field}</span>
+              <span>{TextConstants.tableSong.labels[field as keyof TableSongLabels]}</span>
               <ArrowsIcon />
             </th>
           ))}
@@ -93,7 +95,7 @@ const TableSongs: React.FunctionComponent<TableSongsProps> = ({
               </div>
             </td>
             <td>{props.source}</td>
-            <td className="col-xxs">
+            <td className="col-xs">
               {props.scoreUrl ? (
                 <img src={props.scoreUrl} alt="image" width={30} height={30} />
               ) : null}
