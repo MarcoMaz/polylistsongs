@@ -1,7 +1,6 @@
 import React, { useId } from "react";
 
 interface PolyrhythmsInputProps {
-  againstLabel: string;
   againstValue: number;
   baseValue: number;
   headingLabel: string;
@@ -10,7 +9,6 @@ interface PolyrhythmsInputProps {
 }
 
 const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
-  againstLabel,
   againstValue,
   baseValue,
   headingLabel,
@@ -19,6 +17,8 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
 }) => {
   const againstId = useId();
   const baseId = useId();
+
+  const againstLabel = "against";
 
   return (
     <div>

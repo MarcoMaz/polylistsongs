@@ -4,6 +4,8 @@ import FormInputText from "../FormInputText/FormInputText";
 import PolyrhythmsInput from "../PolyrhythmsInput/PolyrhythmsInput";
 import TimeSignaturesInput from "../TimeSignaturesInput/TimeSignaturesInput";
 
+import TextConstants, { TableSongLabels } from "@/constants/textConstants";
+
 import { InputsProps, PolyrhythmProp, TimeSignatureProp } from "@/models/model";
 
 interface PolyrhythLabelProps {
@@ -36,13 +38,9 @@ interface FormSongProps {
 const FormSong: React.FunctionComponent<FormSongProps> = ({
   inputFields,
   polyrhythmLabels,
-  polyrhythmTypeLabel,
   polyTypes,
-  sourceLabel,
   sourceTypes,
   tableFields,
-  timeSignatureLabel,
-  yearLabel,
   handleInputChange,
   handlePolyrhythmChange,
   handleSelectChange,
@@ -51,6 +49,10 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
   return (
     <>
       {tableFields.map((field: string, index: number) => {
+        const label = (field in TextConstants.tableSong.labels)
+        ? TextConstants.tableSong.labels[field as keyof TableSongLabels]
+        : field;
+
         switch (field) {
           case "title":
           case "album":
@@ -63,16 +65,16 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
                 field={field}
                 handleChange={handleInputChange}
                 inputFields={inputFields}
-                label={field}
+                label={label}
               />
             );
-          case "polyType":
+          case "type":
             return (
               <FormDropdown
                 key={index}
                 field={field}
                 inputFields={inputFields}
-                label={polyrhythmTypeLabel}
+                label={label}
                 types={polyTypes}
                 onChange={handleSelectChange("polyType")}
               />
@@ -83,7 +85,7 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
                 key={field}
                 field={field}
                 inputFields={inputFields}
-                label={yearLabel}
+                label={label}
                 min={1950}
                 max={2023}
                 handleChange={handleInputChange}
@@ -93,12 +95,11 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
             return (
               <PolyrhythmsInput
                 key={index}
-                againstLabel={polyrhythmLabels.against}
                 againstValue={
                   (inputFields.polyrhythm as PolyrhythmProp).against
                 }
                 baseValue={(inputFields.polyrhythm as PolyrhythmProp).base}
-                headingLabel={polyrhythmLabels.heading}
+                headingLabel={label}
                 againstHandleChange={handlePolyrhythmChange("against")}
                 baseHandleChange={handlePolyrhythmChange("base")}
               />
@@ -110,7 +111,7 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
                 denominatorValue={
                   (inputFields.timeSignature as TimeSignatureProp).denominator
                 }
-                headingLabel={timeSignatureLabel}
+                headingLabel={label}
                 numeratorValue={
                   (inputFields.timeSignature as TimeSignatureProp).numerator
                 }
@@ -126,7 +127,7 @@ const FormSong: React.FunctionComponent<FormSongProps> = ({
                 key={index}
                 field={field}
                 inputFields={inputFields}
-                label={sourceLabel}
+                label={label}
                 types={sourceTypes}
                 onChange={handleSelectChange("source")}
               />

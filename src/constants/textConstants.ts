@@ -1,3 +1,15 @@
+export interface TableSongLabels {
+  title: string;
+  album: string;
+  artist: string;
+  drummer: string;
+  timestamp: string;
+  polyrhythm: string;
+  timeSignature: string;
+  source: string;
+  scoreUrl: string;
+}
+
 const TextConstants = {
   app: {
     appName: "PolyListSongs",
@@ -20,6 +32,19 @@ const TextConstants = {
       "source",
       "scoreUrl",
     ],
+    labels: {
+      title: "Title",
+      album: "Album",
+      artist: "Artist",
+      drummer: "Drummer",
+      type: "Type",
+      year: "Year",
+      timestamp: "Starting at",
+      polyrhythm: "Polyrhythm",
+      timeSignature: "Time Signature",
+      source: "Source",
+      scoreUrl: "Score URL",
+    } as TableSongLabels,
     polyTypes: ["groove", "section", "fill"],
     sources: [
       "Mike Portnoy Book",
@@ -31,7 +56,7 @@ const TextConstants = {
       "Minneman Book",
       "Virgil Donati Book",
     ],
-    addSongButton: "add song"
+    addSongButton: "add song",
   },
   formAddSong: {
     polyrhythmTypeLabel: "Type:",
