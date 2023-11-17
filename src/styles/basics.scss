@@ -168,37 +168,37 @@ form {
 
   div {
     margin-bottom: 0.5rem;
+  }
 
-    input {
-      height: 0;
-      opacity: 0;
+  input {
+    height: 0;
+    opacity: 0;
+  }
 
-      &:checked + label::after {
-        content: "";
-        position: absolute;
-        width: 13px;
-        height: 7px;
-        left: -29px;
-        border-left: 0.125rem solid $black;
-        border-bottom: 0.125rem solid $black;
-        transform: rotate(314deg) translateY(5px);
-      }
+  label {
+    position: relative;
+    left: 1rem;
 
-      label {
-        position: relative;
-        left: 1rem;
-        
-        &::before {
-          content: "";
-          position: absolute;
-          width: 1.5rem;
-          height: 1.5rem;
-          background: $white;
-          left: -29px;
-          border-radius: 0.375rem;
-          border: 0.0625rem solid $black;
-        }
-      }
+    &::before {
+      background: $white;
+      border: 1px solid $black;
+      border-radius: 0.375rem;
+      content: "";
+      height: 1.25rem;
+      left: -29px;
+      position: absolute;
+      width: 1.25rem;
     }
+  }
+
+  input:checked + label::after {
+    border-bottom: 2px solid $black;
+    border-left: 2px solid $black;
+    content: "";
+    height: 7px;
+    left: -29px;
+    position: absolute;
+    transform: rotate(314deg) translateY(5px);
+    width: 13px;
   }
 }
