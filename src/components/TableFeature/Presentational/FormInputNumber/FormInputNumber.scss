@@ -1,12 +1,13 @@
-.formDropdown {
+.formInputNumber {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 
   label {
     margin-bottom: 0.5rem;
   }
 
-  select {
+  input {
     border: 1px solid black;
     border-radius: 0.375rem;
     padding: 0.5rem;
