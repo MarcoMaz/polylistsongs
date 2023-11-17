@@ -16,18 +16,16 @@ const Toggle: React.FunctionComponent<ToggleProps> = ({
   const id = useId();
 
   return (
-    <div>
+    <div className="toggle">
       <strong>{heading}</strong>
-      <div>
-        <input
-          type="checkbox"
-          id={id}
-          name={id}
-          checked={checked}
-          onChange={handleChange}
-        />
-        <label htmlFor={id}>{label}</label>
-      </div>
+      <input
+        type="checkbox"
+        id={id}
+        name={id}
+        checked={checked}
+        onChange={handleChange}
+      />
+      <label htmlFor={id} />
     </div>
   );
 };
