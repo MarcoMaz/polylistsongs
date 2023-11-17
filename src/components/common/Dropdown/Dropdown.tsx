@@ -19,7 +19,7 @@ const Dropdown: React.FunctionComponent<DropdownProps> = ({
   const id = useId();
 
   return (
-    <select name={id} id={id} onChange={handleChange} value={value}>
+    <select className="dropdown" name={id} id={id} onChange={handleChange} value={value}>
       {data.map((option: any) => (
         <option key={option.value} value={option.value}>
           {option.label}

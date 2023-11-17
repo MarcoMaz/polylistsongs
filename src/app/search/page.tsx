@@ -136,16 +136,13 @@ const Search = () => {
         />
         <Results data={filteredSongsData} />
       </section>
-      <section className="search__section">
-        <div>
-          <Dropdown
-            data={sortingOptions}
-            value={sortBy}
-            handleChange={handleSortChange}
-          />
-          <Button type="button" icon="grid" variant="integrated"/>
-          <Slider min={0} max={10} orientation="vertical" />
-        </div>
+      <section className="search__change-view">
+        <Dropdown
+          data={sortingOptions}
+          value={sortBy}
+          handleChange={handleSortChange}
+        />
+        <Button type="button" icon="grid" variant="integrated"/>
       </section>
 
       <aside className="search__aside">

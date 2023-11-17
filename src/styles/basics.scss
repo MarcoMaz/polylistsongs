@@ -41,7 +41,7 @@ body {
   grid-template-columns: repeat(12, 1fr);
   height: 100vh;
 
-  &__section {
+  &__change-view {
     grid-area: section;
     grid-column: span 12;
     grid-row: span 2;
@@ -144,5 +144,17 @@ form {
 
   &__query {
     grid-column: 4 / span 6;
+  }
+
+  &__change-view {
+
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+    justify-content: flex-end;
+
+    select {
+      margin-right: 1rem;
+    }
   }
 }
