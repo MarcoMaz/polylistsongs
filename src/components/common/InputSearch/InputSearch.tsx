@@ -14,7 +14,7 @@ const InputSearch: React.FunctionComponent<InputSearchProps> = ({
   const id = useId();
   
   return (
-    <div>
+    <div className="input">
       <label htmlFor={id}>{label}</label>
       <input type="search" id={id} value={value} onChange={handleChange} />
     </div>
