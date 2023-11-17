@@ -26,7 +26,7 @@ const SongCard: React.FunctionComponent<SongProp> = ({
 
   return (
     <li>
-      <details>
+      <details className="songCard">
         <summary>
           <h2>{title}</h2>
           <h3>{artist}</h3>
@@ -68,15 +68,15 @@ const SongCard: React.FunctionComponent<SongProp> = ({
             </tbody>
           </table>
           {scoreUrl && (
-            <section>
+            <div className="songCard__score">
               <h2>{scoreHeading}</h2>
               <img src={scoreUrl} alt="image" width={20} height={20} />
-            </section>
+            </div>
           )}
-          <section>
+          <div className="songCard__source">
             <h2>{sourceHeading}</h2>
             <div>{source}</div>
-          </section>
+          </div>
         </section>
       </details>
     </li>

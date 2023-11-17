@@ -141,7 +141,6 @@ const Search = () => {
           value={sortBy}
           handleChange={handleSortChange}
         />
-        <Button type="button" icon="grid" variant="integrated"/>
       </section>
 
       <aside className="search__aside">
