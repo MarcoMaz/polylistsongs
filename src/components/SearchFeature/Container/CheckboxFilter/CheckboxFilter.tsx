@@ -1,5 +1,3 @@
-import { SongProp } from "@/models/model";
-
 interface CheckboxFilterProps {
   items: string[];
   heading: string;

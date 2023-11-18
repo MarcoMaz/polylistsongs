@@ -17,7 +17,6 @@ const PolyrhythmsInput: React.FunctionComponent<PolyrhythmsInputProps> = ({
 }) => {
   const againstId = useId();
   const baseId = useId();
-
   const againstLabel = ":";
 
   return (

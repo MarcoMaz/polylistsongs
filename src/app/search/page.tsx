@@ -5,7 +5,6 @@ import { useAppContext } from "../layout";
 
 import { songsData } from "../../../pages/api/songs";
 
-import Button from "../../components/common/Button/Button";
 import Toggle from "../../components/common/Toggle/Toggle";
 import CheckboxFilter from "../../components/SearchFeature/Container/CheckboxFilter/CheckboxFilter";
 import CheckboxPair from "../../components/SearchFeature/Container/CheckboxPair/CheckboxPair";
