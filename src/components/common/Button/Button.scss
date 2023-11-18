@@ -41,7 +41,7 @@
   &.-CTA {
     background-color: $blue;
     border: 0;
-    color: white;
+    color: $white;
     
     &:hover {
       background-color: $blue-hover;      
@@ -55,7 +55,7 @@
   &.-warning {
     background-color: $warning;
     border: 0;
-    color: white;
+    color: $white;
     
     &:hover {
       background-color: $warning-hover;      

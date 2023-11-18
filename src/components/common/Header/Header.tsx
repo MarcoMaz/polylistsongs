@@ -1,7 +1,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-import Button from "../common/Button/Button";
+import Button from "../Button/Button";
 
 import TextConstants from "@/constants/textConstants";
 

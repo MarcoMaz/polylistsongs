@@ -33,6 +33,13 @@ body {
   padding: 2rem;
 }
 
+
+
+
+
+
+
+
 // SEARCH VIEW
 .search {
   display: grid;
@@ -196,55 +203,6 @@ form {
     position: absolute;
     transform: rotate(314deg) translateY(5px);
     width: 13px;
-  }
-}
-
-.toggle {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-
-  strong {
-    margin-bottom: 1rem;
-  }
-
-  input[type="checkbox"] {
-    appearance: none;
-    outline: 0;
-    position: absolute;
-
-    &:checked + label::after {
-      left: 1.875rem;
-    }
-  }
-
-  label {
-    background: $light-gray;
-    border-radius: 0.75rem;
-    cursor: pointer;
-    height: 1.5rem;
-    position: relative;
-    width: 3rem;
-
-    &::after {
-      background-color: $white;
-      border-radius: 0.625rem;
-      content: "";
-      height: 0.75rem;
-      left: 0.375rem;
-      position: absolute;
-      top: 0.375rem;
-      transition: left 0.2s ease-out, background-color 0.1s ease-out;
-      width: 0.75rem;
-    }
-  }
-
-  &:hover label {
-    background: $light-gray-hover;
-  }
-
-  &:active label {
-    background: $light-gray-active;
   }
 }
 

@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import { songsData } from "../../pages/api/songs";
 
-import Header from "../components/Header/Header";
+import Header from "../components/common/Header/Header";
 
 import { SongProp } from "@/models/model";
 
