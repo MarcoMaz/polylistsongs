@@ -3,14 +3,12 @@ import { ChangeEventHandler, useId } from "react";
 interface ToggleProps {
   checked: boolean;
   heading: string;
-  label: string;
   handleChange: ChangeEventHandler<HTMLInputElement>;
 }
 
 const Toggle: React.FunctionComponent<ToggleProps> = ({
   checked,
   heading,
-  label,
   handleChange,
 }) => {
   const id = useId();

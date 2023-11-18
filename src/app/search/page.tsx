@@ -20,11 +20,6 @@ import { sortingSongs } from "./utils/sorting";
 
 import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
-import {
-  POLYRHYTHMS,
-  TIME_SIGNATURES,
-  SHOW_SCORE_LABEL,
-} from "@/constants/searchConstants";
 import { sortingOptions } from "@/constants/sortingConstants";
 
 const Search = () => {
@@ -52,6 +47,25 @@ const Search = () => {
   const DRUMMERS: string[] = [...new Set(songs.map((song) => song.drummer))];
   const ARTISTS: string[] = [...new Set(songs.map((song) => song.artist))];
   const POLY_TYPES: string[] = [...new Set(songs.map((song) => song.polyType))];
+  const POLYRHYTHMS = songs
+    .map((song) => song.polyrhythm)
+    .filter(
+      (song, index, self) =>
+        index ===
+        self.findIndex(
+          (s) => s.against === song.against && s.base === song.base
+        )
+    );
+  const TIME_SIGNATURES = songs
+    .map((song) => song.timeSignature)
+    .filter(
+      (song, index, self) =>
+        index ===
+        self.findIndex(
+          (s) =>
+            s.numerator === song.numerator && s.denominator === song.denominator
+        )
+    );
 
   useEffect(() => {
     const updatedFilteredSongs = songs
@@ -194,7 +208,6 @@ const Search = () => {
         <Toggle
           checked={showScore}
           heading={TextConstants.searchFilters[5]}
-          label={SHOW_SCORE_LABEL}
           handleChange={handleShowScore}
         />
       </aside>

@@ -13,8 +13,6 @@ const CheckboxPair: React.FC<CheckboxPairProps> = ({
   data,
   heading,
   selectedData,
-  songsData,
-  type,
   onSelection,
 }) => {
   function isSelected(
@@ -36,43 +34,11 @@ const CheckboxPair: React.FC<CheckboxPairProps> = ({
     }
   }
 
-  function countOccurrences(dataArray: SongProp[] | undefined) {
-    const counts: { [key: string]: number } = {};
-    let key;
-    if (dataArray) {
-      dataArray.forEach(({ polyrhythm, timeSignature }) => {
-        if (type === "polyrhythm") {
-          key =
-            polyrhythm && polyrhythm.against && polyrhythm.base
-              ? `${polyrhythm.against} : ${polyrhythm.base}`
-              : "";
-        } else {
-          key =
-            timeSignature &&
-            timeSignature.numerator &&
-            timeSignature.denominator
-              ? `${timeSignature.numerator}/${timeSignature.denominator}`
-              : "";
-        }
-        if (key in counts) {
-          counts[key]++;
-        } else {
-          counts[key] = 1;
-        }
-      });
-    }
-    return counts;
-  }
-
-  const itemsCount = countOccurrences(songsData);
-
   function getLabelContent(item: PolyrhythmProp | TimeSignatureProp) {
     if ("against" in item && "base" in item) {
-      const key = `${item.against} : ${item.base}`;
-      return `${item.against}:${item.base} (${itemsCount[key] || 0})`;
+      return `${item.against}:${item.base}`;
     } else {
-      const key = `${item.numerator}/${item.denominator}`;
-      return `${item.numerator}/${item.denominator} (${itemsCount[key] || 0})`;
+      return `${item.numerator}/${item.denominator}`;
     }
   }
 
