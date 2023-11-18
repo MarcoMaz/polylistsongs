@@ -7,11 +7,11 @@
     position: relative;
 
     svg {
-      height: 20px;
+      height: 1.25rem;
       position: absolute;
       right: 1rem;
       vertical-align: middle;
-      width: 20px;
+      width: 1.25rem;
     }
 
     &:not(:first-child):not(:last-child):hover::before,
@@ -53,7 +53,3 @@
     display: flex;
   }
 }
-
-/// TODO
-/// 
-/// Fix Dialog and names on top
