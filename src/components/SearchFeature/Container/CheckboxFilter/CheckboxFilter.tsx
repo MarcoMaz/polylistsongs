@@ -4,8 +4,6 @@ interface CheckboxFilterProps {
   items: string[];
   heading: string;
   selectedItems: string[];
-  songsData: SongProp[];
-  type: keyof SongProp;
   onSelection: (item: string) => void;
 }
 
@@ -13,8 +11,6 @@ const CheckboxFilterGroup: React.FunctionComponent<CheckboxFilterProps> = ({
   items,
   heading,
   selectedItems,
-  songsData,
-  type,
   onSelection,
 }) => {
   
@@ -23,7 +19,6 @@ const CheckboxFilterGroup: React.FunctionComponent<CheckboxFilterProps> = ({
       <strong>{heading}</strong>
       {items.map((item, index) => {
         const id = `${heading}${index}`;
-
         return (
           <div key={index}>
             <input

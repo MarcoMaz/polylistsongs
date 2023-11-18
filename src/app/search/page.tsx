@@ -44,6 +44,7 @@ const Search = () => {
   // Text
   const { inputLabel } = TextConstants.searchHeader;
 
+  // Filter Fields
   const DRUMMERS: string[] = [...new Set(songs.map((song) => song.drummer))];
   const ARTISTS: string[] = [...new Set(songs.map((song) => song.artist))];
   const POLY_TYPES: string[] = [...new Set(songs.map((song) => song.polyType))];
@@ -157,7 +158,6 @@ const Search = () => {
           handleChange={handleSortChange}
         />
       </section>
-
       <aside className="search__aside">
         <CheckboxFilter
           items={DRUMMERS}
@@ -166,8 +166,6 @@ const Search = () => {
             handleSelection(drummer, setSelectedDrummers, selectedDrummers)
           }
           heading={TextConstants.searchFilters[0]}
-          songsData={songsData}
-          type="drummer"
         />
         <CheckboxFilter
           items={ARTISTS}
@@ -176,8 +174,6 @@ const Search = () => {
             handleSelection(artist, setSelectedArtists, selectedArtists)
           }
           heading={TextConstants.searchFilters[1]}
-          songsData={songsData}
-          type="artist"
         />
         <CheckboxFilter
           items={POLY_TYPES}
@@ -186,8 +182,6 @@ const Search = () => {
             handleSelection(polyType, setSelectedPolytypes, selectedPolytypes)
           }
           heading={TextConstants.searchFilters[2]}
-          songsData={songsData}
-          type="polyType"
         />
         <CheckboxPair
           data={POLYRHYTHMS}
