@@ -141,8 +141,8 @@ const Search = () => {
   }
 
   return (
-    <main className="search">
-      <section className="search__query">
+    <main className="searchView">
+      <section className="searchView__query">
         <InputSearch
           label={inputLabel}
           value={searchQuery}
@@ -150,14 +150,14 @@ const Search = () => {
         />
         <Results data={filteredSongsData} />
       </section>
-      <section className="search__change-view">
+      <section className="searchView__change-view">
         <Dropdown
           data={sortingOptions}
           value={sortBy}
           handleChange={handleSortChange}
         />
       </section>
-      <aside className="search__aside">
+      <aside className="searchView__aside">
         <CheckboxFilter
           items={DRUMMERS}
           selectedItems={selectedDrummers}
@@ -204,7 +204,7 @@ const Search = () => {
           handleChange={handleShowScore}
         />
       </aside>
-      <div className="search__results">
+      <div className="searchView__results">
         <ul>
           {filteredSongsData.map((song, index) => (
             <SongCard key={index} {...song} />

@@ -40,33 +40,6 @@ body {
 
 
 
-// SEARCH VIEW
-.search {
-  display: grid;
-  grid-template-areas:
-    "section section"
-    "aside main";
-  grid-template-columns: repeat(12, 1fr);
-  height: 100vh;
-
-  &__change-view {
-    grid-area: section;
-    grid-column: span 12;
-    grid-row: span 2;
-  }
-
-  &__aside {
-    grid-area: aside;
-    grid-column: span 3;
-    grid-row: span 10;
-  }
-
-  &__results {
-    grid-area: main;
-    grid-column: span 9;
-    grid-row: span 10;
-  }
-}
 
 .table {
   overflow-x: scroll;
@@ -144,19 +117,6 @@ form {
     border: 1px solid $black;
     border-radius: 0.375rem;
     padding: 0.5rem;
-  }
-}
-
-.search {
-  &__query {
-    grid-column: 4 / span 6;
-  }
-
-  &__change-view {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 2rem;
-    justify-content: flex-end;
   }
 }
 
