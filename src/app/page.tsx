@@ -50,7 +50,7 @@ export default function Home() {
             variant="CTA"
             onClick={addSongButtonClick}
           />
-          <section className="table">
+          <section className="tableView">
             <TableSongs
               tableFields={tableFields}
               songs={songs}

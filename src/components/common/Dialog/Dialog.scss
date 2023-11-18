@@ -21,4 +21,23 @@
   &__content {
     margin-top: 2.5rem;
   }
+
+  form {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+
+    > * {
+      grid-column: span 4;
+    }
+
+    .polyrhythmsInput,
+    .timeSignaturesInput {
+      grid-column: span 2;
+    }
+
+    button {
+      justify-self: flex-end;
+    }
+  }
 }

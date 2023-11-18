@@ -15,10 +15,10 @@
 @import "../components/common/Toggle/Toggle.scss";
 
 @import "../app/search/searchView.scss";
+@import "../app/tableView.scss";
 
 @import "../components/TableFeature/Presentational/PolyrhythmsInput/PolyrhythmsInput.scss";
 @import "../components/TableFeature/Presentational/TimeSignaturesInput/TimeSignaturesInput.scss";
-
-@import "../components/SearchFeature/Presentational/Results/Results.scss";
-
 @import "../components/TableFeature/Container/TableSongs/TableSongs.scss";
+@import "../components/SearchFeature/Presentational/SongCard/SongCard.scss";
+@import "../components/SearchFeature/Presentational/Results/Results.scss";
