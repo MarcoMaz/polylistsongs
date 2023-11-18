@@ -1,16 +1,16 @@
 import { songsData } from "../../pages/api/songs";
 
-export const DRUMMERS: string[] = [
-  ...new Set(songsData.map((song) => song.drummer)),
-];
+// export const DRUMMERS: string[] = [
+//   ...new Set(songsData.map((song) => song.drummer)),
+// ];
 
-export const ARTISTS: string[] = [
-  ...new Set(songsData.map((song) => song.artist)),
-];
+// export const ARTISTS: string[] = [
+//   ...new Set(songsData.map((song) => song.artist)),
+// ];
 
-export const POLY_TYPES: string[] = [
-  ...new Set(songsData.map((song) => song.polyType)),
-];
+// export const POLY_TYPES: string[] = [
+//   ...new Set(songsData.map((song) => song.polyType)),
+// ];
 
 export const POLYRHYTHMS = songsData
   .map((song) => song.polyrhythm)

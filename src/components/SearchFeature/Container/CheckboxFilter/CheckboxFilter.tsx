@@ -17,24 +17,7 @@ const CheckboxFilterGroup: React.FunctionComponent<CheckboxFilterProps> = ({
   type,
   onSelection,
 }) => {
-  function countTypeOccurrences(
-    dataArray: SongProp[],
-    key: keyof SongProp
-  ): Record<string, number> {
-    const counts: Record<string, number> = {};
-    dataArray.forEach((item) => {
-      const keyValue = item[key] as string;
-      if (keyValue in counts) {
-        counts[keyValue]++;
-      } else {
-        counts[keyValue] = 1;
-      }
-    });
-    return counts;
-  }
-
-  const itemsCount = countTypeOccurrences(songsData, type);
-
+  
   return (
     <div className="checkboxGroup">
       <strong>{heading}</strong>
@@ -51,7 +34,7 @@ const CheckboxFilterGroup: React.FunctionComponent<CheckboxFilterProps> = ({
               onChange={() => onSelection(item)}
             />
             <label htmlFor={id}>
-              {item} ({itemsCount[item] || 0})
+              {item}
             </label>
           </div>
         );

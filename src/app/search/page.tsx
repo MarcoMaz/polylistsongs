@@ -21,9 +21,6 @@ import { sortingSongs } from "./utils/sorting";
 import { PolyrhythmProp, SongProp, TimeSignatureProp } from "@/models/model";
 
 import {
-  ARTISTS,
-  DRUMMERS,
-  POLY_TYPES,
   POLYRHYTHMS,
   TIME_SIGNATURES,
   SHOW_SCORE_LABEL,
@@ -51,6 +48,10 @@ const Search = () => {
 
   // Text
   const { inputLabel } = TextConstants.searchHeader;
+
+  const DRUMMERS: string[] = [...new Set(songs.map((song) => song.drummer))];
+  const ARTISTS: string[] = [...new Set(songs.map((song) => song.artist))];
+  const POLY_TYPES: string[] = [...new Set(songs.map((song) => song.polyType))];
 
   useEffect(() => {
     const updatedFilteredSongs = songs
