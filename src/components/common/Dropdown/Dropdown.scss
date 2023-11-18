@@ -1,6 +1,6 @@
 .dropdown {
   display: flex;
-  border: 1px solid $black;
-  border-radius: .375rem;
+  border: $border;
+  border-radius: $borderRadius;
   padding: 0.5rem;
 }

@@ -1,6 +1,6 @@
 .dialog {
   border: 0;
-  border-radius: 6px;
+  border-radius: $borderRadius;
   height: 36rem;
   left: calc(50% - 12rem);
   padding: 1rem;
